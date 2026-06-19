@@ -1,0 +1,457 @@
+{
+  "name": "Max Godoy",
+  "headline": "Dados, Business Intelligence, IA aplicada e automação",
+  "stats": [
+    {
+      "value": "12+",
+      "label": "anos em processos e negócio"
+    },
+    {
+      "value": "4º",
+      "label": "semestre na FATEC"
+    },
+    {
+      "value": "5",
+      "label": "projetos e iniciativas em destaque"
+    }
+  ],
+  "focus": [
+    {
+      "symbol": "BI",
+      "title": "Dados & Business Intelligence",
+      "text": "SQL, modelagem, Power BI, KPIs e dashboards para transformar informação em decisão.",
+      "tags": [
+        "SQL",
+        "Power BI",
+        "Modelagem",
+        "Dashboards"
+      ]
+    },
+    {
+      "symbol": "PY",
+      "title": "Python & Automação",
+      "text": "Lógica, manipulação de dados, APIs e automação de rotinas. Este portfólio é meu primeiro projeto web em Python.",
+      "tags": [
+        "Python",
+        "Automação",
+        "APIs",
+        "JSON"
+      ]
+    },
+    {
+      "symbol": "AI",
+      "title": "IA aplicada",
+      "text": "Uso de IA para análise, documentação, prototipação e apoio ao desenvolvimento, sempre com validação humana.",
+      "tags": [
+        "IA aplicada",
+        "Análise",
+        "Prototipação",
+        "Documentação"
+      ]
+    },
+    {
+      "symbol": "DEV",
+      "title": "Software & Arquitetura",
+      "text": "JavaScript, Node.js, Express, MongoDB, MVC, regras de negócio e estruturação de soluções digitais.",
+      "tags": [
+        "JavaScript",
+        "Node.js",
+        "MongoDB",
+        "MVC"
+      ]
+    }
+  ],
+  "technologies": [
+    {
+      "name": "JavaScript",
+      "iconClass": "devicon-javascript-plain colored"
+    },
+    {
+      "name": "Node.js",
+      "iconClass": "devicon-nodejs-plain colored"
+    },
+    {
+      "name": "Python",
+      "iconClass": "devicon-python-plain colored"
+    },
+    {
+      "name": "SQL",
+      "iconClass": "devicon-azuresqldatabase-plain colored"
+    },
+    {
+      "name": "MongoDB",
+      "iconClass": "devicon-mongodb-plain colored"
+    },
+    {
+      "name": "Power BI",
+      "iconUrl": "/static/assets/icons/powerbi.png"
+    },
+    {
+      "name": "Git",
+      "iconClass": "devicon-git-plain colored"
+    },
+    {
+      "name": "GitHub",
+      "iconClass": "devicon-github-original"
+    },
+    {
+      "name": "IA aplicada",
+      "iconUrl": "/static/assets/icons/ai-applied.svg"
+    },
+    {
+      "name": "HTML5",
+      "iconClass": "devicon-html5-plain colored"
+    },
+    {
+      "name": "CSS3",
+      "iconClass": "devicon-css3-plain colored"
+    },
+    {
+      "name": "Bootstrap",
+      "iconClass": "devicon-bootstrap-plain colored"
+    },
+    {
+      "name": "Express",
+      "iconClass": "devicon-express-original"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Studio Patty Leão",
+      "category": "sistemas",
+      "categoryLabel": "Sistemas",
+      "kicker": "ERP operacional · cliente real · produção",
+      "status": "Online",
+      "image": "/static/assets/projects/studio-patty-original.webp",
+      "alt": "Página original da plataforma Studio Patty Leão",
+      "summary": "Plataforma web monolítica com características de ERP operacional para gestão de salão.",
+      "description": "Integra site institucional, agendamentos, agenda profissional, vitrine digital, reservas, estoque, financeiro manual, permissões e BI básico.",
+      "problem": "Os controles estavam distribuídos entre cadernos, mensagens, folhas e rotinas manuais, sem uma visão centralizada da operação.",
+      "solution": "A proposta inicial de e-commerce e banco relacional foi reavaliada. O projeto foi reconstruído como uma plataforma operacional com Node.js, MVC e MongoDB Atlas.",
+      "value": "Projeto publicado, validado com a cliente e orientado a uma necessidade real de negócio.",
+      "tags": [
+        "Node.js",
+        "Express",
+        "MongoDB Atlas",
+        "Mongoose",
+        "EJS",
+        "MVC",
+        "Render"
+      ],
+      "links": [
+        {
+          "label": "Abrir plataforma",
+          "url": "https://studio-patty-leao.onrender.com"
+        },
+        {
+          "label": "GitHub",
+          "url": "https://github.com/maxgodoydev-dotcom/studio-patty-leao"
+        },
+        {
+          "label": "Teste com a cliente",
+          "url": "https://vimeo.com/1199613770"
+        }
+      ]
+    },
+    {
+      "name": "Power BI Portfolio",
+      "category": "dados",
+      "categoryLabel": "Dados & BI",
+      "kicker": "dashboards · arquivos para estudo · indicadores",
+      "status": "Repositório público",
+      "image": "/static/assets/projects/powerbi/power-bi-cover.webp",
+      "alt": "Composição com dois dashboards desenvolvidos em Power BI",
+      "summary": "Dashboards e arquivos PBIX para estudo de indicadores, vendas, regiões e operação do Studio Patty Leão.",
+      "description": "Reúne dois exercícios práticos de Power BI desenvolvidos em grupo, com participação ativa na organização dos dados, definição de indicadores, leitura gerencial e condução das entregas.",
+      "problem": "Bases extensas e dados dispersos dificultavam a comparação entre faturamento, vendedores, regiões, serviços, produtos e desempenho operacional.",
+      "solution": "Modelagem visual com KPIs, gráficos comparativos, filtros e painéis que transformam dados brutos em informação acessível para análise.",
+      "value": "Demonstra prática com Power BI, leitura de negócio, storytelling visual, organização de indicadores e liderança em atividades de grupo.",
+      "tags": [
+        "Power BI",
+        "SQL",
+        "KPIs",
+        "Dashboards",
+        "Análise de dados"
+      ],
+      "links": [
+        {
+          "label": "Ver repositório",
+          "url": "https://github.com/maxgodoydev-dotcom/power-bi-portfolio"
+        },
+        {
+          "label": "Baixar PBIX - Studio Patty Leão",
+          "url": "/static/assets/downloads/Studio_Patty_Leao_BI.pbix"
+        },
+        {
+          "label": "Baixar PBIX - Vendas e Região",
+          "url": "/static/assets/downloads/Dashboard_Vendas_Clientes_Regiao.pbix"
+        }
+      ],
+      "gallery": [
+        {
+          "image": "/static/assets/projects/powerbi/dashboard-vendas.webp",
+          "alt": "Dashboard de vendas, faturamento e desempenho por região e vendedor",
+          "caption": "Vendas, faturamento, regiões e desempenho comercial"
+        },
+        {
+          "image": "/static/assets/projects/powerbi/dashboard-studio.webp",
+          "alt": "Dashboard do Studio Patty Leão com faturamento, tickets e canais de receita",
+          "caption": "Studio Patty Leão: faturamento, tickets e serviços x produtos"
+        }
+      ]
+    },
+    {
+      "name": "DevPilot 360",
+      "category": "desenvolvimento",
+      "categoryLabel": "Em desenvolvimento",
+      "kicker": "edtech · arquitetura · acompanhamento de projetos",
+      "status": "Em desenvolvimento",
+      "image": "/static/assets/projects/devpilot-hero.svg",
+      "alt": "Interface conceitual do DevPilot 360",
+      "summary": "Plataforma para ajudar estudantes e equipes a organizar projetos de software e sistemas.",
+      "description": "Conecta tarefas, fluxos, arquitetura, banco de dados, documentação, Git e decisões técnicas em uma jornada visual.",
+      "problem": "Alunos frequentemente começam pela tecnologia sem organizar o problema, o escopo, as dependências e as entregas.",
+      "solution": "Uma experiência guiada que transforma o projeto em etapas compreensíveis e acompanháveis.",
+      "value": "Projeto em evolução que reúne arquitetura de software, IHC, gestão e IA aplicada.",
+      "tags": [
+        "Arquitetura",
+        "Kanban",
+        "Fluxos",
+        "IA aplicada",
+        "Documentação"
+      ],
+      "links": []
+    },
+    {
+      "name": "EntreLaços",
+      "category": "sistemas",
+      "categoryLabel": "Sistemas",
+      "kicker": "vitrine digital · catálogo · atendimento",
+      "status": "Portfólio",
+      "image": "/static/assets/projects/entrelacos-cover.webp",
+      "alt": "Capa do projeto EntreLaços",
+      "summary": "Vitrine digital responsiva para organizar produtos e facilitar o contato comercial.",
+      "description": "Catálogo com filtros, dados em JSON e direcionamento para atendimento no WhatsApp.",
+      "problem": "Produtos dependiam de imagens e mensagens separadas, o que dificultava apresentação e consulta.",
+      "solution": "Uma vitrine digital leve, organizada e responsiva, com navegação simples e informações centralizadas.",
+      "value": "Transforma conteúdo disperso em uma experiência visual mais clara e fácil de converter em contato.",
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "JSON",
+        "UX"
+      ],
+      "links": [
+        {
+          "label": "Abrir vitrine",
+          "url": "https://entrelacos-vitrine.vercel.app"
+        },
+        {
+          "label": "Ver GitHub",
+          "url": "https://github.com/maxgodoydev-dotcom/entrelacos-vitrine"
+        }
+      ]
+    },
+    {
+      "name": "BASE LAB FATEC",
+      "category": "comunidade",
+      "categoryLabel": "Comunidade",
+      "kicker": "comunidade · estudos · liderança",
+      "status": "Comunidade",
+      "image": "/static/assets/projects/base-lab.webp",
+      "alt": "Identidade visual do BASE LAB FATEC",
+      "summary": "Comunidade criada para aproximar estudantes por meio de estudos e colaboração.",
+      "description": "Encontros, materiais, preparação técnica e profissional e troca de experiências em tecnologia.",
+      "problem": "O estudo isolado torna mais difícil manter rotina, trocar conhecimento e preparar-se para oportunidades.",
+      "solution": "Um espaço colaborativo no Discord para organizar encontros, materiais e práticas em grupo.",
+      "value": "Demonstra iniciativa, comunicação, organização e liderança entre estudantes.",
+      "tags": [
+        "Comunidade",
+        "Discord",
+        "FATEC",
+        "Organização",
+        "Liderança"
+      ],
+      "links": [
+        {
+          "label": "Entrar no Discord",
+          "url": "https://discord.gg/74UVssrtP"
+        }
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "period": "2012 — 2013",
+      "place": "Início profissional",
+      "title": "Office boy e auxiliar de escrita fiscal",
+      "text": "Primeiro contato com rotinas administrativas, documentos, prazos, atendimento e organização fiscal.",
+      "tags": [
+        "Rotinas administrativas",
+        "Fiscal",
+        "Organização"
+      ]
+    },
+    {
+      "period": "2014 — 2024",
+      "place": "Departamento societário e legalização",
+      "title": "De auxiliar a analista paralegal",
+      "text": "Atuação em abertura, alteração, transformação e encerramento de empresas, regularização, certidões, benefícios fiscais, documentação jurídica e relacionamento com órgãos públicos.",
+      "tags": [
+        "Contamar",
+        "Conube",
+        "Contmor",
+        "Ecar Fleet"
+      ]
+    },
+    {
+      "period": "2019 — 2021",
+      "place": "UNINOVE",
+      "title": "Graduação em Direito",
+      "text": "Início dos estudos em Direito. O curso foi trancado durante o período da pandemia, enquanto a trajetória profissional seguiu em reestruturação.",
+      "tags": [
+        "Direito",
+        "Interpretação de regras",
+        "Documentação"
+      ]
+    },
+    {
+      "period": "2024",
+      "place": "Mudança de direção",
+      "title": "Preparação para uma nova carreira",
+      "text": "Retomada dos estudos e aprovação no processo seletivo da FATEC para construir uma nova trajetória em tecnologia.",
+      "tags": [
+        "Transição de carreira",
+        "Planejamento",
+        "FATEC"
+      ]
+    },
+    {
+      "period": "2025 — atual",
+      "place": "FATEC Zona Sul",
+      "title": "Desenvolvimento de Software Multiplataforma",
+      "text": "Formação tecnológica voltada a software, web, mobile, dados, nuvem, engenharia, gestão ágil e inteligência artificial, acompanhada de projetos práticos e criação do BASE LAB.",
+      "tags": [
+        "4º semestre",
+        "Projetos",
+        "Dados",
+        "Software"
+      ],
+      "active": true
+    },
+    {
+      "period": "Agora",
+      "place": "Próximo passo",
+      "title": "Estágio em tecnologia",
+      "text": "Busca por oportunidade em Dados, Business Intelligence, Desenvolvimento de Software, SQL, automação ou IA aplicada.",
+      "tags": [
+        "Estágio",
+        "Dados",
+        "BI",
+        "Automação",
+        "IA"
+      ],
+      "active": true
+    }
+  ],
+  "certificates": [
+    {
+      "title": "SQL para Análise de Dados: do básico ao avançado",
+      "issuer": "Udemy",
+      "date": "jun 2026",
+      "category": "SQL & Dados"
+    },
+    {
+      "title": "Dados do Zero: Excel, SQL, Python e AWS com Projetos Reais",
+      "issuer": "Udemy",
+      "date": "jun 2026",
+      "category": "Dados & Cloud"
+    },
+    {
+      "title": "Python Essentials 1",
+      "issuer": "Cisco",
+      "date": "abr 2025",
+      "category": "Python"
+    },
+    {
+      "title": "EF SET English Certificate 55/100 - B2",
+      "issuer": "EF SET",
+      "date": "jun 2025",
+      "category": "Inglês B2"
+    },
+    {
+      "title": "Projetando uma carreira em TI",
+      "issuer": "Even3",
+      "date": "nov 2025",
+      "category": "Carreira"
+    },
+    {
+      "title": "FuturIA: Casos de uso de IA nos Negócios",
+      "issuer": "Even3",
+      "date": "nov 2025",
+      "category": "IA aplicada"
+    },
+    {
+      "title": "Introdução à Qualidade de Software",
+      "issuer": "Even3",
+      "date": "nov 2025",
+      "category": "Qualidade"
+    }
+  ],
+  "interests": [
+    {
+      "icon": "🎮",
+      "title": "Jogos",
+      "text": "Gosto de jogos competitivos e de observar como regras, feedback e experiência moldam a interação."
+    },
+    {
+      "icon": "🎭",
+      "title": "Festas temáticas",
+      "text": "Eventos temáticos são uma forma divertida de sair da rotina e exercitar criatividade e presença."
+    },
+    {
+      "icon": "🚀",
+      "title": "Eventos geek",
+      "text": "Tecnologia, cinema, séries e cultura pop também fazem parte do meu repertório pessoal."
+    }
+  ],
+  "gallery": [
+    {
+      "image": "/static/assets/gallery/gamer-profile.jpeg",
+      "alt": "Max em um espaço gamer com monitores ao fundo",
+      "title": "Jogos e tecnologia",
+      "text": "Uma parte do meu tempo livre também passa por jogos e experiências digitais."
+    },
+    {
+      "image": "/static/assets/gallery/gameplay.jpeg",
+      "alt": "Registro de uma partida de videogame",
+      "title": "Jogos",
+      "text": "Competição, estratégia, atenção e diversão fora do ambiente de trabalho."
+    },
+    {
+      "image": "/static/assets/gallery/halloween.webp",
+      "alt": "Max em uma festa temática de Halloween",
+      "title": "Festas temáticas",
+      "text": "Criatividade e bom humor também fazem parte de quem eu sou."
+    },
+    {
+      "image": "/static/assets/gallery/ccxp-toy-story.webp",
+      "alt": "Max em evento geek com personagens de Toy Story",
+      "title": "Eventos geek",
+      "text": "Gosto de eventos que conectam pessoas, histórias e universos criativos."
+    },
+    {
+      "image": "/static/assets/gallery/ccxp-the-boys.webp",
+      "alt": "Max em um evento de cultura pop",
+      "title": "Cultura pop",
+      "text": "Cinema, séries e experiências presenciais ampliam meu repertório."
+    },
+    {
+      "image": "/static/assets/gallery/perfil-casual.webp",
+      "alt": "Max em uma fotografia casual",
+      "title": "Fora do trabalho",
+      "text": "Equilíbrio entre estudo, trabalho, lazer e evolução pessoal."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+PORTFÓLIO MAX GODOY - V3
+
+RODAR LOCALMENTE NO VS CODE
+1. Abra esta pasta no VS Code.
+2. Abra o terminal.
+3. Execute: py app.py
+4. Acesse: http://127.0.0.1:8000
+
+PUBLICAR
+O projeto está pronto para GitHub + Vercel e não usa banco de dados.
+A seção de contato abre canais externos: e-mail, LinkedIn, GitHub e Discord.
+
+CONTEÚDO
+Os textos, projetos, links e tecnologias ficam em data/profile.json.
+O visual fica em static/css/main.css.
+As interações ficam em static/js/main.js.

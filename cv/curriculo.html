@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Currículo - Max Godoy</title>
+<style>
+  @page { size: A4; margin: 0; }
+  :root { --ink:#202420; --paper:#f8f3e9; --cream:#fffdf8; --rust:#b35c3d; --gold:#c7a24a; --sage:#7d8b72; --slate:#6f7b83; --plum:#7c4653; --line:#d8cebc; --muted:#66675f; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; padding:0; width:210mm; height:297mm; }
+  body { background:var(--paper); color:var(--ink); font-family:Arial, Helvetica, sans-serif; font-size:8.15pt; line-height:1.28; }
+  .page { width:210mm; height:297mm; display:grid; grid-template-columns:64mm 146mm; overflow:hidden; }
+  .side { background:#111512; color:#f1ece2; padding:8mm 6mm 5mm; position:relative; overflow:hidden; }
+  .side::after { content:""; position:absolute; inset:auto -1px 0 auto; width:1px; height:100%; background:linear-gradient(var(--rust),var(--gold),var(--sage),var(--slate)); }
+  .main { padding:10mm 11mm 7mm; background:var(--cream); }
+  h1,h2,h3,p { margin-top:0; }
+  h1 { margin-bottom:1.5mm; font-size:25pt; line-height:.95; letter-spacing:-.7px; }
+  .role { color:var(--rust); font-size:11.2pt; font-weight:800; margin-bottom:3mm; }
+  .intro { color:var(--muted); font-size:8.5pt; margin-bottom:4mm; }
+  .contact { display:grid; gap:1mm; margin:3mm 0 4mm; font-size:7.2pt; }
+  .contact span { display:flex; gap:2mm; align-items:flex-start; }
+  .contact b { color:var(--gold); min-width:4mm; }
+  .side h2, .main h2 { margin:0 0 2.5mm; font-size:9pt; letter-spacing:1.2px; text-transform:uppercase; }
+  .side h2 { color:var(--cream); display:flex; gap:2mm; align-items:center; }
+  .side h2::before { content:"◆"; color:var(--rust); font-size:7pt; }
+  .main h2 { color:var(--ink); display:flex; align-items:center; gap:2mm; border-bottom:1px solid var(--line); padding-bottom:1.4mm; }
+  .main h2::before { content:"◆"; color:var(--rust); font-size:7pt; }
+  .block { margin-bottom:3.2mm; }
+  .skill-list { display:grid; gap:.8mm; }
+  .skill { border:1px solid #343a35; border-radius:2.2mm; padding:1.35mm 1.8mm; background:#171b18; }
+  .skill strong { display:block; color:var(--gold); font-size:7.35pt; }
+  .skill span { color:#c9c2b6; font-size:6.55pt; }
+  .edu, .cert { padding:0 0 1.3mm; margin-bottom:1.3mm; border-bottom:1px solid #343a35; }
+  .edu:last-child, .cert:last-child { border-bottom:0; }
+  .edu strong, .cert strong { display:block; color:#f1ece2; font-size:7.15pt; }
+  .edu span, .cert span { color:#aaa59a; font-size:6.35pt; }
+  .badge-row { display:flex; flex-wrap:wrap; gap:1.3mm; }
+  .badge { border:1px solid #454b46; border-radius:999px; padding:.7mm 1.25mm; color:#d7d0c4; font-size:6.2pt; }
+  .summary { font-size:8.7pt; margin-bottom:4.5mm; }
+  .entry { display:grid; grid-template-columns:24mm 1fr; gap:3mm; padding-bottom:3mm; margin-bottom:3mm; border-bottom:1px solid var(--line); page-break-inside:avoid; }
+  .entry:last-child { margin-bottom:0; }
+  .date { color:var(--slate); font-weight:800; font-size:7.2pt; }
+  .entry h3 { margin:0; font-size:9.1pt; }
+  .place { color:var(--rust); font-weight:700; font-size:7.4pt; margin:.5mm 0 1.2mm; }
+  ul { margin:1mm 0 0 3.4mm; padding:0; }
+  li { margin:.45mm 0; }
+  .projects { display:grid; grid-template-columns:1fr 1fr; gap:2.5mm; }
+  .project { border:1px solid var(--line); border-radius:2.7mm; padding:2.4mm; background:#faf6ee; page-break-inside:avoid; }
+  .project h3 { margin:0 0 1mm; font-size:8.5pt; }
+  .project p { margin:0; color:var(--muted); font-size:7.2pt; }
+  .project .stack { color:var(--rust); font-weight:700; margin-top:1mm; }
+  .strengths { display:grid; grid-template-columns:repeat(4,1fr); gap:2mm; }
+  .strength { border-left:2px solid var(--sage); padding-left:2mm; }
+  .strength strong { display:block; font-size:7.5pt; }
+  .strength span { color:var(--muted); font-size:6.8pt; }
+  footer { position:fixed; left:75mm; right:11mm; bottom:3mm; display:flex; justify-content:space-between; color:#8a877f; font-size:6.5pt; border-top:1px solid var(--line); padding-top:1.5mm; }
+</style>
+</head>
+<body>
+<div class="page">
+  <aside class="side">
+    <h1>Max<br>Godoy</h1>
+    <div class="role">Estágio em Dados, BI, Software, Automação ou IA aplicada</div>
+    <p class="intro">12 anos de experiência em processos contábeis e jurídicos convertidos em visão de negócio, organização e responsabilidade operacional.</p>
+
+    <div class="contact">
+      <span><b>●</b> São Paulo, SP</span>
+      <span><b>✉</b> maxgodoy.dev@gmail.com</span>
+      <span><b>↗</b> linkedin.com/in/max-godoy</span>
+      <span><b>↗</b> github.com/maxgodoydev-dotcom</span>
+    </div>
+
+    <section class="block">
+      <h2>Competências técnicas</h2>
+      <div class="skill-list">
+        <div class="skill"><strong>Dados & BI</strong><span>SQL, Power BI, KPIs, dashboards e modelagem</span></div>
+        <div class="skill"><strong>Python & Automação</strong><span>Lógica, APIs, JSON, manipulação e automação</span></div>
+        <div class="skill"><strong>Desenvolvimento</strong><span>JavaScript, Node.js, Express, HTML e CSS</span></div>
+        <div class="skill"><strong>Arquitetura</strong><span>MVC, APIs, regras de negócio e documentação</span></div>
+        <div class="skill"><strong>Banco de dados</strong><span>SQL, MongoDB Atlas, Mongoose e NoSQL</span></div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Formação</h2>
+      <div class="edu"><strong>FATEC Zona Sul</strong><span>DSM - 4º semestre<br>fev/2025 a dez/2027</span></div>
+      <div class="edu"><strong>UNINOVE</strong><span>Direito - 2019 a 2021<br>curso trancado na pandemia</span></div>
+    </section>
+
+    <section class="block">
+      <h2>Certificações</h2>
+      <div class="cert"><strong>SQL para Análise de Dados</strong><span>Udemy · jun/2026</span></div>
+      <div class="cert"><strong>Excel, SQL, Python e AWS</strong><span>Udemy · jun/2026</span></div>
+      <div class="cert"><strong>Python Essentials 1</strong><span>Cisco · abr/2025</span></div>
+      <div class="cert"><strong>Inglês B2 - EF SET 55/100</strong><span>EF SET · jun/2025</span></div>
+    </section>
+
+    <section>
+      <h2>Ferramentas</h2>
+      <div class="badge-row">
+        <span class="badge">Git</span><span class="badge">GitHub</span><span class="badge">Kanban</span><span class="badge">Render</span><span class="badge">Vercel</span><span class="badge">Postman</span>
+      </div>
+    </section>
+  </aside>
+
+  <main class="main">
+    <section>
+      <h2>Perfil profissional</h2>
+      <p class="summary">Estudante de Desenvolvimento de Software Multiplataforma na FATEC Zona Sul, em transição para tecnologia. Tenho facilidade para compreender processos, regras de negócio e necessidades empresariais. Busco transformar informações e problemas reais em sistemas, automações e indicadores úteis para tomada de decisão.</p>
+    </section>
+
+    <section>
+      <h2>Experiência profissional</h2>
+      <div class="entry"><div class="date">ago/2023<br>jul/2024</div><div><h3>Analista Paralegal</h3><div class="place">Contmor Assessoria Contábil</div><ul><li>Constituição, alteração, transformação e encerramento de empresas.</li><li>Regularização de cadastros, débitos, certidões e benefícios fiscais.</li><li>Organização de informações, documentos, prazos e processos administrativos.</li></ul></div></div>
+      <div class="entry"><div class="date">mai/2022<br>fev/2023</div><div><h3>Consultor de Legalização</h3><div class="place">Conube</div><ul><li>Cadastro de clientes em plataformas digitais e órgãos públicos.</li><li>Montagem e acompanhamento de processos de legalização empresarial.</li><li>Elaboração de procedimentos, manuais e orientação ao cliente.</li></ul></div></div>
+      <div class="entry"><div class="date">set/2017<br>nov/2019</div><div><h3>Assistente de Legalização</h3><div class="place">Contamar Consultoria Contábil</div><ul><li>Legalização de empresas, atos societários, alvarás e licenças.</li><li>Controle de registros, certidões, documentos e pendências.</li><li>Atendimento e relacionamento com órgãos públicos.</li></ul></div></div>
+      <div class="entry"><div class="date">2012<br>2024</div><div><h3>Trajetória em processos contábeis e jurídicos</h3><div class="place">De office boy a analista</div><p>Experiência contínua com documentação, interpretação de regras, atendimento, compliance e organização operacional.</p></div></div>
+    </section>
+
+    <section>
+      <h2>Projetos selecionados</h2>
+      <div class="projects">
+        <div class="project"><h3>Studio Patty Leão</h3><p>Plataforma web com características de ERP operacional, cliente real e sistema publicado.</p><p class="stack">Node.js · Express · MongoDB · MVC · BI</p></div>
+        <div class="project"><h3>Power BI Portfolio</h3><p>Dashboards e arquivos para download, com KPIs, análises e leitura gerencial.</p><p class="stack">Power BI · SQL · Indicadores</p></div>
+        <div class="project"><h3>DevPilot 360</h3><p>Em desenvolvimento: apoio a estudantes na organização de projetos de software.</p><p class="stack">Arquitetura · IHC · IA aplicada</p></div>
+        <div class="project"><h3>EntreLaços</h3><p>Vitrine digital responsiva para organização de produtos e contato comercial.</p><p class="stack">HTML · CSS · JavaScript · JSON</p></div>
+      </div>
+    </section>
+
+    <section style="margin-top:4mm">
+      <h2>Diferenciais</h2>
+      <div class="strengths">
+        <div class="strength"><strong>◆ Negócio</strong><span>Leitura de contexto e regras</span></div>
+        <div class="strength"><strong>◆ Dados</strong><span>Organização e indicadores</span></div>
+        <div class="strength"><strong>◆ Execução</strong><span>Prazos e documentação</span></div>
+        <div class="strength"><strong>◆ Comunicação</strong><span>Explicação clara de fluxos</span></div>
+      </div>
+    </section>
+  </main>
+  <footer><span>Max Godoy - Currículo 2026</span><span>Dados · BI · Software · Automação · IA aplicada</span></footer>
+</div>
+</body>
+</html>
