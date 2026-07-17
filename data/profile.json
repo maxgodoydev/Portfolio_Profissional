@@ -1,6 +1,6 @@
 {
   "name": "Max Godoy",
-  "headline": "Dados, Business Intelligence, IA aplicada e automação",
+  "headline": "Dados, Analytics & BI | Automação de Processos",
   "stats": [
     {
       "value": "12+",
@@ -11,7 +11,7 @@
       "label": "semestre na FATEC"
     },
     {
-      "value": "5",
+      "value": "6",
       "label": "projetos e iniciativas em destaque"
     }
   ],
@@ -145,7 +145,7 @@
         },
         {
           "label": "GitHub",
-          "url": "https://github.com/maxgodoydev-dotcom/studio-patty-leao"
+          "url": "https://github.com/maxgodoydev/Studio_Patty_Leao"
         },
         {
           "label": "Teste com a cliente",
@@ -176,7 +176,7 @@
       "links": [
         {
           "label": "Ver repositório",
-          "url": "https://github.com/maxgodoydev-dotcom/power-bi-portfolio"
+          "url": "https://github.com/maxgodoydev/Portfolio_Power_BI"
         },
         {
           "label": "Baixar PBIX - Studio Patty Leão",
@@ -249,7 +249,35 @@
         },
         {
           "label": "Ver GitHub",
-          "url": "https://github.com/maxgodoydev-dotcom/entrelacos-vitrine"
+          "url": "https://github.com/maxgodoydev/Entrelacos"
+        }
+      ]
+    },
+    {
+      "name": "InteliBolsas",
+      "category": "sistemas",
+      "categoryLabel": "Sistemas",
+      "kicker": "sistema acadêmico · CRUD · gestão de dados",
+      "status": "Repositório público",
+      "image": "/static/assets/projects/power-bi-portfolio.svg",
+      "alt": "Identidade visual do projeto InteliBolsas",
+      "summary": "Sistema acadêmico para gestão e divulgação de bolsas de estudo, desenvolvido em grupo na FATEC.",
+      "description": "CRUD completo com áreas separadas para administração, instituições e alunos, centralizando informações de oportunidades, cursos e usuários em uma estrutura consultável.",
+      "problem": "Informações sobre bolsas, instituições e cursos ficavam dispersas, dificultando o cadastro, a consulta e a gestão dessas oportunidades.",
+      "solution": "Modelagem de banco relacional em MySQL, com separação clara de responsabilidades entre administração, instituições e alunos, documentação (UML, DER e dicionário de dados) e estrutura preparada para escalabilidade.",
+      "value": "Prática de modelagem de dados, banco relacional, organização de escopo e trabalho em equipe em um sistema com múltiplos perfis de usuário.",
+      "tags": [
+        "PHP",
+        "MySQL",
+        "CRUD",
+        "Modelagem de dados",
+        "HTML",
+        "CSS"
+      ],
+      "links": [
+        {
+          "label": "Ver repositório",
+          "url": "https://github.com/maxgodoydev/InteliBolsas"
         }
       ]
     },
@@ -344,7 +372,7 @@
       "period": "Agora",
       "place": "Próximo passo",
       "title": "Estágio em tecnologia",
-      "text": "Busca por oportunidade em Dados, Business Intelligence, Desenvolvimento de Software, SQL, automação ou IA aplicada.",
+      "text": "Busca por oportunidade em Data Analytics, Data Science, Business Intelligence ou Engenharia de Dados.",
       "tags": [
         "Estágio",
         "Dados",
