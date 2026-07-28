@@ -1,0 +1,535 @@
+<div align="center">
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/hero-light.svg">
+  <img width="100%" alt="Max Godoy — Dados, Business Intelligence, IA aplicada e automação" src="./assets/hero-dark.svg">
+</picture>
+
+</div>
+
+<br>
+
+<div align="center">
+
+<table width="100%">
+<tr>
+
+<td align="center" width="33%" valign="top">
+
+## ⏳ Experiência
+
+### +12 anos
+
+Vivência analítica em ambientes contábeis e jurídicos, com foco em processos, regras, documentação e responsabilidade operacional.
+
+</td>
+
+<td align="center" width="33%" valign="top">
+
+## 🎓 Formação
+
+### Desenvolvimento de Software Multiplataforma — FATEC
+
+<br>
+
+<img src="https://img.shields.io/badge/Curso-Desenvolvimento de Software Multiplataforma-2B2D2A?style=plastic&labelColor=151714&color=B35C3D" />
+<br>
+<img src="https://img.shields.io/badge/Período-Vespertino%20(tarde)-2B2D2A?style=plastic&labelColor=151714&color=7D8B72" />
+<br>
+<img src="https://img.shields.io/badge/Semestre%20atual-4º%20semestre-2B2D2A?style=plastic&labelColor=151714&color=6F7B83" />
+<br>
+<img src="https://img.shields.io/badge/Início-02%2F2025-2B2D2A?style=plastic&labelColor=151714&color=C7A24A" />
+<br>
+<img src="https://img.shields.io/badge/Conclusão-12%2F2027-2B2D2A?style=plastic&labelColor=151714&color=7C4653" />
+
+</td>
+
+<td align="center" width="33%" valign="top">
+
+## 🎯 Objetivo
+
+### Estágio em Dados, BI, IA & Automação
+
+Buscar um ambiente onde eu possa conectar processos, indicadores, sistemas e tecnologia para resolver problemas reais de negócio.
+
+</td>
+
+</tr>
+</table>
+
+</div>
+
+<br>
+
+<img width="100%" src="./assets/divider-about.svg" alt="Divisor artístico">
+
+# 👨‍💻 SOBRE MIM
+
+<div align="justify">
+
+Sou analista de legalização e estudante de **Desenvolvimento de Software Multiplataforma pela FATEC Zona Sul**, em transição para tecnologia após mais de 12 anos de atuação em ambientes contábeis e jurídicos. Minha trajetória foi construída em **processos, interpretação de regras, análise crítica, documentação, organização operacional e responsabilidade com prazos**. Hoje, direciono essa base para **Dados, Business Intelligence, IA aplicada, automação de processos e desenvolvimento de soluções digitais**. Nos projetos que desenvolvo, meu foco não é apenas criar algo funcional, mas compreender o problema, organizar a informação, estruturar o fluxo e entregar uma solução com utilidade real para quem vai usar.
+
+</div>
+
+<br>
+
+<div align="center">
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/about-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/about-light.svg">
+  <img width="100%" alt="Análise, processos, documentação, execução e melhoria" src="./assets/about-dark.svg">
+</picture>
+
+</div>
+
+<br>
+
+<img width="100%" src="./assets/divider-journey.svg" alt="Divisor artístico">
+
+# 🧭 TRILHA PROFISSIONAL
+
+<div align="center">
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/journey-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/journey-light.svg">
+  <img width="100%" alt="Trilha profissional de processos até dados, BI, IA e automação" src="./assets/journey-dark.svg">
+</picture>
+
+</div>
+
+<br>
+
+<img width="100%" src="./assets/divider-projects.svg" alt="Divisor artístico">
+
+# 🏆 PROJETOS EM DESTAQUE
+
+<div align="center">
+
+<table width="100%">
+<tr>
+
+<td width="50%" align="center" valign="top">
+
+## 💇 Studio Patty Leão
+
+Sistema web em produção para gestão operacional de salão de beleza.
+
+<br>
+
+### 🎯 Necessidade
+
+Substituir controles distribuídos entre cadernos, folhas, mensagens e rotinas manuais.
+
+<br>
+
+### ✅ Solução entregue
+
+Plataforma que conecta **agendamentos, recepção, agenda profissional, reservas, estoque, financeiro manual e BI básico** em um único fluxo operacional.
+
+<br>
+
+### ⚙️ Tecnologias
+
+<img src="https://img.shields.io/badge/Node.js-566246?style=flat-square&logo=node.js&logoColor=white" />
+<img src="https://img.shields.io/badge/Express-272B28?style=flat-square&logo=express&logoColor=white" />
+<img src="https://img.shields.io/badge/MongoDB-61745B?style=flat-square&logo=mongodb&logoColor=white" />
+<img src="https://img.shields.io/badge/EJS-B9A06A?style=flat-square&logoColor=111111" />
+<img src="https://img.shields.io/badge/Bootstrap-6C6078?style=flat-square&logo=bootstrap&logoColor=white" />
+<img src="https://img.shields.io/badge/Render-708076?style=flat-square&logo=render&logoColor=white" />
+
+<br><br>
+
+<a href="https://studio-patty-leao.onrender.com">
+  <img src="https://img.shields.io/badge/ACESSAR%20PLATAFORMA-171B18?style=for-the-badge&logo=render&logoColor=D6C5A1" />
+</a>
+
+<a href="https://github.com/maxgodoydev-dotcom/studio-patty-leao">
+  <img src="https://img.shields.io/badge/REPOSITÓRIO-171B18?style=for-the-badge&logo=github&logoColor=F1ECE2" />
+</a>
+
+</td>
+
+<td width="50%" align="center" valign="top">
+
+## 📊 Power BI Portfolio
+
+Portfólio de dashboards e estudos de dados voltados à leitura de negócio.
+
+<br>
+
+### 🎯 Necessidade
+
+Transformar bases e informações dispersas em indicadores visuais comparáveis e compreensíveis.
+
+<br>
+
+### ✅ Solução entregue
+
+Painéis com **KPIs, visualizações, análises operacionais e leituras gerenciais** para apoiar identificação de padrões e tomada de decisão.
+
+<br>
+
+### ⚙️ Tecnologias e conceitos
+
+<img src="https://img.shields.io/badge/Power%20BI-C7A24A?style=flat-square&logo=powerbi&logoColor=111111" />
+<img src="https://img.shields.io/badge/Business%20Intelligence-6F7B83?style=flat-square" />
+<img src="https://img.shields.io/badge/Dashboards-7D8B72?style=flat-square" />
+<img src="https://img.shields.io/badge/KPIs-7C4653?style=flat-square" />
+
+<br><br>
+
+<a href="https://github.com/maxgodoydev-dotcom/power-bi-portfolio">
+  <img src="https://img.shields.io/badge/ACESSAR%20PORTFÓLIO-171B18?style=for-the-badge&logo=github&logoColor=C7A24A" />
+</a>
+
+</td>
+
+</tr>
+</table>
+
+<br>
+
+<table width="100%">
+<tr>
+
+<td width="50%" align="center" valign="top">
+
+## 🧶 EntreLaços
+
+Projeto real de vitrine digital. O repositório público apresenta a versão preparada para portfólio.
+
+<br>
+
+### 🎯 Necessidade
+
+Organizar produtos que antes dependiam de imagens e mensagens separadas durante apresentação e atendimento.
+
+<br>
+
+### ✅ Solução entregue
+
+Catálogo online responsivo com **filtros, dados em JSON, visualização organizada e direcionamento para atendimento no WhatsApp**.
+
+<br>
+
+### ⚙️ Tecnologias
+
+<img src="https://img.shields.io/badge/HTML5-B35C3D?style=flat-square&logo=html5&logoColor=white" />
+<img src="https://img.shields.io/badge/CSS3-6F7B83?style=flat-square&logo=css3&logoColor=white" />
+<img src="https://img.shields.io/badge/JavaScript-C7A24A?style=flat-square&logo=javascript&logoColor=111111" />
+<img src="https://img.shields.io/badge/JSON-272B28?style=flat-square&logo=json&logoColor=white" />
+<img src="https://img.shields.io/badge/Vercel-111111?style=flat-square&logo=vercel&logoColor=white" />
+
+<br><br>
+
+<a href="https://entrelacos-vitrine.vercel.app">
+  <img src="https://img.shields.io/badge/PORTFÓLIO%20ONLINE-171B18?style=for-the-badge&logo=vercel&logoColor=F1ECE2" />
+</a>
+
+<a href="https://github.com/maxgodoydev-dotcom/entrelacos-vitrine">
+  <img src="https://img.shields.io/badge/REPOSITÓRIO-171B18?style=for-the-badge&logo=github&logoColor=B35C3D" />
+</a>
+
+</td>
+
+<td width="50%" align="center" valign="top">
+
+## 🎓 InteliBolsas
+
+Sistema acadêmico para gestão e divulgação de bolsas de estudo.
+
+<br>
+
+### 🎯 Necessidade
+
+Centralizar informações de oportunidades, instituições, cursos e usuários em uma estrutura consultável.
+
+<br>
+
+### ✅ Solução entregue
+
+CRUD com separação entre **administração, estudantes e instituições**, organização de dados e banco relacional em MySQL.
+
+<br>
+
+### ⚙️ Tecnologias
+
+<img src="https://img.shields.io/badge/PHP-6C6078?style=flat-square&logo=php&logoColor=white" />
+<img src="https://img.shields.io/badge/MySQL-6F7B83?style=flat-square&logo=mysql&logoColor=white" />
+<img src="https://img.shields.io/badge/HTML5-B35C3D?style=flat-square&logo=html5&logoColor=white" />
+<img src="https://img.shields.io/badge/CSS3-6F7B83?style=flat-square&logo=css3&logoColor=white" />
+
+<br><br>
+
+<a href="https://github.com/maxgodoydev-dotcom/inteliBolsas">
+  <img src="https://img.shields.io/badge/ACESSAR%20REPOSITÓRIO-171B18?style=for-the-badge&logo=github&logoColor=7D8B72" />
+</a>
+
+</td>
+
+</tr>
+</table>
+
+<br>
+
+<table width="100%">
+<tr>
+<td align="center">
+
+## 🔬 BASE LAB
+
+Comunidade no Discord criada para aproximar estudantes por meio de encontros, estudos, compartilhamento de materiais e prática em tecnologia.
+
+<br>
+
+<img src="https://img.shields.io/badge/22%20MEMBROS%20ATIVOS-6C6078?style=flat-square&logo=discord&logoColor=white" />
+<img src="https://img.shields.io/badge/ESTUDOS-6F7B83?style=flat-square&labelColor=171B18" />
+<img src="https://img.shields.io/badge/COMUNIDADE-7D8B72?style=flat-square&labelColor=171B18" />
+<img src="https://img.shields.io/badge/COLABORAÇÃO-7C4653?style=flat-square&labelColor=171B18" />
+
+<br><br>
+
+<a href="https://discord.gg/tRYYUxsQc">
+  <img src="https://img.shields.io/badge/ACESSAR%20BASE%20LAB-171B18?style=for-the-badge&logo=discord&logoColor=D6C5A1" />
+</a>
+
+</td>
+</tr>
+</table>
+
+</div>
+
+<br>
+
+<img width="100%" src="./assets/divider-value.svg" alt="Divisor artístico">
+
+# 💼 O QUE ENTREGO PARA UMA EQUIPE
+
+<div align="center">
+
+<table width="100%">
+<tr>
+
+<td width="25%" align="center" valign="top">
+
+## 01
+
+### 🧠 Leitura de negócio
+
+Entendo contexto, regra, restrição e impacto antes de propor solução.
+
+</td>
+
+<td width="25%" align="center" valign="top">
+
+## 02
+
+### 📊 Organização da informação
+
+Transformo processo disperso em fluxo, documentação e indicadores mais legíveis.
+
+</td>
+
+<td width="25%" align="center" valign="top">
+
+## 03
+
+### ⚙️ Execução estruturada
+
+Divido em etapas, acompanho dependências e organizo a entrega para sair do papel.
+
+</td>
+
+<td width="25%" align="center" valign="top">
+
+## 04
+
+### 🤖 IA com critério
+
+Uso IA para acelerar análise, prototipação e documentação, sem abrir mão de entendimento técnico.
+
+</td>
+
+</tr>
+</table>
+
+<br>
+
+<img src="https://img.shields.io/badge/OBJETIVO-ESTÁGIO%20EM%20DADOS%2C%20BI%2C%20IA%20OU%20AUTOMAÇÃO-7C4653?style=for-the-badge&labelColor=171B18" />
+<img src="https://img.shields.io/badge/DIFERENCIAL-PROCESSOS%20%2B%20TECNOLOGIA-6F7B83?style=for-the-badge&labelColor=171B18" />
+<img src="https://img.shields.io/badge/FORÇA-ANÁLISE%20%2B%20ESTRUTURA%20%2B%20ENTREGA-C7A24A?style=for-the-badge&labelColor=171B18" />
+
+</div>
+
+<br>
+
+<img width="100%" src="./assets/divider-stack.svg" alt="Divisor artístico">
+
+# 🛠️ TECNOLOGIAS E ESTUDOS
+
+<div align="center">
+
+<table width="100%">
+<tr>
+
+<td align="center" width="25%" valign="top">
+
+## 📊 Dados & BI
+
+<img src="https://skillicons.dev/icons?i=mysql,mongodb,postgres,sqlite&theme=dark" />
+
+<br><br>
+
+<img src="https://img.shields.io/badge/Power%20BI-C7A24A?style=flat-square&logo=powerbi&logoColor=111111" />
+<img src="https://img.shields.io/badge/SQL-6F7B83?style=flat-square" />
+
+<br><br>
+
+`Dashboards`  
+`Indicadores`  
+`Modelagem`  
+`Leitura gerencial`
+
+</td>
+
+<td align="center" width="25%" valign="top">
+
+## 🤖 IA Aplicada
+
+<img src="https://img.shields.io/badge/ChatGPT-61745B?style=flat-square&logo=openai&logoColor=white" />
+<img src="https://img.shields.io/badge/Gemini-6F7B83?style=flat-square&logo=googlegemini&logoColor=white" />
+<img src="https://img.shields.io/badge/Claude-B35C3D?style=flat-square&logo=anthropic&logoColor=white" />
+
+<br><br>
+
+`Análise`  
+`Documentação`  
+`Prototipação`  
+`Aplicação prática`
+
+</td>
+
+<td align="center" width="25%" valign="top">
+
+## ⚙️ Desenvolvimento
+
+<img src="https://skillicons.dev/icons?i=nodejs,js,java,php,py,html,css,bootstrap&theme=dark" />
+
+<br><br>
+
+`Back-end`  
+`Rotas`  
+`MVC`  
+`APIs`
+
+</td>
+
+<td align="center" width="25%" valign="top">
+
+## 🧰 Ferramentas
+
+<img src="https://skillicons.dev/icons?i=git,github,vscode,figma,postman&theme=dark" />
+
+<br><br>
+
+<img src="https://img.shields.io/badge/Render-708076?style=flat-square&logo=render&logoColor=white" />
+<img src="https://img.shields.io/badge/Vercel-111111?style=flat-square&logo=vercel&logoColor=white" />
+
+<br><br>
+
+`Versionamento`  
+`Documentação`  
+`Organização`  
+`Deploy`
+
+</td>
+
+</tr>
+</table>
+
+</div>
+
+<br>
+
+<img width="100%" src="./assets/divider-stats.svg" alt="Divisor artístico">
+
+# 📈 GITHUB STATUS
+
+<div align="center">
+
+<img width="47%" src="https://github-readme-stats.vercel.app/api?username=maxgodoydev-dotcom&show_icons=true&hide_border=true&bg_color=0E1110&title_color=D6C5A1&text_color=F1ECE2&icon_color=B35C3D&ring_color=7D8B72&locale=pt-br" alt="Estatísticas do GitHub" />
+
+<img width="47%" src="https://github-readme-streak-stats.herokuapp.com/?user=maxgodoydev-dotcom&hide_border=true&background=0E1110&stroke=343A35&ring=D6C5A1&fire=B35C3D&currStreakNum=C7A24A&sideNums=F1ECE2&currStreakLabel=7C4653&sideLabels=AAA59A&dates=AAA59A&locale=pt_BR" alt="Sequência de contribuições" />
+
+<br><br>
+
+<img width="94%" src="https://github-readme-activity-graph.vercel.app/graph?username=maxgodoydev-dotcom&bg_color=0E1110&color=F1ECE2&line=B35C3D&point=C7A24A&area=true&area_color=7D8B72&hide_border=true&custom_title=Atividade%20recente%20no%20GitHub" alt="Atividade recente no GitHub" />
+
+</div>
+
+<br>
+
+# 🕹️ BREAKOUT DE CONTRIBUIÇÕES
+
+<div align="center">
+
+Cada contribuição vira um bloco no jogo, atualizado automaticamente pelo GitHub Actions.
+
+<br><br>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/maxgodoydev-dotcom/maxgodoydev-dotcom/github-breakout/images/breakout-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/maxgodoydev-dotcom/maxgodoydev-dotcom/github-breakout/images/breakout-light.svg">
+  <img width="100%" alt="Breakout das contribuições do GitHub" src="https://raw.githubusercontent.com/maxgodoydev-dotcom/maxgodoydev-dotcom/github-breakout/images/breakout-light.svg">
+</picture>
+
+</div>
+
+<br>
+
+<img width="100%" src="./assets/divider-contact.svg" alt="Divisor artístico">
+
+# 🌐 REDES & CONTATO
+
+<div align="center">
+
+Aberto a conversas sobre **estágio, colaboração e projetos em Dados, BI, IA aplicada e automação de processos**.
+
+<br><br>
+
+<a href="https://www.linkedin.com/in/max-godoy/">
+  <img src="https://img.shields.io/badge/LINKEDIN-44515C?style=for-the-badge&logo=linkedin&logoColor=white" />
+</a>
+
+<a href="mailto:maxgodoy.dev@gmail.com">
+  <img src="https://img.shields.io/badge/E--MAIL-7C4653?style=for-the-badge&logo=gmail&logoColor=white" />
+</a>
+
+<a href="https://github.com/maxgodoydev-dotcom">
+  <img src="https://img.shields.io/badge/GITHUB-202420?style=for-the-badge&logo=github&logoColor=F1ECE2" />
+</a>
+
+<a href="https://discord.gg/tRYYUxsQc">
+  <img src="https://img.shields.io/badge/BASE%20LAB-6C6078?style=for-the-badge&logo=discord&logoColor=white" />
+</a>
+
+<br><br>
+
+<img src="https://komarev.com/ghpvc/?username=maxgodoydev-dotcom&style=flat-square&color=7C4653&label=VISUALIZAÇÕES" />
+
+</div>
+
+<br>
+
+<div align="center">
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/footer-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/footer-light.svg">
+  <img width="100%" alt="Processos bem entendidos geram decisões melhores" src="./assets/footer-dark.svg">
+</picture>
+
+</div>
