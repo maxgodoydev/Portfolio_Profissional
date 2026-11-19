@@ -17,9 +17,10 @@ Rota única `/{lang}/admin`; telas por `?view=overview|analytics|monitoring`. `n
 Princípios: senha e token nunca ficam no navegador (cookie `HttpOnly`, `SameSite=Strict`; a sessão é sempre confirmada por `GET /admin/session`); 401 em qualquer chamada leva ao login com aviso; nada é estimado — sessões são "sessões estimadas" (hash diário), comparação com período anterior só aparece quando há histórico completo, serviço não verificado aparece como "Não verificado" (o envio de e-mail não é testável e é mostrado apenas como configurado/não configurado); aviso permanente quando o armazenamento é em memória; contadores de `/admin/ops` valem só para a instância que respondeu.
 
 ### O que mudou em relação ao checkpoint
-- **Backend (correção):** `GET /admin/ops` devolvia `recentErrors: null` quando não havia erros 5xx; agora devolve `[]`. Teste de contrato em `internal/server/admin_contract_test.go`.
+- **Deploy na Vercel (correção):** a pasta `internal/` foi renomeada para `backend/`. A Vercel compila `api/index.go` como um pacote separado (`handler/api`), e o Go proíbe esse pacote de importar `internal/` (`use of internal package ... not allowed`). Não use o nome `internal` para pacotes importados por `api/`.
+- **Backend (correção):** `GET /admin/ops` devolvia `recentErrors: null` quando não havia erros 5xx; agora devolve `[]`. Teste de contrato em `backend/server/admin_contract_test.go`.
 - **Frontend:** `services/api.ts` normaliza listas `null` (defesa em profundidade); **foco do login** agora volta ao campo após senha errada (antes falhava porque o campo ainda estava desabilitado); tabelas do painel não quebram mais o texto das rotas em telas de 360 px (rolagem horizontal dentro da tabela).
-- **Testes novos:** `tests/admin.test.mjs` (12), `internal/server/admin_contract_test.go` (9), `scripts/e2e-admin.mjs` (18 verificações com Chromium contra a API Go real).
+- **Testes novos:** `tests/admin.test.mjs` (12), `backend/server/admin_contract_test.go` (9), `scripts/e2e-admin.mjs` (18 verificações com Chromium contra a API Go real).
 - Nenhum endpoint, evento ou dado novo foi inventado; o backend só recebeu a correção acima.
 
 ### Auditoria final
@@ -40,7 +41,7 @@ Veja `docs/ETAPA-3-AUDITORIA.md` (evidências, problema corrigido e pendências 
 
 **Frontend**
 - `web/src/services/analytics.ts` (novo): rastreador anônimo ligado ao `POST /api/events`. Eventos usados, exatamente os do backend: `pageview`, `project_view`, `resume_download`, `theme_change`. Respeita DNT e Global Privacy Control, ignora `/admin`, 404 e `?demo=`, deduplica eventos repetidos, envia só o **hostname** do referrer (apenas na primeira visualização), nunca lança erro e desiste da sessão após 3 falhas seguidas ou ao receber 429/403.
-- **Não existe evento de troca de idioma no backend**, então nenhum foi inventado: o idioma já vai no campo `lang` de cada evento. Se quiser um evento próprio, é preciso criá-lo em `internal/server/events.go` e em `store.go` primeiro.
+- **Não existe evento de troca de idioma no backend**, então nenhum foi inventado: o idioma já vai no campo `lang` de cada evento. Se quiser um evento próprio, é preciso criá-lo em `backend/server/events.go` e em `store.go` primeiro.
 - `App.tsx` mede a página pelo caminho (a visita em `/` só é medida após o redirecionamento para `/pt|en|es/`); `theme/context.tsx` mede só mudança real de paleta; `pages/Resume.tsx` mede o clique **somente** nos PDFs que existem no manifest.
 - `pages/Contact.tsx`: trava síncrona contra duplo envio; sucesso exibido apenas se a API responder `200` com `sent:true`; erros 422 por campo (textos no idioma da página); foco no primeiro campo inválido; regiões `role="status"` (envio/sucesso) e `role="alert"` (erro) sempre presentes; `aria-busy`; `required`, `maxLength`, `inputMode`; botão com `aria-disabled` (mantém o foco do teclado).
 - `content/profile.ts`: e-mail, LinkedIn e GitHub preenchidos (os dados informados). Sem telefone, endereço ou currículo.
@@ -58,7 +59,7 @@ Veja `docs/ETAPA-3-AUDITORIA.md` (evidências, problema corrigido e pendências 
 
 **Testes novos**
 - `tests/analytics.test.mjs` (8) e `tests/contact.test.mjs` (8, app real em jsdom com `fetch` simulado).
-- `internal/server/integration_test.go` (Go): envio com Resend falso (200/500), limite de 3/hora, honeypot, detalhes 422, contrato dos 4 tipos de evento, ausência de IP/UA/hostname no evento gravado, segredo aleatório, `/info`, avisos de configuração.
+- `backend/server/integration_test.go` (Go): envio com Resend falso (200/500), limite de 3/hora, honeypot, detalhes 422, contrato dos 4 tipos de evento, ausência de IP/UA/hostname no evento gravado, segredo aleatório, `/info`, avisos de configuração.
 - `scripts/verify-dist.mjs`: 3 idiomas × todas as rotas, canonical, hreflang, robots por página, sitemap, robots.txt, manifest de currículo, `vercel.json` (sem SPA fallback, CSP), varredura de credenciais.
 - Tudo junto: `npm test` (typecheck → testes web → build → verify → `go test`).
 
@@ -160,9 +161,9 @@ O build lê `web/public/resume/curriculo-max-godoy-{pt,en,es}.pdf` e gera `dist/
 |---|---|
 | `api/index.go` | Função serverless Go da Vercel (roteia toda a API) |
 | `cmd/server/main.go` | Mesma API rodando localmente (`go run ./cmd/server`) |
-| `internal/config` | Leitura de variáveis de ambiente |
-| `internal/store` | Persistência: Turso via HTTP (sem driver) e memória (só dev/testes) + agregação das métricas |
-| `internal/server` | Rotas, validação, CORS, rate limit, logs JSON, admin (cookie HMAC), contato (Resend), monitoramento |
+| `backend/config` | Leitura de variáveis de ambiente |
+| `backend/store` | Persistência: Turso via HTTP (sem driver) e memória (só dev/testes) + agregação das métricas |
+| `backend/server` | Rotas, validação, CORS, rate limit, logs JSON, admin (cookie HMAC), contato (Resend), monitoramento |
 | `web/src/theme` | 5 paletas × claro/escuro, contraste derivado por código |
 | `web/src/i18n` | Dicionários pt/en/es tipados (`en.ts` e `es.ts` precisam ter a mesma forma de `pt.ts`) |
 | `vercel.json`, `.env.example`, `.gitignore`, `package.json`, `tsconfig.json` | Configuração |

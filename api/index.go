@@ -1,13 +1,13 @@
 // Package handler é o ponto de entrada da função serverless Go na Vercel.
-// O vercel.json reescreve /api/* para /api/index?path=*, e o roteamento acontece em internal/server.
+// O vercel.json reescreve /api/* para /api/index?path=*, e o roteamento acontece em backend/server.
 package handler
 
 import (
 	"net/http"
 	"sync"
 
-	"github.com/maxgodoydev/portfolio/internal/config"
-	"github.com/maxgodoydev/portfolio/internal/server"
+	"github.com/maxgodoydev/portfolio/backend/config"
+	"github.com/maxgodoydev/portfolio/backend/server"
 )
 
 var (

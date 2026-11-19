@@ -4,7 +4,7 @@
 | Verificação | Resultado |
 |---|---|
 | `go vet`, `gofmt -l` | limpos |
-| `go test -count=1 ./...` e `-race ./internal/...` | passam (cobertura: server 82%, store 38% — o cliente Turso não é testado sem rede; config sem testes) |
+| `go test -count=1 ./...` e `-race ./backend/...` | passam (cobertura: server 82%, store 38% — o cliente Turso não é testado sem rede; config sem testes) |
 | `tests/admin.test.mjs` | 12/12 |
 | Build + `verify-dist` | 50 páginas, 1118/1118 verificações |
 | `scripts/e2e-admin.mjs` (Chromium + API Go real) | 18/18 |

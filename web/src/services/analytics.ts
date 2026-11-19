@@ -5,7 +5,7 @@
 //    HOSTNAME de origem (nunca a URL completa do referrer);
 //  - evita duplicatas (StrictMode, re-render, cliques repetidos);
 //  - desiste da sessão após falhas seguidas (API fora do ar, 429) para não gerar ruído.
-// Contrato do backend: internal/server/events.go. Tipos aceitos: pageview, project_view,
+// Contrato do backend: backend/server/events.go. Tipos aceitos: pageview, project_view,
 // resume_download, theme_change. O backend NÃO tem evento de troca de idioma: o idioma
 // vai no campo `lang` de cada evento.
 import { isLang, type Lang } from '../i18n';

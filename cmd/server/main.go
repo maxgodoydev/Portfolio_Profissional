@@ -10,8 +10,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/maxgodoydev/portfolio/internal/config"
-	"github.com/maxgodoydev/portfolio/internal/server"
+	"github.com/maxgodoydev/portfolio/backend/config"
+	"github.com/maxgodoydev/portfolio/backend/server"
 )
 
 func main() {
