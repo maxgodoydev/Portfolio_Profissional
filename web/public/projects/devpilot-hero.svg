@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 650">
+  <defs>
+    <linearGradient id="bg" x1="70" y1="30" x2="820" y2="620" gradientUnits="userSpaceOnUse"><stop stop-color="#f7fbff"/><stop offset="1" stop-color="#eaf2ff"/></linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#2962ff"/><stop offset="1" stop-color="#08b6d1"/></linearGradient>
+    <linearGradient id="warm" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f0ae24"/><stop offset="1" stop-color="#ee7919"/></linearGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7b47f5"/><stop offset="1" stop-color="#dc4799"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="22" stdDeviation="22" flood-color="#35558f" flood-opacity=".18"/></filter>
+  </defs>
+  <rect width="920" height="650" rx="48" fill="url(#bg)"/>
+  <circle cx="100" cy="100" r="60" fill="#4a78ff" opacity=".08"/>
+  <circle cx="825" cy="540" r="100" fill="#08b6d1" opacity=".08"/>
+  <ellipse cx="460" cy="555" rx="300" ry="48" fill="#cbdcf8" opacity=".55"/>
+  <g filter="url(#shadow)">
+    <rect x="92" y="90" width="736" height="430" rx="34" fill="#fff" stroke="#d4e1f7" stroke-width="3"/>
+    <rect x="92" y="90" width="736" height="62" rx="34" fill="#122446"/>
+    <circle cx="131" cy="121" r="8" fill="#ff6688"/><circle cx="157" cy="121" r="8" fill="#f0ae24"/><circle cx="183" cy="121" r="8" fill="#3bc66d"/>
+    <rect x="225" y="109" width="180" height="24" rx="12" fill="#263d67"/>
+    <rect x="704" y="107" width="82" height="28" rx="14" fill="url(#blue)"/>
+    <rect x="116" y="175" width="148" height="318" rx="22" fill="#edf3ff"/>
+    <g font-family="Arial" font-weight="700" font-size="15" fill="#54709e">
+      <text x="145" y="215">01 Problema</text><text x="145" y="255">02 Negócio</text><text x="145" y="295">03 Requisitos</text><text x="145" y="335">04 MVP</text><text x="145" y="375">05 Fluxos</text><text x="145" y="415">06 Dados</text><text x="145" y="455">07 Arquitetura</text>
+    </g>
+    <rect x="126" y="189" width="128" height="42" rx="13" fill="#fff"/>
+    <rect x="284" y="176" width="160" height="104" rx="20" fill="#f8fbff" stroke="#dce7f9"/>
+    <rect x="460" y="176" width="160" height="104" rx="20" fill="#f8fbff" stroke="#dce7f9"/>
+    <rect x="636" y="176" width="166" height="104" rx="20" fill="#f8fbff" stroke="#dce7f9"/>
+    <text x="306" y="207" font-family="Arial" font-size="13" font-weight="700" fill="#7890b7">PROGRESSO</text>
+    <text x="306" y="256" font-family="Arial" font-size="38" font-weight="800" fill="#2962ff">72%</text>
+    <text x="482" y="207" font-family="Arial" font-size="13" font-weight="700" fill="#7890b7">RISCO</text>
+    <text x="482" y="256" font-family="Arial" font-size="38" font-weight="800" fill="#ee7919">18%</text>
+    <text x="658" y="207" font-family="Arial" font-size="13" font-weight="700" fill="#7890b7">MVP</text>
+    <text x="658" y="256" font-family="Arial" font-size="38" font-weight="800" fill="#27ad55">84%</text>
+    <rect x="284" y="300" width="518" height="193" rx="22" fill="#f8fbff" stroke="#dce7f9"/>
+    <text x="307" y="334" font-family="Arial" font-size="14" font-weight="800" fill="#18345f">PRAZO PLANEJADO X REAL</text>
+    <g>
+      <rect x="308" y="358" width="355" height="14" rx="7" fill="#dce5f3"/><rect x="308" y="358" width="280" height="14" rx="7" fill="url(#blue)"/>
+      <rect x="308" y="392" width="410" height="14" rx="7" fill="#dce5f3"/><rect x="308" y="392" width="236" height="14" rx="7" fill="url(#warm)"/>
+      <rect x="308" y="426" width="325" height="14" rx="7" fill="#dce5f3"/><rect x="308" y="426" width="300" height="14" rx="7" fill="url(#purple)"/>
+      <rect x="308" y="460" width="450" height="14" rx="7" fill="#dce5f3"/><rect x="308" y="460" width="185" height="14" rx="7" fill="#27ad55"/>
+    </g>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="48" y="430" width="180" height="120" rx="24" fill="#fff" stroke="#d4e1f7" stroke-width="3"/>
+    <circle cx="88" cy="472" r="20" fill="url(#blue)"/><path d="m78 472 8 8 14-16" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="120" y="468" font-family="Arial" font-size="15" font-weight="800" fill="#18345f">Banco certo</text>
+    <text x="120" y="489" font-family="Arial" font-size="12" fill="#7188ad">MongoDB ou SQL</text>
+    <rect x="74" y="515" width="128" height="9" rx="4.5" fill="#e7eefb"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="700" y="35" width="170" height="110" rx="24" fill="#fff" stroke="#d4e1f7" stroke-width="3"/>
+    <rect x="727" y="60" width="116" height="14" rx="7" fill="#e2ebfa"/>
+    <rect x="727" y="88" width="84" height="14" rx="7" fill="url(#purple)"/>
+    <circle cx="826" cy="96" r="15" fill="#f0ae24"/>
+  </g>
+</svg>

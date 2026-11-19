@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-labelledby="t d">
+  <title id="t">DevPilot 360</title>
+  <desc id="d">Composição abstrata representando arquitetura em camadas e um quadro de tarefas Kanban</desc>
+  <defs>
+    <linearGradient id="dpBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#111512"/>
+      <stop offset="1" stop-color="#221c1a"/>
+    </linearGradient>
+    <linearGradient id="dpGold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c7a24a"/>
+      <stop offset="1" stop-color="#b35c3d"/>
+    </linearGradient>
+    <filter id="dpGlow"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+
+  <rect width="1400" height="900" rx="48" fill="url(#dpBg)"/>
+  <g opacity=".18" stroke="#7d8b72" stroke-width="2">
+    <path d="M0 170H1400M0 340H1400M0 510H1400M0 680H1400"/>
+    <path d="M200 0V900M400 0V900M600 0V900M800 0V900M1000 0V900M1200 0V900"/>
+  </g>
+
+  <rect x="95" y="90" width="1210" height="720" rx="38" fill="#171b18" stroke="#343a35" stroke-width="3"/>
+  <circle cx="145" cy="137" r="9" fill="#b35c3d"/><circle cx="175" cy="137" r="9" fill="#c7a24a"/><circle cx="205" cy="137" r="9" fill="#7d8b72"/>
+  <text x="1155" y="145" fill="#aaa59a" font-family="Arial" font-size="20" text-anchor="end">arquitetura em camadas</text>
+
+  <!-- Left: layered architecture stack -->
+  <text x="140" y="200" fill="#f1ece2" font-family="Arial" font-size="24" font-weight="700">Camadas &amp; dependências</text>
+
+  <g font-family="Arial" font-size="19" font-weight="700">
+    <rect x="140" y="225" width="470" height="60" rx="12" fill="#0e1110" stroke="#7c4653" stroke-width="2"/>
+    <rect x="140" y="225" width="8" height="60" rx="4" fill="#7c4653"/>
+    <text x="168" y="262" fill="#f1ece2">Bootstrap</text>
+
+    <rect x="140" y="297" width="470" height="60" rx="12" fill="#0e1110" stroke="#6c6078" stroke-width="2"/>
+    <rect x="140" y="297" width="8" height="60" rx="4" fill="#6c6078"/>
+    <text x="168" y="334" fill="#f1ece2">Módulos de UI</text>
+
+    <rect x="140" y="369" width="470" height="60" rx="12" fill="#0e1110" stroke="#6f7b83" stroke-width="2"/>
+    <rect x="140" y="369" width="8" height="60" rx="4" fill="#6f7b83"/>
+    <text x="168" y="406" fill="#f1ece2">Engines de domínio</text>
+
+    <rect x="140" y="441" width="470" height="60" rx="12" fill="#0e1110" stroke="#c7a24a" stroke-width="2"/>
+    <rect x="140" y="441" width="8" height="60" rx="4" fill="#c7a24a"/>
+    <text x="168" y="478" fill="#f1ece2">Store (commit único)</text>
+
+    <rect x="140" y="513" width="470" height="60" rx="12" fill="#0e1110" stroke="#7d8b72" stroke-width="2"/>
+    <rect x="140" y="513" width="8" height="60" rx="4" fill="#7d8b72"/>
+    <text x="168" y="550" fill="#f1ece2">Persistência</text>
+
+    <rect x="140" y="585" width="470" height="60" rx="12" fill="#0e1110" stroke="#b35c3d" stroke-width="2"/>
+    <rect x="140" y="585" width="8" height="60" rx="4" fill="#b35c3d"/>
+    <text x="168" y="622" fill="#f1ece2">Utilitários</text>
+
+    <rect x="140" y="657" width="470" height="60" rx="12" fill="#0e1110" stroke="#aaa59a" stroke-width="2"/>
+    <rect x="140" y="657" width="8" height="60" rx="4" fill="#aaa59a"/>
+    <text x="168" y="694" fill="#f1ece2">Catálogo de dados</text>
+  </g>
+  <path d="M375 285V297M375 357V369M375 429V441M375 501V513M375 573V585M375 645V657" stroke="#c7a24a" stroke-width="2" stroke-dasharray="2 6"/>
+
+  <!-- Right: kanban board -->
+  <text x="655" y="200" fill="#f1ece2" font-family="Arial" font-size="24" font-weight="700">Planner &amp; tarefas</text>
+
+  <g font-family="Arial">
+    <!-- Column 1 -->
+    <rect x="655" y="225" width="175" height="492" rx="18" fill="#0e1110" stroke="#343a35" stroke-width="2"/>
+    <text x="678" y="258" fill="#c7a24a" font-size="18" font-weight="700">Planejar</text>
+    <rect x="675" y="278" width="135" height="70" rx="10" fill="#202420" stroke="#b35c3d" stroke-width="2"/>
+    <rect x="675" y="360" width="135" height="70" rx="10" fill="#202420" stroke="#7d8b72" stroke-width="2"/>
+    <rect x="675" y="442" width="135" height="46" rx="10" fill="#202420" stroke="#6f7b83" stroke-width="2"/>
+
+    <!-- Column 2 -->
+    <rect x="845" y="225" width="175" height="492" rx="18" fill="#0e1110" stroke="#343a35" stroke-width="2"/>
+    <text x="868" y="258" fill="#c7a24a" font-size="18" font-weight="700">Em progresso</text>
+    <rect x="865" y="278" width="135" height="70" rx="10" fill="#202420" stroke="#c7a24a" stroke-width="2"/>
+    <rect x="865" y="360" width="135" height="94" rx="10" fill="#202420" stroke="#7c4653" stroke-width="2"/>
+
+    <!-- Column 3 -->
+    <rect x="1035" y="225" width="175" height="492" rx="18" fill="#0e1110" stroke="#343a35" stroke-width="2"/>
+    <text x="1058" y="258" fill="#c7a24a" font-size="18" font-weight="700">Concluído</text>
+    <rect x="1055" y="278" width="135" height="70" rx="10" fill="#202420" stroke="#7d8b72" stroke-width="2"/>
+    <path d="M1078 313l14 14 24-28" fill="none" stroke="#7d8b72" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="1055" y="360" width="135" height="70" rx="10" fill="#202420" stroke="#7d8b72" stroke-width="2"/>
+    <path d="M1078 395l14 14 24-28" fill="none" stroke="#7d8b72" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Bottom chips -->
+  <g font-family="Arial" font-size="18" font-weight="700">
+    <rect x="140" y="738" width="188" height="46" rx="23" fill="#0e1110" stroke="#343a35"/>
+    <text x="234" y="767" fill="#f1ece2" text-anchor="middle">4 telas</text>
+    <rect x="344" y="738" width="248" height="46" rx="23" fill="#0e1110" stroke="#343a35"/>
+    <text x="468" y="767" fill="#f1ece2" text-anchor="middle">Testes com jsdom</text>
+    <rect x="608" y="738" width="292" height="46" rx="23" fill="#0e1110" stroke="#343a35"/>
+    <text x="754" y="767" fill="#f1ece2" text-anchor="middle">Sem servidor (local)</text>
+  </g>
+</svg>
