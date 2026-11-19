@@ -13,8 +13,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/maxgodoydev/portfolio/internal/config"
-	"github.com/maxgodoydev/portfolio/internal/store"
+	"github.com/maxgodoydev/portfolio/backend/config"
+	"github.com/maxgodoydev/portfolio/backend/store"
 )
 
 // Server reúne dependências e rotas.

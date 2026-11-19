@@ -1,0 +1,181 @@
+/* Base global: reset, tipografia, layout e foco visível.
+ * Cores vêm SOMENTE das variáveis dos temas (themes.generated.css):
+ *   --bg --surface --card --soft --action --ink --muted --line --link --on-action
+ * Regra de contraste: nunca usar --muted sobre --soft; nessa combinação use --ink.
+ * Sem fontes externas: pilhas de fontes do sistema (a CSP só permite font-src 'self').
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0 0 0.6em;
+  font-family: ui-serif, 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, 'Times New Roman', serif;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+h1 { font-size: clamp(2rem, 1.4rem + 3vw, 3.25rem); }
+h2 { font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.125rem); }
+h3 { font-size: 1.25rem; }
+
+p,
+ul,
+ol,
+dl {
+  margin: 0 0 1em;
+}
+
+p { max-width: 68ch; text-wrap: pretty; }
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--link);
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 0.08em;
+}
+
+a:hover {
+  text-decoration-thickness: 0.16em;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Foco visível para teclado em todos os elementos interativos. */
+:focus-visible {
+  outline: 3px solid var(--link);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* O foco programático no <main> (troca de página) não precisa de contorno. */
+main:focus {
+  outline: none;
+}
+
+::selection {
+  background: var(--action);
+  color: var(--on-action);
+}
+
+/* ---- Utilitários ---- */
+
+.container {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--action);
+  color: var(--on-action);
+  border-radius: 0.375rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.lead {
+  font-size: 1.1875rem;
+  color: var(--ink);
+}
+
+.button {
+  display: inline-block;
+  padding: 0.65rem 1.25rem;
+  background: var(--action);
+  color: var(--on-action);
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.button:hover {
+  filter: brightness(0.94);
+}
+
+/* ---- Movimento reduzido ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

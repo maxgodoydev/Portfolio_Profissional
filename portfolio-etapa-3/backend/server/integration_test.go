@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/maxgodoydev/portfolio/internal/config"
-	"github.com/maxgodoydev/portfolio/internal/store"
+	"github.com/maxgodoydev/portfolio/backend/config"
+	"github.com/maxgodoydev/portfolio/backend/store"
 )
 
 // fakeResend simula a API do Resend e guarda o último corpo recebido.

@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/maxgodoydev/portfolio/internal/config"
-	"github.com/maxgodoydev/portfolio/internal/store"
+	"github.com/maxgodoydev/portfolio/backend/config"
+	"github.com/maxgodoydev/portfolio/backend/store"
 )
 
 // Contrato consumido pelo painel (web/src/services/api.ts). Se algo aqui mudar, o frontend muda junto.

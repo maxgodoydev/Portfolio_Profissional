@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/maxgodoydev/portfolio/internal/config"
-	"github.com/maxgodoydev/portfolio/internal/store"
+	"github.com/maxgodoydev/portfolio/backend/config"
+	"github.com/maxgodoydev/portfolio/backend/store"
 )
 
 const browserUA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
