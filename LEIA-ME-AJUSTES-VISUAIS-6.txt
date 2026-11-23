@@ -1,9 +1,0 @@
-AJUSTES VISUAIS 6
-- Pop-up do projeto: capa inteira no topo (sem corte) + links pequenos com símbolo (demonstração, site, GitHub, página completa).
-- Página do projeto: capa do projeto + emojis nas funcionalidades.
-- Segunda Vitrine: foto da equipe como link no fim (Alexandre, Max, Luca, Maycon e Mariana).
-- Todos os projetos: linha "Idealização e liderança do projeto." (em participação).
-- Projetos agrupados: Negócios e empresas / Acadêmicos / Estudos e práticas (transição ao trocar de grupo).
-- Trajetória: cartões pequenos em cores alternadas que deslizam para o lado, com ícones de tecnologias; Segunda Vitrine como experiência; resumo final.
-- 4 novas paletas (Ocean & Navy, Rose & Plum, Forest & Gold, Mint & Coral). Lista também atualizada em public/theme-init.js, backend/server/events.go e scripts/verify-dist.mjs.
-Arquivos novos: web/src/components/ProjectParts.tsx, JourneyTrack.tsx, web/src/styles/showcase.css.
