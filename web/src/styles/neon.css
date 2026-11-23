@@ -1,0 +1,43 @@
+/* Parte 4C — neon. Uma cor de brilho derivada do tema (nunca valores soltos): --neon.
+ * Tema escuro: brilho forte e legível; tema claro: brilho discreto (sombra suave), para não pesar.
+ * Só aparece em itens de navegação/ação (menu, filtros, foco, cartões ao passar o mouse); brilho é estático
+ * (sem piscar) e o texto continua com o contraste do tema. */
+:root { --neon: var(--action); --neon-a: 38%; --neon-glow: 0 0 0 1px color-mix(in srgb, var(--neon) 55%, transparent), 0 0 14px -2px color-mix(in srgb, var(--neon) var(--neon-a), transparent); }
+[data-mode='dark'] { --neon: var(--link); --neon-a: 70%; }
+[data-mode='light'] { --neon-a: 32%; }
+
+/* Marca (logo do cabeçalho) */
+.brand:hover, .brand:focus-visible { text-shadow: 0 0 12px color-mix(in srgb, var(--neon) var(--neon-a), transparent); }
+
+/* Menu: ícone + brilho no item ativo/hover */
+.site-nav__label { display: inline-flex; align-items: center; gap: 0.6rem; }
+.site-nav__icon { flex: none; opacity: 0.85; }
+.site-nav__link:hover .site-nav__icon, .site-nav__link[aria-current='page'] .site-nav__icon { color: var(--neon); opacity: 1; filter: drop-shadow(0 0 5px color-mix(in srgb, var(--neon) var(--neon-a), transparent)); }
+.site-nav__link[aria-current='page'] { box-shadow: inset 3px 0 0 var(--neon), inset 8px 0 14px -10px color-mix(in srgb, var(--neon) var(--neon-a), transparent); }
+@media (min-width: 56.25em) {
+  .site-nav__link { padding-inline: 0.5rem; border-radius: 0.5rem; }
+  .site-nav__link[aria-current='page'] { box-shadow: none; }
+  .site-nav__link::after { background: var(--neon); height: 2px; box-shadow: 0 0 10px 1px color-mix(in srgb, var(--neon) var(--neon-a), transparent); inset-inline: 0.5rem; }
+  .site-nav__link:hover, .site-nav__link:focus-visible { color: var(--ink); text-shadow: 0 0 14px color-mix(in srgb, var(--neon) var(--neon-a), transparent); }
+}
+
+/* Filtros e busca */
+.chip[aria-pressed='true'] { box-shadow: var(--neon-glow); }
+.search input:focus, .search input:focus-visible { outline-color: var(--neon); box-shadow: var(--neon-glow); }
+
+/* Cartões: borda neon ao passar o mouse/focar (o pop-up herda o mesmo traço) */
+.project-card--compact:hover, .project-card--compact:focus-within { border-color: var(--neon); box-shadow: var(--neon-glow); }
+.project-dialog { border-color: color-mix(in srgb, var(--neon) 60%, var(--line)); box-shadow: 0 0 0 1px color-mix(in srgb, var(--neon) 30%, transparent), 0 0 38px -8px color-mix(in srgb, var(--neon) var(--neon-a), transparent), 0 30px 70px -20px rgb(0 0 0 / 0.55); }
+.pd-section__icon { box-shadow: 0 0 10px -3px color-mix(in srgb, var(--neon) var(--neon-a), transparent); }
+
+/* Botões principais e botões de ícone */
+.button:not(.button--ghost):hover, .button:not(.button--ghost):focus-visible { box-shadow: var(--neon-glow); }
+.icon-button:hover { box-shadow: var(--neon-glow); }
+
+/* Azulejo claro das marcas escuras (logo continua na cor original em qualquer tema) */
+.brand-tile { display: inline-grid; place-items: center; flex: none; background: #fff; border-radius: 0.3rem; box-shadow: 0 0 0 1px rgb(0 0 0 / 0.12); vertical-align: middle; }
+.brand-tile .brand-icon { width: 72%; height: 72%; }
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card--compact:hover, .project-card--compact:focus-within { transform: none; }
+}

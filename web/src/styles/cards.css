@@ -78,3 +78,98 @@
   .motion-ok .project-card--expandable:hover .project-card__cover img { transform: scale(1.04); }
 }
 .project-card__note { margin: 0; font-size: 0.9375rem; color: var(--ink); }
+
+/* ======================================================================
+ * Parte 4C — cartões compactos + pop-up de detalhes
+ * ====================================================================== */
+
+/* ---------- Cartão compacto ---------- */
+.card-grid--results { gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); }
+.project-card--compact { padding-bottom: 1rem; }
+.project-card--compact .project-card__cover { aspect-ratio: 960 / 340; margin-bottom: 0.8rem; }
+.project-card--compact .project-card__category { display: flex; align-items: center; gap: 0.35rem; margin-bottom: 0.3rem; font-size: 0.75rem; }
+.project-card--compact .project-card__title { margin-bottom: 0.35rem; font-size: 1.2rem; }
+.project-card--compact .project-card__summary { display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; flex: 1; margin-bottom: 0.7rem; font-size: 0.9375rem; line-height: 1.5; }
+.project-card--compact .tag-list { margin-bottom: 0.7rem; gap: 0.3rem; }
+.project-card--compact .tag { padding: 0.1rem 0.5rem; font-size: 0.75rem; }
+.project-card--compact .project-card__cta { font-size: 0.875rem; }
+.project-card--compact[data-open='true'] { border-color: var(--line); } /* o foco está no pop-up */
+.project-card--compact .project-card__chevron { transform: none !important; }
+.motion-ok .project-card--compact:hover .project-card__chevron { transform: scale(1.15) !important; }
+
+/* ---------- Pop-up (<dialog>) ---------- */
+html.modal-open { overflow: hidden; }
+.project-dialog {
+  width: min(42rem, calc(100vw - 1.5rem));
+  max-height: min(88dvh, 52rem);
+  margin: auto;
+  padding: 0;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 1.1rem;
+  box-shadow: 0 30px 70px -20px rgb(0 0 0 / 0.55);
+  overflow: hidden;
+}
+.project-dialog[open] { display: block; }
+.project-dialog::backdrop { background: rgb(8 12 16 / 0.62); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); }
+.project-dialog__box { display: flex; flex-direction: column; max-height: min(88dvh, 52rem); }
+.project-dialog .project-card__panel, .project-dialog p { margin-top: 0; }
+
+.pd-head { display: flex; align-items: flex-start; gap: 0.75rem; padding: 1.1rem 1.25rem 0.6rem; }
+.pd-head__text { flex: 1; min-width: 0; }
+.pd-head__category { display: flex; align-items: center; gap: 0.35rem; margin: 0 0 0.25rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
+.pd-head__title { margin: 0; font-size: clamp(1.35rem, 1.1rem + 1vw, 1.75rem); line-height: 1.2; }
+.pd-meta { display: flex; flex-wrap: wrap; gap: 0.3rem 0.9rem; margin: 0.5rem 0 0; padding: 0; list-style: none; font-size: 0.8125rem; color: var(--muted); }
+.pd-meta li { display: inline-flex; align-items: center; gap: 0.35rem; }
+.pd-close { flex: none; }
+
+/* Acesso rápido: sempre visível, logo abaixo do título */
+.pd-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 0.5rem 1.25rem 0.85rem; list-style: none; }
+.pd-actions .button, .pd-actions .button--ghost { min-height: 2.75rem; display: inline-flex; align-items: center; gap: 0.45rem; }
+.pd-note { margin: 0; padding: 0 1.25rem 0.85rem; font-size: 0.875rem; color: var(--muted); }
+
+.pd-body { overflow-y: auto; overscroll-behavior: contain; padding: 0 1.25rem 1.25rem; border-top: 1px solid var(--line); }
+.pd-photo { margin: 1rem 0 0; }
+.pd-photo img { display: block; width: 100%; height: auto; border-radius: 0.75rem; border: 1px solid var(--line); }
+
+/* Seções separadas por filete */
+.pd-section { padding-top: 1rem; margin-top: 1rem; border-top: 1px dashed var(--line); }
+.pd-section:first-child, .pd-photo + .pd-section { margin-top: 0; border-top: 0; }
+.pd-body > .pd-section:first-child { padding-top: 1rem; }
+.pd-section p { margin: 0 0 0.5rem; font-size: 0.9375rem; line-height: 1.55; }
+.pd-section__title { display: flex; align-items: center; gap: 0.5rem; margin: 0 0 0.5rem; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.pd-section__icon { display: grid; place-items: center; width: 1.6rem; height: 1.6rem; border-radius: 0.5rem; background: var(--soft); color: var(--ink); }
+.pd-features { gap: 0.35rem; font-size: 0.9375rem; }
+.pd-section .tag-list { margin: 0; }
+
+@media (max-width: 40em) {
+  .project-dialog { width: 100vw; max-width: 100vw; max-height: 94dvh; margin: auto 0 0; border-radius: 1.1rem 1.1rem 0 0; }
+  .project-dialog__box { max-height: 94dvh; }
+  .pd-actions .button { flex: 1 1 calc(50% - 0.5rem); justify-content: center; }
+}
+
+/* Entrada/saída do pop-up (só com movimento permitido) */
+@keyframes pd-in { from { opacity: 0; transform: translateY(14px) scale(0.98); } }
+@keyframes pd-fade { from { opacity: 0; } }
+.motion-ok .project-dialog[open] { animation: pd-in 0.24s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.motion-ok .project-dialog[open]::backdrop { animation: pd-fade 0.24s ease; }
+
+/* ---------- Ajustes 4C (após conferir no navegador) ---------- */
+.project-card--compact .project-card__summary { flex: none; }
+.project-card--compact .tag-list { margin-top: auto; }
+.project-card--compact .project-card__summary + .tag-list { margin-top: auto; }
+.pd-actions li { flex: 1 1 auto; display: flex; }
+.pd-actions li > a { flex: 1 1 auto; justify-content: center; min-height: 2.5rem; padding-block: 0.4rem; font-size: 0.9375rem; }
+@media (min-width: 40em) {
+  .pd-actions li { flex: 0 1 auto; }
+  .pd-features { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.35rem 1.25rem; }
+}
+
+/* ---------- Correções da auditoria (parte 5) ---------- */
+/* Título do cartão: alvo de toque com pelo menos 24px de altura (WCAG 2.5.8) */
+.project-card__toggle { display: inline-block; min-height: 1.75rem; line-height: 1.3; }
+/* Tooltip das tecnologias: quebra de linha e largura limitada; nunca gera rolagem horizontal */
+.tech-chip .tip { white-space: normal; width: max-content; max-width: min(15rem, 70vw); text-align: center; }
+html, body { overflow-x: clip; }
+.pd-body:focus-visible { outline: 3px solid var(--link); outline-offset: -3px; }
