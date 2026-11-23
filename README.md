@@ -1,6 +1,14 @@
 # Portfólio de Max Godoy
 
-> **Evolução visual — parte 1 (Etapa 8):** logos de marca (Simple Icons/Font Awesome), hero com painel, fundo ambiente, microinterações e entrada ao rolar. Detalhes e backlog em `docs/historico/ETAPA-8-VISUAL-1.md`. Atribuição: logos de Simple Icons (CC0) e Font Awesome Free Brands (CC BY 4.0, Java e LinkedIn); marcas pertencem aos titulares.
+> **Evolução visual — parte 1 (Etapa 8):** logos de marca (Simple Icons/Font Awesome), hero com painel, fundo ambiente, microinterações e entrada ao rolar. Detalhes e backlog em `docs/historico/ETAPA-8-VISUAL-1.md`.
+>
+> **Evolução visual — parte 2 (Etapa 8):** busca e filtros de Projetos (sem acento, vários termos, destaque, contagem por categoria, chips removíveis, estado vazio e filtros na URL). Detalhes, validação e backlog atualizado em `docs/historico/ETAPA-8-VISUAL-2.md`. Atribuição: logos de Simple Icons (CC0) e Font Awesome Free Brands (CC BY 4.0, Java e LinkedIn); marcas pertencem aos titulares.
+
+> **Evolução visual — parte 3 (Etapa 8):** menu mobile animado (botão que vira X, painel com entrada/saída, fundo escurecido, item atual destacado) e tooltips de categoria nas tecnologias da Home. Detalhes e backlog em `docs/historico/ETAPA-8-VISUAL-3.md`.
+
+> **Evolução visual — parte 4 (Etapa 8):** cartões de projeto expansíveis na página Projetos (disclosure acessível, prévia de tecnologias, painel com foto, fatos, funcionalidades e links). Detalhes e backlog em `docs/historico/ETAPA-8-VISUAL-4.md`.
+
+> **Evolução visual — parte 4B (Etapa 8):** capas dos cartões de projeto (prints reais, 960×436 WebP) e aviso "Sem versão online" nos projetos sem deploy. Detalhes e pendências em `docs/historico/ETAPA-8-VISUAL-4B-CAPAS.md`.
 
 Portfólio profissional de Max Godoy, estudante de Desenvolvimento de Software Multiplataforma na FATEC Zona Sul, com foco em Dados & Analytics, Business Intelligence, desenvolvimento de software e automação de processos.
 
