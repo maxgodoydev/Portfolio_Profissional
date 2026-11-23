@@ -117,7 +117,7 @@ Atualmente, curso **Desenvolvimento de Software Multiplataforma na FATEC Zona Su
 ## 🌐 Acesso
 
 <p align="center">
-  <a href="SEU_LINK_DO_DEPLOY">
+  <a href="max-godoy-portfolio.vercel.app">
     <img src="https://img.shields.io/badge/Acessar_Portf%C3%B3lio-Visualizar_online-2B2E2A?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Acessar portfólio">
   </a>
 </p>
