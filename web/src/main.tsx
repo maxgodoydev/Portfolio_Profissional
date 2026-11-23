@@ -7,6 +7,7 @@ import './styles/pages.css';
 import './styles/visual.css';
 import './styles/search.css';
 import './styles/cards.css';
+import './styles/neon.css';
 import './styles/admin.css';
 import { App } from './App';
 import { I18nProvider } from './i18n/context';

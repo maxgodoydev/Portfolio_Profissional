@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState, type KeyboardEvent } from 'react';
+import { useEffect, useId, useRef, useState, type MouseEvent } from 'react';
 import type { Project } from '../content/projects';
 import { PROJECT_DETAILS } from '../content/projectDetails';
 import { format } from '../i18n';
@@ -8,12 +8,13 @@ import { matchesAll } from '../lib/search';
 import { ExternalLink } from '../pages/shared';
 import { Link } from '../router';
 import { buildPath } from '../routes';
+import { BrandIcon } from './BrandIcon';
 import { Highlight } from './Highlight';
-import { Icon } from './icons';
+import { Icon, type IconName } from './icons';
 import { Tag, TagList } from './Tag';
 
-/** Quantas tecnologias aparecem no cartão recolhido (o restante vira "+N"). */
-const PREVIEW_TAGS = 4;
+/** Tecnologias visíveis no cartão compacto (o restante vira "+N"; a lista completa está no pop-up). */
+const PREVIEW_TAGS = 3;
 
 export interface ExpandableProjectCardProps {
   project: Project;
@@ -22,70 +23,82 @@ export interface ExpandableProjectCardProps {
   tokens?: readonly string[];
 }
 
+/** Cabeçalho de seção do pop-up: ícone + título. */
+function SectionTitle({ icon, children }: { icon: IconName; children: string }) {
+  return (
+    <h3 className="pd-section__title">
+      <span className="pd-section__icon" aria-hidden="true">
+        <Icon name={icon} size={16} />
+      </span>
+      {children}
+    </h3>
+  );
+}
+
 /**
- * Cartão de projeto expansível (padrão "disclosure" do WAI-ARIA: o título é um botão com aria-expanded).
- * Recolhido: categoria, título, resumo e prévia das tecnologias. Expandido: foto (se existir), fatos,
- * funcionalidades, todas as tecnologias e links. Só usa dados já existentes em content/.
- * O cartão inteiro alterna ao toque/clique (o ::after do botão cobre o cartão); links internos ficam acima dele.
+ * Cartão de projeto compacto. Clicar (ou Enter/Espaço no título) abre um pop-up (<dialog> modal nativo:
+ * foco preso, Esc fecha, fundo inerte) com seções curtas e os links de código/site logo no começo.
+ * Só usa dados já existentes em content/ — seções sem dado não aparecem.
  */
 export function ExpandableProjectCard({ project, category, tokens = [] }: ExpandableProjectCardProps) {
   const { lang, t } = useI18n();
   const [open, setOpen] = useState(false);
-  const uid = useId();
-  const panelId = `${uid}-painel`;
-  const cardRef = useRef<HTMLElement>(null);
+  const titleId = useId();
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
-  const firstRender = useRef(true);
 
   const d = PROJECT_DETAILS[project.slug]?.[lang];
   const p = t.project;
   const summary = project.summary[lang];
 
-  // Ao abrir, garante que o fim do cartão apareça (útil no celular); não faz nada se já está visível.
+  // Abre o <dialog> como modal assim que ele existe no DOM; trava a rolagem da página atrás.
   useEffect(() => {
-    if (firstRender.current) {
-      firstRender.current = false;
-      return;
-    }
     if (!open) return;
-    const id = window.setTimeout(() => {
-      const el = cardRef.current;
-      if (!el) return;
-      const r = el.getBoundingClientRect();
-      if (r.bottom > window.innerHeight) {
-        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        el.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
-      }
-    }, 300);
-    return () => window.clearTimeout(id);
+    const dlg = dialogRef.current;
+    if (dlg && !dlg.open) dlg.showModal();
+    document.documentElement.classList.add('modal-open');
+    return () => document.documentElement.classList.remove('modal-open');
   }, [open]);
 
-  const onKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'Escape' && open) {
-      e.stopPropagation();
-      setOpen(false);
-      toggleRef.current?.focus();
-    }
+  const close = () => {
+    setOpen(false);
+    toggleRef.current?.focus();
+  };
+
+  // Clique no fundo escurecido (fora da caixa) fecha.
+  const onBackdrop = (e: MouseEvent<HTMLDialogElement>) => {
+    if (e.target === e.currentTarget) close();
   };
 
   // Prévia: se a busca casa com tecnologias, elas vêm primeiro (para o destaque ficar visível).
   const ordered = tokens.length === 0 ? project.tags : [...project.tags].sort((a, b) => Number(matchesAll(tokens, [b])) - Number(matchesAll(tokens, [a])));
   const preview = ordered.slice(0, PREVIEW_TAGS);
   const hidden = project.tags.length - preview.length;
+  const hasDeploy = !!(project.demo || project.site);
+  // Seções só existem com conteúdo real (texto vazio ou só espaços não conta).
+  const audience = d?.audience?.trim();
+  const problem = d?.problem?.trim();
+  const context = d?.context?.trim();
+  const solution = d?.solution?.trim();
+  const features = (d?.features ?? []).filter((f) => f.trim() !== '');
+  const participation = (d?.participation ?? []).filter((f) => f.trim() !== '');
 
   return (
-    <article ref={cardRef} className="project-card project-card--expandable" data-open={open ? 'true' : 'false'} onKeyDown={onKeyDown}>
+    <article className="project-card project-card--expandable project-card--compact" data-open={open ? 'true' : 'false'}>
       <div className="project-card__cover" aria-hidden={project.cover ? undefined : true} data-empty={project.cover ? undefined : 'true'}>
         {project.cover ? (
           <img src={project.cover.src} width={project.cover.width} height={project.cover.height} alt={project.cover.alt[lang]} loading="lazy" decoding="async" />
         ) : (
-          <Icon name="chart" size={34} />
+          <Icon name="chart" size={30} />
         )}
       </div>
-      <p className="project-card__category">{category}</p>
+      <p className="project-card__category">
+        <Icon name="tag" size={13} /> {category}
+      </p>
       <h2 className="project-card__title">
-        <button ref={toggleRef} type="button" className="project-card__toggle" aria-expanded={open} aria-controls={panelId} onClick={() => setOpen((v) => !v)}>
+        <button ref={toggleRef} type="button" className="project-card__toggle" aria-haspopup="dialog" aria-expanded={open} onClick={() => setOpen(true)}>
           <Highlight text={project.title} tokens={tokens} />
+          <span className="visually-hidden">. {t.projects.dialogHint}</span>
         </button>
       </h2>
       <p className="project-card__summary">
@@ -93,114 +106,158 @@ export function ExpandableProjectCard({ project, category, tokens = [] }: Expand
       </p>
 
       {preview.length > 0 && (
-        <div className="collapse collapse--preview" data-open={open ? 'false' : 'true'} inert={open}>
-          <div className="collapse__inner">
-            <ul className="tag-list" aria-label={p.technologies}>
-              {preview.map((tag) => (
-                <li key={tag}>
-                  <Tag icon={tag}>
-                    <Highlight text={tag} tokens={tokens} />
-                  </Tag>
-                </li>
-              ))}
-              {hidden > 0 && (
-                <li>
-                  <Tag tone="outline">
-                    <span aria-hidden="true">{format(t.projects.moreTags, { n: hidden })}</span>
-                    <span className="visually-hidden">{format(t.projects.moreTagsLabel, { n: hidden })}</span>
-                  </Tag>
-                </li>
-              )}
-            </ul>
-          </div>
-        </div>
+        <ul className="tag-list tag-list--compact" aria-label={p.technologies}>
+          {preview.map((tag) => (
+            <li key={tag}>
+              <Tag icon={tag}>
+                <Highlight text={tag} tokens={tokens} />
+              </Tag>
+            </li>
+          ))}
+          {hidden > 0 && (
+            <li>
+              <Tag tone="outline">
+                <span aria-hidden="true">{format(t.projects.moreTags, { n: hidden })}</span>
+                <span className="visually-hidden">{format(t.projects.moreTagsLabel, { n: hidden })}</span>
+              </Tag>
+            </li>
+          )}
+        </ul>
       )}
 
-      <div id={panelId} className="collapse collapse--panel" data-open={open ? 'true' : 'false'} inert={!open} role="region" aria-label={project.title}>
-        <div className="collapse__inner">
-          <div className="project-card__panel">
-            {project.image && (
-              <figure className="project-card__photo">
-                <img src={project.image.src} width={project.image.width} height={project.image.height} alt={project.image.alt[lang]} loading="lazy" decoding="async" />
-              </figure>
-            )}
+      <p className="project-card__cta" aria-hidden="true">
+        {t.projects.viewDetails} <Icon name="expand" size={16} className="project-card__chevron" />
+      </p>
 
-            {(project.kind || project.created || d?.team) && (
-              <dl className="facts facts--compact">
-                {project.kind && (
-                  <div>
-                    <dt>{p.kindLabel}</dt>
-                    <dd>{p.kinds[project.kind]}</dd>
-                  </div>
+      {open && (
+        <dialog ref={dialogRef} className="project-dialog" aria-labelledby={titleId} onClose={() => setOpen(false)} onClick={onBackdrop}>
+          <div className="project-dialog__box">
+            <header className="pd-head">
+              <div className="pd-head__text">
+                <p className="pd-head__category">
+                  <Icon name="tag" size={13} /> {category}
+                </p>
+                <h2 id={titleId} className="pd-head__title">
+                  {project.title}
+                </h2>
+                {(project.kind || project.created || d?.team) && (
+                  <ul className="pd-meta">
+                    {project.kind && (
+                      <li>
+                        <Icon name="briefcase" size={14} /> {p.kinds[project.kind]}
+                      </li>
+                    )}
+                    {project.created && (
+                      <li>
+                        <Icon name="calendar" size={14} /> {formatDate(lang, project.created)}
+                      </li>
+                    )}
+                    {d?.team && (
+                      <li>
+                        <Icon name="users" size={14} /> {d.team}
+                      </li>
+                    )}
+                  </ul>
                 )}
-                {project.created && (
-                  <div>
-                    <dt>{p.created}</dt>
-                    <dd>{formatDate(lang, project.created)}</dd>
-                  </div>
-                )}
-                {d?.team && (
-                  <div>
-                    <dt>{p.team}</dt>
-                    <dd>{d.team}</dd>
-                  </div>
-                )}
-              </dl>
-            )}
-
-            {d?.features && d.features.length > 0 && (
-              <div className="project-card__block">
-                <h3 className="project-card__subtitle">{p.features}</h3>
-                <ul className="check-list">
-                  {d.features.map((f) => (
-                    <li key={f}>{f}</li>
-                  ))}
-                </ul>
               </div>
-            )}
+              <button type="button" className="icon-button pd-close" onClick={close} aria-label={t.projects.close}>
+                <Icon name="close" size={20} />
+              </button>
+            </header>
 
-            {project.tags.length > 0 && (
-              <div className="project-card__block">
-                <h3 className="project-card__subtitle">{p.technologies}</h3>
-                <TagList items={project.tags} label={p.technologies} tokens={tokens} />
-              </div>
-            )}
-
-            <ul className="link-row project-card__links" aria-label={p.links}>
-              <li>
-                <Link className="button" to={buildPath(lang, 'project', project.slug)}>
-                  {t.projects.openPage} <Icon name="arrowRight" size={18} />
-                  <span className="visually-hidden">: {project.title}</span>
-                </Link>
-              </li>
+            {/* Acesso rápido: código e site logo no começo */}
+            <ul className="pd-actions" aria-label={t.projects.quickLinks}>
               {project.demo && (
                 <li>
-                  <ExternalLink href={project.demo} variant="ghost">
-                    {p.demo}
+                  <ExternalLink href={project.demo} variant="button">
+                    <Icon name="play" size={16} /> {p.demo}
                   </ExternalLink>
                 </li>
               )}
               {project.site && (
                 <li>
-                  <ExternalLink href={project.site} variant="ghost">
-                    {p.site}
+                  <ExternalLink href={project.site} variant="button">
+                    <Icon name="globe" size={16} /> {p.site}
                   </ExternalLink>
                 </li>
               )}
               <li>
-                <ExternalLink href={project.repo} variant="ghost">
-                  {p.repo}
+                <ExternalLink href={project.repo} variant={hasDeploy ? 'ghost' : 'button'}>
+                  <BrandIcon name="GitHub" size={16} /> {p.repo}
                 </ExternalLink>
               </li>
+              <li>
+                <Link className="button button--ghost" to={buildPath(lang, 'project', project.slug)}>
+                  <Icon name="file" size={16} /> {t.projects.openPage}
+                  <span className="visually-hidden">: {project.title}</span>
+                </Link>
+              </li>
             </ul>
-            {!project.demo && !project.site && <p className="project-card__note">{t.projects.noDeploy}</p>}
-          </div>
-        </div>
-      </div>
+            {!hasDeploy && <p className="pd-note">{t.projects.noDeploy}</p>}
 
-      <p className="project-card__cta" aria-hidden="true">
-        {open ? t.projects.collapse : t.projects.expand} <Icon name="chevronDown" size={18} className="project-card__chevron" />
-      </p>
+            <div className="pd-body" tabIndex={0} role="region" aria-labelledby={titleId}>
+              {project.image && (
+                <figure className="pd-photo">
+                  <img src={project.image.src} width={project.image.width} height={project.image.height} alt={project.image.alt[lang]} loading="lazy" decoding="async" />
+                </figure>
+              )}
+
+              {problem && (
+                <section className="pd-section">
+                  <SectionTitle icon="info">{p.problem}</SectionTitle>
+                  <p>{problem}</p>
+                </section>
+              )}
+
+              {audience && (
+                <section className="pd-section">
+                  <SectionTitle icon="users">{p.audience}</SectionTitle>
+                  <p>{audience}</p>
+                </section>
+              )}
+
+              {context && (
+                <section className="pd-section">
+                  <SectionTitle icon="info">{p.context}</SectionTitle>
+                  <p>{context}</p>
+                </section>
+              )}
+
+              {(solution || features.length > 0) && (
+                <section className="pd-section">
+                  <SectionTitle icon="wrench">{p.how}</SectionTitle>
+                  {solution && <p>{solution}</p>}
+                  {features.length > 0 && (
+                    <ul className="check-list pd-features">
+                      {features.map((f) => (
+                        <li key={f}>{f}</li>
+                      ))}
+                    </ul>
+                  )}
+                </section>
+              )}
+
+              {participation.length > 0 && (
+                <section className="pd-section">
+                  <SectionTitle icon="user">{p.participation}</SectionTitle>
+                  <ul className="check-list pd-features">
+                    {participation.map((f) => (
+                      <li key={f}>{f}</li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+
+              {project.tags.length > 0 && (
+                <section className="pd-section">
+                  <SectionTitle icon="layers">{p.technologies}</SectionTitle>
+                  <TagList items={project.tags} label={p.technologies} tokens={tokens} />
+                </section>
+              )}
+            </div>
+          </div>
+        </dialog>
+      )}
     </article>
   );
 }

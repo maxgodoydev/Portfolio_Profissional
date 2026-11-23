@@ -4,6 +4,8 @@ import type { Localized } from '../i18n';
 export interface ProjectDetail {
   context?: string;
   problem?: string;
+  /** Para quem foi feito (só preencher com o que o autor confirmou). */
+  audience?: string;
   solution?: string;
   features?: readonly string[];
   /** Parágrafos curtos sobre a participação individual. */

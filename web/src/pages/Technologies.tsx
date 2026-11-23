@@ -55,6 +55,7 @@ export function TechnologiesPage() {
           ))}
         </ul>
         <p className="legend__note">{t.technologies.noLogoNote}</p>
+        <p className="legend__note">{t.technologies.brandAttribution}</p>
       </section>
 
       {TECH_CATEGORIES.map((cat) => {

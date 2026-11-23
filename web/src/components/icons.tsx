@@ -58,6 +58,61 @@ const PATHS: Record<string, ReactNode> = {
   ),
   chart: <path d="M4 20V10M10 20V4M16 20v-7M22 20H2" />,
   code: <path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16" />,
+  home: <path d="M4 11l8-7 8 7M6 10v9a1 1 0 0 0 1 1h3.5v-5h3V20H17a1 1 0 0 0 1-1v-9" />,
+  user: (
+    <>
+      <circle cx="12" cy="8" r="3.5" />
+      <path d="M5 20c.6-3.6 3.3-5.5 7-5.5s6.4 1.9 7 5.5" />
+    </>
+  ),
+  users: (
+    <>
+      <circle cx="9" cy="8.5" r="3" />
+      <path d="M3 19.5c.5-3.1 2.8-4.7 6-4.7s5.5 1.6 6 4.7M16 5.7a3 3 0 0 1 0 5.6M18 15c1.7.6 2.7 2 3 4.5" />
+    </>
+  ),
+  folder: <path d="M3 7a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />,
+  layers: <path d="M12 3l9 5-9 5-9-5zM3 12.5l9 5 9-5M3 16.5l9 5 9-5" />,
+  route: (
+    <>
+      <circle cx="6" cy="18" r="2" />
+      <circle cx="18" cy="6" r="2" />
+      <path d="M8 18h7a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h7" />
+    </>
+  ),
+  file: (
+    <>
+      <path d="M6 3h8l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" />
+      <path d="M14 3v5h5M8 13h8M8 17h5" />
+    </>
+  ),
+  globe: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9S14.6 18.4 12 21M12 3C9.4 5.6 8.1 8.6 8.1 12s1.3 6.4 3.9 9" />
+    </>
+  ),
+  calendar: (
+    <>
+      <rect x="3.5" y="5" width="17" height="15" rx="2" />
+      <path d="M3.5 10h17M8 3v4M16 3v4" />
+    </>
+  ),
+  play: <path d="M8 5.5v13l11-6.5z" />,
+  info: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 11v5.5M12 7.8v.2" />
+    </>
+  ),
+  wrench: <path d="M14.5 6.5a4 4 0 0 0 5 5l-9.7 9.7a2.1 2.1 0 0 1-3-3zM14.5 6.5l3-3 3 3-3 3" />,
+  expand: <path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7" />,
+  tag: (
+    <>
+      <path d="M3 12V4h8l10 10-8 8z" />
+      <circle cx="7.5" cy="8.5" r="1" />
+    </>
+  ),
   search: (
     <>
       <circle cx="11" cy="11" r="6.5" />

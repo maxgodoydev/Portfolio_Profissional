@@ -28,6 +28,13 @@ export function ProjectDetailPage({ slug }: { slug: string }) {
   if (!project) return <ProjectNotFound />;
   const d = PROJECT_DETAILS[slug]?.[lang];
   const p = t.project;
+  // Não renderiza seções ou listas vazias (inclusive conteúdo composto só por espaços).
+  const context = d?.context?.trim();
+  const problem = d?.problem?.trim();
+  const audience = d?.audience?.trim();
+  const solution = d?.solution?.trim();
+  const features = (d?.features ?? []).filter((item) => item.trim().length > 0);
+  const participation = (d?.participation ?? []).filter((item) => item.trim().length > 0);
 
   return (
     <div className="page project-detail">
@@ -95,33 +102,38 @@ export function ProjectDetailPage({ slug }: { slug: string }) {
         </figure>
       )}
 
-      {d?.context && (
+      {context && (
         <Section title={p.context}>
-          <p>{d.context}</p>
+          <p>{context}</p>
         </Section>
       )}
-      {d?.problem && (
+      {problem && (
         <Section title={p.problem}>
-          <p>{d.problem}</p>
+          <p>{problem}</p>
         </Section>
       )}
-      {d?.solution && (
+      {audience && (
+        <Section title={p.audience}>
+          <p>{audience}</p>
+        </Section>
+      )}
+      {solution && (
         <Section title={p.solution}>
-          <p>{d.solution}</p>
+          <p>{solution}</p>
         </Section>
       )}
-      {d?.features && d.features.length > 0 && (
+      {features.length > 0 && (
         <Section title={p.features}>
           <ul className="check-list">
-            {d.features.map((f) => (
+            {features.map((f) => (
               <li key={f}>{f}</li>
             ))}
           </ul>
         </Section>
       )}
-      {d?.participation && (
+      {participation.length > 0 && (
         <Section title={p.participation}>
-          {d.participation.map((item) => (
+          {participation.map((item) => (
             <p key={item}>{item}</p>
           ))}
         </Section>

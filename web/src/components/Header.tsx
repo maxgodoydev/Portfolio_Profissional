@@ -2,11 +2,21 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { useI18n } from '../i18n/context';
 import { Link, useLocation } from '../router';
 import { buildPath, type StaticRouteId } from '../routes';
-import { Icon } from './icons';
+import { Icon, type IconName } from './icons';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { ThemeSwitcher } from './ThemeSwitcher';
 
 export const MENU_ROUTES = ['about', 'projects', 'technologies', 'journey', 'contact', 'resume'] as const satisfies readonly StaticRouteId[];
+
+/** Ícone de cada item do menu (affordance: reconhecer a seção antes de ler). */
+const NAV_ICONS: Record<(typeof MENU_ROUTES)[number], IconName> = {
+  about: 'user',
+  projects: 'folder',
+  technologies: 'layers',
+  journey: 'route',
+  contact: 'mail',
+  resume: 'file',
+};
 
 const DESKTOP_QUERY = '(min-width: 56.25em)'; // 900px — mantém em sincronia com components.css
 
@@ -71,7 +81,10 @@ export function Header() {
               return (
                 <li key={id} style={{ '--i': i } as CSSProperties}>
                   <Link to={buildPath(lang, id)} className="site-nav__link" aria-current={active ? 'page' : undefined}>
-                    <span>{t.nav[id]}</span>
+                    <span className="site-nav__label">
+                      <Icon name={NAV_ICONS[id]} size={18} className="site-nav__icon" />
+                      <span>{t.nav[id]}</span>
+                    </span>
                     <Icon name={active ? 'check' : 'arrowRight'} size={18} className="site-nav__mark" />
                   </Link>
                 </li>
