@@ -31,6 +31,14 @@ export function Footer() {
               </a>
             </li>
           )}
+          {LINKS.whatsapp && (
+            <li>
+              <a href={`https://wa.me/${LINKS.whatsapp}`} target="_blank" rel="noopener noreferrer">
+                {t.common.whatsapp}
+                <span className="visually-hidden"> {t.common.newTab}</span>
+              </a>
+            </li>
+          )}
           {LINKS.email && (
             <li>
               <a href={`mailto:${LINKS.email}`}>

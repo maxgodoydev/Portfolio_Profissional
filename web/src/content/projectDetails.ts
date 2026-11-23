@@ -157,6 +157,49 @@ export const PROJECT_DETAILS: Record<string, Localized<ProjectDetail> | undefine
       features: ['Área del alumno', 'Área de la institución', 'Área de administración', 'Difusión de becas de estudio y cursos'],
     },
   },
+  'tica-artesanato': {
+    pt: {
+      context: 'Projeto integrador do curso de Desenvolvimento de Software Multiplataforma da FATEC, para uma artesã autônoma que produz peças de crochê sob encomenda.',
+      problem: 'O catálogo fica em fotos soltas no celular, cada pedido começa do zero no WhatsApp (produto, cor, tamanho e prazo) e não há controle do status dos pedidos.',
+      solution: 'Um sistema com duas áreas: a do cliente, com vitrine, montagem guiada da peça, envio do pedido ao WhatsApp e acompanhamento por link, e a da artesã, com produtos, pedidos com status e histórico e indicadores. O fechamento continua sendo uma conversa real no WhatsApp. O projeto está em desenvolvimento.',
+      features: ['Vitrine digital com catálogo', 'Jornada guiada para montar a peça', 'Envio estruturado ao WhatsApp', 'Acompanhamento do pedido por link, sem senha', 'Gestão de pedidos com status e histórico', 'Indicadores básicos do negócio'],
+    },
+    en: {
+      context: 'An integrative project of the Multiplatform Software Development course at FATEC, for a self-employed artisan who makes crochet pieces to order.',
+      problem: 'The catalog lives in loose photos on a phone, every order starts from scratch on WhatsApp (product, color, size and deadline) and there is no control of order status.',
+      solution: 'A system with two areas: the customer\'s, with a storefront, guided piece building, order submission to WhatsApp and tracking by link, and the artisan\'s, with products, orders with status and history, and indicators. Closing the sale remains a real conversation on WhatsApp. The project is in development.',
+      features: ['Digital storefront with catalog', 'Guided journey to build the piece', 'Structured submission to WhatsApp', 'Order tracking by link, no password', 'Order management with status and history', 'Basic business indicators'],
+    },
+    es: {
+      context: 'Proyecto integrador del curso de Desarrollo de Software Multiplataforma de la FATEC, para una artesana autónoma que hace piezas de crochet por encargo.',
+      problem: 'El catálogo está en fotos sueltas en el celular, cada pedido empieza de cero en WhatsApp (producto, color, tamaño y plazo) y no hay control del estado de los pedidos.',
+      solution: 'Un sistema con dos áreas: la del cliente, con vitrina, armado guiado de la pieza, envío del pedido a WhatsApp y seguimiento por enlace, y la de la artesana, con productos, pedidos con estado e historial e indicadores. El cierre sigue siendo una conversación real en WhatsApp. El proyecto está en desarrollo.',
+      features: ['Vitrina digital con catálogo', 'Recorrido guiado para armar la pieza', 'Envío estructurado a WhatsApp', 'Seguimiento del pedido por enlace, sin contraseña', 'Gestión de pedidos con estado e historial', 'Indicadores básicos del negocio'],
+    },
+  },
+  'pm-bem-casados': {
+    pt: {
+      context: 'Projeto integrador do 4º semestre de Desenvolvimento de Software Multiplataforma, para uma confeiteira autônoma que produz bem-casados, doces e itens personalizados por encomenda.',
+      problem: 'O catálogo está em fotos soltas e redes sociais, cada encomenda começa do zero no WhatsApp e o controle de ingredientes e embalagens é feito de cabeça.',
+      solution: 'Um sistema com área pública (vitrine, jornada guiada de encomenda e envio ao WhatsApp) e área da administradora (produtos e ficha técnica, encomendas e produção, estoque com alerta de mínimo e indicadores). Não é uma loja virtual: o fechamento continua no WhatsApp. O projeto está em desenvolvimento.',
+      features: ['Vitrine e catálogo de produtos', 'Jornada guiada de encomenda', 'Envio estruturado ao WhatsApp', 'Estoque de insumos com alerta de mínimo', 'Ficha técnica de produtos', 'Indicadores do negócio'],
+      participation: ['Implementação do banco de dados PostgreSQL e validação do esquema.'],
+    },
+    en: {
+      context: 'An integrative project of the 4th semester of Multiplatform Software Development, for a self-employed confectioner who makes wedding favors, sweets and custom items to order.',
+      problem: 'The catalog is in loose photos and social media, every order starts from scratch on WhatsApp, and ingredients and packaging are tracked from memory.',
+      solution: 'A system with a public area (storefront, guided order journey and submission to WhatsApp) and an administrator area (products and recipe sheets, orders and production, inventory with minimum-stock alerts and indicators). It is not an online store: closing the sale stays on WhatsApp. The project is in development.',
+      features: ['Storefront and product catalog', 'Guided order journey', 'Structured submission to WhatsApp', 'Ingredient inventory with minimum-stock alert', 'Product recipe sheets', 'Business indicators'],
+      participation: ['Implementation of the PostgreSQL database and schema validation.'],
+    },
+    es: {
+      context: 'Proyecto integrador del 4.º semestre de Desarrollo de Software Multiplataforma, para una confitera autónoma que elabora bem-casados, dulces y artículos personalizados por encargo.',
+      problem: 'El catálogo está en fotos sueltas y redes sociales, cada encargo empieza de cero en WhatsApp y el control de ingredientes y embalajes se hace de memoria.',
+      solution: 'Un sistema con área pública (vitrina, recorrido guiado de encargo y envío a WhatsApp) y área de la administradora (productos y ficha técnica, encargos y producción, inventario con alerta de mínimo e indicadores). No es una tienda en línea: el cierre sigue en WhatsApp. El proyecto está en desarrollo.',
+      features: ['Vitrina y catálogo de productos', 'Recorrido guiado de encargo', 'Envío estructurado a WhatsApp', 'Inventario de insumos con alerta de mínimo', 'Ficha técnica de productos', 'Indicadores del negocio'],
+      participation: ['Implementación de la base de datos PostgreSQL y validación del esquema.'],
+    },
+  },
   'segunda-vitrine': {
     pt: {
       context: 'Iniciativa independente criada em novembro de 2026 por estudantes de Desenvolvimento de Software Multiplataforma da FATEC Zona Sul. Não tem vínculo institucional nem representa a FATEC. O nome vem da ideia de ser a "segunda vitrine" de um negócio: a primeira é a loja física, a segunda é a presença digital.',
@@ -167,6 +210,7 @@ export const PROJECT_DETAILS: Record<string, Localized<ProjectDetail> | undefine
         'Coordenação dos projetos: planejamento, levantamento de necessidades, distribuição de tarefas, prazos e entregas.',
         'Organização da comunicação com Trello, Jira e Discord e apoio à documentação e apresentação dos projetos.',
       ],
+      team: 'Alexandre, Max, Luca, Maycon e Mariana',
     },
     en: {
       context: 'An independent initiative created in November 2026 by Multiplatform Software Development students at FATEC Zona Sul. It has no institutional link with FATEC and does not represent it. The name comes from the idea of being a business\'s "second storefront": the first is the physical shop, the second is the digital presence.',
@@ -177,6 +221,7 @@ export const PROJECT_DETAILS: Record<string, Localized<ProjectDetail> | undefine
         'Project coordination: planning, requirements gathering, task distribution, deadlines and deliveries.',
         'Organizing communication with Trello, Jira and Discord and supporting project documentation and presentation.',
       ],
+      team: 'Alexandre, Max, Luca, Maycon and Mariana',
     },
     es: {
       context: 'Iniciativa independiente creada en noviembre de 2026 por estudiantes de Desarrollo de Software Multiplataforma de la FATEC Zona Sul. No tiene vínculo institucional ni representa a la FATEC. El nombre viene de la idea de ser la "segunda vitrina" de un negocio: la primera es la tienda física, la segunda es la presencia digital.',
@@ -187,6 +232,39 @@ export const PROJECT_DETAILS: Record<string, Localized<ProjectDetail> | undefine
         'Coordinación de los proyectos: planificación, levantamiento de necesidades, distribución de tareas, plazos y entregas.',
         'Organización de la comunicación con Trello, Jira y Discord y apoyo a la documentación y presentación de los proyectos.',
       ],
+      team: 'Alexandre, Max, Luca, Maycon y Mariana',
     },
   },
 };
+
+// ---------------------------------------------------------------------------------------------
+// Liderança: em todos os projetos Max foi o idealizador ou o líder (informado pelo autor).
+// Barbershop e Segunda Vitrine já descrevem a liderança em detalhe; os demais ganham a linha abaixo.
+// ---------------------------------------------------------------------------------------------
+const LEAD: Localized<string> = {
+  pt: 'Idealização e liderança do projeto.',
+  en: 'Conceived and led the project.',
+  es: 'Ideación y liderazgo del proyecto.',
+};
+const HAS_LEAD_TEXT = new Set(['barbershop-do-gui', 'segunda-vitrine']);
+for (const [slug, loc] of Object.entries(PROJECT_DETAILS)) {
+  if (!loc || HAS_LEAD_TEXT.has(slug)) continue;
+  for (const lang of ['pt', 'en', 'es'] as const) {
+    loc[lang] = { ...loc[lang], participation: [LEAD[lang], ...(loc[lang].participation ?? [])] };
+  }
+}
+
+/** Emoji de cada funcionalidade (mesma ordem de `features`; iguais nos três idiomas). */
+export const FEATURE_ICONS: Record<string, readonly string[]> = {
+  'barbershop-do-gui': ['👥', '📅', '🛠️', '📊'],
+  'banking-analytics': ['❓', '🔎', '🧪', '🔁'],
+  'power-bi-portfolio': ['📊', '🧑', '👥'],
+  'studio-patty-leao': ['📅', '📦', '💰', '🪟', '📈'],
+  entrelacos: ['📱', '🔍', '💬'],
+  'python-studies': ['🧠', '📈', '🎲'],
+  intelibolsas: ['🎓', '🏫', '🛡️', '📢'],
+  'segunda-vitrine': ['🌐', '📲', '🗂️', '⚙️'],
+};
+export function featureIcon(slug: string, index: number): string {
+  return FEATURE_ICONS[slug]?.[index] ?? '✅';
+}

@@ -3,14 +3,20 @@
 import type { Localized } from '../i18n';
 
 export type ProjectCategory = 'development' | 'data' | 'bi' | 'automation' | 'academic';
+/** Grupo de exibição na página Projetos. */
+export type ProjectGroup = 'business' | 'academic' | 'practice';
+export const PROJECT_GROUPS: readonly ProjectGroup[] = ['business', 'academic', 'practice'];
 export type ProjectKind = 'client' | 'academic' | 'study' | 'initiative';
 
 export interface Project {
   slug: string;
+  group: ProjectGroup;
   categories: readonly ProjectCategory[];
   /** Tipo conforme informado pelo autor; ausente quando não confirmado. */
   kind?: ProjectKind;
   featured?: boolean;
+  /** Situação, quando o projeto ainda está em andamento. */
+  status?: 'inProgress';
   /** Somente tecnologias confirmadas para o projeto. */
   tags: readonly string[];
   repo: string;
@@ -20,7 +26,7 @@ export interface Project {
   image?: { src: string; width: number; height: number; alt: Localized<string>; caption: Localized<string> };
   /** Capa do cartão na lista de Projetos: captura de tela/banner do próprio projeto (web/public/projects/covers, 960×436). Sem capa, o cartão mostra um quadro neutro. */
   cover?: { src: string; width: number; height: number; alt: Localized<string> };
-  /** Criação (AAAA-MM), quando confirmada. */
+  /** Criação (AAAA-MM quando o mês é conhecido; somente AAAA quando apenas o ano foi confirmado). */
   created?: string;
   title: string;
   summary: Localized<string>;
@@ -29,6 +35,8 @@ export interface Project {
 export const PROJECTS: readonly Project[] = [
   {
     slug: 'barbershop-do-gui',
+    created: '2025-02',
+    group: 'business',
     categories: ['development', 'automation', 'bi'],
     kind: 'client',
     featured: true,
@@ -54,10 +62,22 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     slug: 'banking-analytics',
+    created: '2026',
+    group: 'practice',
     categories: ['data'],
     featured: true,
     tags: ['Python', 'SQL', 'SQLite', 'Pandas', 'Matplotlib', 'Pytest'],
     repo: 'https://github.com/maxgodoydev/Banking-analytics',
+    cover: {
+      src: '/projects/covers/banking-analytics.webp',
+      width: 960,
+      height: 436,
+      alt: {
+        pt: 'Capa do projeto Banking Analytics com painéis de análise financeira, gráficos, banco de dados e tecnologias Python, SQL e SQLite.',
+        en: 'Banking Analytics project cover with financial analysis dashboards, charts, a database, and Python, SQL and SQLite technologies.',
+        es: 'Portada del proyecto Banking Analytics con paneles de análisis financiero, gráficos, base de datos y tecnologías Python, SQL y SQLite.',
+      },
+    },
     title: 'Banking Analytics',
     summary: {
       pt: 'Análise de transações bancárias sintéticas com Python, SQL e SQLite: cinco perguntas de negócio respondidas com CTEs, funções de janela e testes automatizados.',
@@ -67,6 +87,8 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     slug: 'power-bi-portfolio',
+    created: '2026',
+    group: 'academic',
     categories: ['bi', 'academic'],
     kind: 'academic',
     featured: true,
@@ -91,6 +113,8 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     slug: 'studio-patty-leao',
+    created: '2026-03',
+    group: 'business',
     categories: ['development', 'automation'],
     tags: ['Node.js', 'Express', 'EJS', 'MongoDB Atlas'],
     repo: 'https://github.com/maxgodoydev/Studio_Patty_Leao',
@@ -114,6 +138,8 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     slug: 'entrelacos',
+    created: '2026',
+    group: 'business',
     categories: ['development'],
     tags: ['HTML', 'CSS', 'JavaScript', 'JSON'],
     repo: 'https://github.com/maxgodoydev/Entrelacos',
@@ -137,6 +163,8 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     slug: 'python-studies',
+    created: '2026',
+    group: 'practice',
     categories: ['data'],
     kind: 'study',
     tags: ['Python', 'NumPy', 'Pandas', 'SQL'],
@@ -160,6 +188,8 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     slug: 'intelibolsas',
+    created: '2025-09',
+    group: 'academic',
     categories: ['development', 'academic'],
     kind: 'academic',
     tags: ['PHP', 'MySQL'],
@@ -182,7 +212,40 @@ export const PROJECTS: readonly Project[] = [
     },
   },
   {
+    slug: 'tica-artesanato',
+    created: '2026',
+    group: 'academic',
+    categories: ['development', 'academic'],
+    kind: 'academic',
+    status: 'inProgress',
+    tags: ['Java 21', 'Spring Boot', 'Angular', 'Ionic', 'PostgreSQL', 'Python'],
+    repo: 'https://github.com/Emmed22/Tica-Artesanato',
+    title: 'Tica Artesanato',
+    summary: {
+      pt: 'Vitrine digital e gestão de encomendas para uma artesã de crochê sob encomenda, com jornada guiada, envio do pedido ao WhatsApp e controle de status.',
+      en: 'Digital storefront and order management for a made-to-order crochet artisan, with a guided journey, order submission to WhatsApp and status tracking.',
+      es: 'Vitrina digital y gestión de encargos para una artesana de crochet por encargo, con recorrido guiado, envío del pedido a WhatsApp y control de estados.',
+    },
+  },
+  {
+    slug: 'pm-bem-casados',
+    created: '2026',
+    group: 'academic',
+    categories: ['development', 'academic'],
+    kind: 'academic',
+    status: 'inProgress',
+    tags: ['Java', 'Spring Boot', 'Angular', 'Ionic', 'PostgreSQL', 'Python'],
+    repo: 'https://github.com/Luck16Ash/PM-Bem-Casados',
+    title: 'PM Bem-Casados',
+    summary: {
+      pt: 'Vitrine digital e gestão de encomendas, produção e estoque para uma confeitaria artesanal, com envio da solicitação ao WhatsApp.',
+      en: 'Digital storefront and management of orders, production and inventory for an artisanal confectionery, with requests sent to WhatsApp.',
+      es: 'Vitrina digital y gestión de encargos, producción e inventario para una confitería artesanal, con envío de la solicitud a WhatsApp.',
+    },
+  },
+  {
     slug: 'segunda-vitrine',
+    group: 'business',
     categories: ['development'],
     kind: 'initiative',
     tags: [],

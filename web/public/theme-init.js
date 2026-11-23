@@ -6,7 +6,7 @@
  */
 (function () {
   var root = document.documentElement;
-  var THEMES = ['ice-tangerine', 'cherry-cream', 'sage-ink', 'lavender-graphite', 'monochrome-stone'];
+  var THEMES = ['ice-tangerine', 'cherry-cream', 'sage-ink', 'lavender-graphite', 'monochrome-stone', 'ocean-navy', 'rose-plum', 'forest-gold', 'mint-coral'];
   var theme = 'ice-tangerine';
   var mode = 'auto';
   try {

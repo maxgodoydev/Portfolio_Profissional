@@ -5,12 +5,9 @@ import { format } from '../i18n';
 import { useI18n } from '../i18n/context';
 import { formatDate } from '../lib/period';
 import { matchesAll } from '../lib/search';
-import { ExternalLink } from '../pages/shared';
-import { Link } from '../router';
-import { buildPath } from '../routes';
-import { BrandIcon } from './BrandIcon';
 import { Highlight } from './Highlight';
 import { Icon, type IconName } from './icons';
+import { FeatureList, ProjectLinks, TeamPhotoLink } from './ProjectParts';
 import { Tag, TagList } from './Tag';
 
 /** Tecnologias visíveis no cartão compacto (o restante vira "+N"; a lista completa está no pop-up). */
@@ -94,6 +91,12 @@ export function ExpandableProjectCard({ project, category, tokens = [] }: Expand
       </div>
       <p className="project-card__category">
         <Icon name="tag" size={13} /> {category}
+        {project.status && <Tag tone="accent">{p.statuses[project.status]}</Tag>}
+        {project.created && (
+          <span className="project-card__year">
+            <Icon name="calendar" size={13} /> {project.created.slice(0, 4)}
+          </span>
+        )}
       </p>
       <h2 className="project-card__title">
         <button ref={toggleRef} type="button" className="project-card__toggle" aria-haspopup="dialog" aria-expanded={open} onClick={() => setOpen(true)}>
@@ -132,76 +135,54 @@ export function ExpandableProjectCard({ project, category, tokens = [] }: Expand
       {open && (
         <dialog ref={dialogRef} className="project-dialog" aria-labelledby={titleId} onClose={() => setOpen(false)} onClick={onBackdrop}>
           <div className="project-dialog__box">
-            <header className="pd-head">
-              <div className="pd-head__text">
-                <p className="pd-head__category">
-                  <Icon name="tag" size={13} /> {category}
-                </p>
-                <h2 id={titleId} className="pd-head__title">
-                  {project.title}
-                </h2>
-                {(project.kind || project.created || d?.team) && (
-                  <ul className="pd-meta">
-                    {project.kind && (
-                      <li>
-                        <Icon name="briefcase" size={14} /> {p.kinds[project.kind]}
-                      </li>
-                    )}
-                    {project.created && (
-                      <li>
-                        <Icon name="calendar" size={14} /> {formatDate(lang, project.created)}
-                      </li>
-                    )}
-                    {d?.team && (
-                      <li>
-                        <Icon name="users" size={14} /> {d.team}
-                      </li>
-                    )}
-                  </ul>
-                )}
-              </div>
+            <div className="pd-top">
+              {project.cover && (
+                <figure className="pd-cover">
+                  <img src={project.cover.src} width={project.cover.width} height={project.cover.height} alt={project.cover.alt[lang]} decoding="async" />
+                </figure>
+              )}
               <button type="button" className="icon-button pd-close" onClick={close} aria-label={t.projects.close}>
                 <Icon name="close" size={20} />
               </button>
+            </div>
+
+            <header className="pd-head">
+              <p className="pd-head__category">
+                <Icon name="tag" size={13} /> {category}
+              </p>
+              <h2 id={titleId} className="pd-head__title">
+                {project.title}
+              </h2>
+              {(project.kind || project.created || project.status || d?.team) && (
+                <ul className="pd-meta">
+                  {project.kind && (
+                    <li>
+                      <Icon name="briefcase" size={14} /> {p.kinds[project.kind]}
+                    </li>
+                  )}
+                  {project.status && (
+                    <li>
+                      <Icon name="wrench" size={14} /> {p.statuses[project.status]}
+                    </li>
+                  )}
+                  {project.created && (
+                    <li>
+                      <Icon name="calendar" size={14} /> {formatDate(lang, project.created)}
+                    </li>
+                  )}
+                  {d?.team && !project.image && (
+                    <li>
+                      <Icon name="users" size={14} /> {d.team}
+                    </li>
+                  )}
+                </ul>
+              )}
+              {/* Acesso rápido: links pequenos com símbolo */}
+              <ProjectLinks project={project} withPage />
+              {!hasDeploy && <p className="pd-note">{t.projects.noDeploy}</p>}
             </header>
 
-            {/* Acesso rápido: código e site logo no começo */}
-            <ul className="pd-actions" aria-label={t.projects.quickLinks}>
-              {project.demo && (
-                <li>
-                  <ExternalLink href={project.demo} variant="button">
-                    <Icon name="play" size={16} /> {p.demo}
-                  </ExternalLink>
-                </li>
-              )}
-              {project.site && (
-                <li>
-                  <ExternalLink href={project.site} variant="button">
-                    <Icon name="globe" size={16} /> {p.site}
-                  </ExternalLink>
-                </li>
-              )}
-              <li>
-                <ExternalLink href={project.repo} variant={hasDeploy ? 'ghost' : 'button'}>
-                  <BrandIcon name="GitHub" size={16} /> {p.repo}
-                </ExternalLink>
-              </li>
-              <li>
-                <Link className="button button--ghost" to={buildPath(lang, 'project', project.slug)}>
-                  <Icon name="file" size={16} /> {t.projects.openPage}
-                  <span className="visually-hidden">: {project.title}</span>
-                </Link>
-              </li>
-            </ul>
-            {!hasDeploy && <p className="pd-note">{t.projects.noDeploy}</p>}
-
             <div className="pd-body" tabIndex={0} role="region" aria-labelledby={titleId}>
-              {project.image && (
-                <figure className="pd-photo">
-                  <img src={project.image.src} width={project.image.width} height={project.image.height} alt={project.image.alt[lang]} loading="lazy" decoding="async" />
-                </figure>
-              )}
-
               {problem && (
                 <section className="pd-section">
                   <SectionTitle icon="info">{p.problem}</SectionTitle>
@@ -227,13 +208,7 @@ export function ExpandableProjectCard({ project, category, tokens = [] }: Expand
                 <section className="pd-section">
                   <SectionTitle icon="wrench">{p.how}</SectionTitle>
                   {solution && <p>{solution}</p>}
-                  {features.length > 0 && (
-                    <ul className="check-list pd-features">
-                      {features.map((f) => (
-                        <li key={f}>{f}</li>
-                      ))}
-                    </ul>
-                  )}
+                  {features.length > 0 && <FeatureList slug={project.slug} items={features} className="pd-features" />}
                 </section>
               )}
 
@@ -252,6 +227,13 @@ export function ExpandableProjectCard({ project, category, tokens = [] }: Expand
                 <section className="pd-section">
                   <SectionTitle icon="layers">{p.technologies}</SectionTitle>
                   <TagList items={project.tags} label={p.technologies} tokens={tokens} />
+                </section>
+              )}
+
+              {project.image && (
+                <section className="pd-section">
+                  <SectionTitle icon="users">{p.team}</SectionTitle>
+                  <TeamPhotoLink project={project} detail={d} />
                 </section>
               )}
             </div>
