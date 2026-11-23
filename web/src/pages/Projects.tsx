@@ -3,17 +3,28 @@ import { Icon } from '../components/icons';
 import { ExpandableProjectCard } from '../components/ExpandableProjectCard';
 import { format } from '../i18n';
 import { useI18n } from '../i18n/context';
-import { PROJECTS, type ProjectCategory } from '../content/projects';
+import { PROJECTS, PROJECT_GROUPS, type ProjectGroup } from '../content/projects';
 import { matchesAll, tokenize } from '../lib/search';
 import { buildPath } from '../routes';
 import { navigate, useLocation } from '../router';
 import { PageHeader } from './shared';
 
-type Filter = 'all' | ProjectCategory;
-const FILTERS: readonly Filter[] = ['all', 'development', 'data', 'bi', 'automation', 'academic'];
+/** Projetos por página (a lista nunca carrega todos de uma vez). */
+export const PAGE_SIZE = 3;
+
+type Filter = 'all' | ProjectGroup;
+const FILTERS: readonly Filter[] = ['all', ...PROJECT_GROUPS];
+
+/** Rótulo de um filtro ("Todos" ou o nome do grupo). */
+const filterLabel = (t: { projects: { filters: { all: string }; groups: Record<ProjectGroup, string> } }, f: Filter) => (f === 'all' ? t.projects.filters.all : t.projects.groups[f]);
 
 function parseFilter(value: string | null): Filter {
   return FILTERS.find((f) => f === value) ?? 'all';
+}
+
+function parsePage(value: string | null): number {
+  const n = Number(value);
+  return Number.isInteger(n) && n >= 1 ? n : 1;
 }
 
 /** As tecnologias mais frequentes entre os projetos (sugestões do estado vazio; dados reais, não inventados). */
@@ -33,35 +44,27 @@ export function ProjectsPage() {
   // A busca e o filtro ficam na URL (?q=sql&cat=bi): voltar do detalhe de um projeto mantém o que a pessoa escolheu.
   const urlQuery = location.query.get('q') ?? '';
   const urlFilter = parseFilter(location.query.get('cat'));
+  const urlPage = parsePage(location.query.get('page'));
   const [query, setQuery] = useState(urlQuery);
   const [filter, setFilter] = useState<Filter>(urlFilter);
-  const written = useRef(`${urlQuery}|${urlFilter}`);
+  // A página pertence a uma busca/filtro (sig). Se a busca ou o filtro mudam, a página volta à 1 sem efeito extra.
+  const [pageState, setPageState] = useState({ page: urlPage, sig: `${urlQuery.trim()}|${urlFilter}` });
+  const sig = `${query.trim()}|${filter}`;
+  const requestedPage = pageState.sig === sig ? pageState.page : 1;
+  const written = useRef(`${urlQuery}|${urlFilter}|${urlPage}`);
+  const resultsRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Botão voltar/avançar: adota a URL quando ela mudou por fora.
   useEffect(() => {
-    const key = `${urlQuery}|${urlFilter}`;
+    const key = `${urlQuery}|${urlFilter}|${urlPage}`;
     if (key !== written.current) {
       written.current = key;
       setQuery(urlQuery);
       setFilter(urlFilter);
+      setPageState({ page: urlPage, sig: `${urlQuery.trim()}|${urlFilter}` });
     }
-  }, [urlQuery, urlFilter]);
-
-  // Escreve na URL com atraso (evita uma entrada de histórico por tecla digitada).
-  useEffect(() => {
-    const key = `${query.trim()}|${filter}`;
-    if (key === written.current) return;
-    const id = window.setTimeout(() => {
-      written.current = key;
-      const params = new URLSearchParams();
-      if (query.trim()) params.set('q', query.trim());
-      if (filter !== 'all') params.set('cat', filter);
-      const qs = params.toString();
-      navigate(buildPath(lang, 'projects') + (qs ? `?${qs}` : ''), { replace: true, keepScroll: true });
-    }, 300);
-    return () => window.clearTimeout(id);
-  }, [query, filter, lang]);
+  }, [urlQuery, urlFilter, urlPage]);
 
   const tokens = useMemo(() => tokenize(query), [query]);
 
@@ -74,11 +77,47 @@ export function ProjectsPage() {
   const matchingSearch = useMemo(() => searchable.filter((s) => matchesAll(tokens, s.text)), [searchable, tokens]);
 
   const visible = useMemo(
-    () => matchingSearch.filter((s) => filter === 'all' || s.p.categories.includes(filter)).map((s) => s.p),
+    () => matchingSearch.filter((s) => filter === 'all' || s.p.group === filter).map((s) => s.p),
     [matchingSearch, filter],
   );
 
-  const countFor = (f: Filter) => (f === 'all' ? matchingSearch.length : matchingSearch.filter((s) => s.p.categories.includes(f)).length);
+  // Ordem de exibição: grupos na ordem do site; a paginação corta essa lista em páginas de PAGE_SIZE.
+  const ordered = useMemo(() => PROJECT_GROUPS.flatMap((g) => visible.filter((p) => p.group === g)), [visible]);
+  const totalPages = Math.max(1, Math.ceil(ordered.length / PAGE_SIZE));
+  const page = Math.min(requestedPage, totalPages);
+  const pageItems = ordered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+  const from = ordered.length === 0 ? 0 : (page - 1) * PAGE_SIZE + 1;
+  const to = Math.min(page * PAGE_SIZE, ordered.length);
+
+  // Escreve na URL com atraso (evita uma entrada de histórico por tecla digitada).
+  useEffect(() => {
+    const key = `${query.trim()}|${filter}|${page}`;
+    if (key === written.current) return;
+    const id = window.setTimeout(() => {
+      written.current = key;
+      const params = new URLSearchParams();
+      if (query.trim()) params.set('q', query.trim());
+      if (filter !== 'all') params.set('cat', filter);
+      if (page > 1) params.set('page', String(page));
+      const qs = params.toString();
+      navigate(buildPath(lang, 'projects') + (qs ? `?${qs}` : ''), { replace: true, keepScroll: true });
+    }, 300);
+    return () => window.clearTimeout(id);
+  }, [query, filter, page, lang]);
+
+  const goToPage = (n: number) => {
+    const next = Math.min(Math.max(1, n), totalPages);
+    setPageState({ page: next, sig });
+    // Leva a pessoa ao topo da lista e anuncia a mudança (foco no contêiner dos resultados).
+    window.requestAnimationFrame(() => {
+      const el = resultsRef.current;
+      if (!el) return;
+      el.focus({ preventScroll: true });
+      el.scrollIntoView({ block: 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    });
+  };
+
+  const countFor = (f: Filter) => (f === 'all' ? matchingSearch.length : matchingSearch.filter((s) => s.p.group === f).length);
 
   const hasQuery = tokens.length > 0;
   const filtered = hasQuery || filter !== 'all';
@@ -145,7 +184,7 @@ export function ProjectsPage() {
                 disabled={n === 0 && !pressed}
                 onClick={() => setFilter(f)}
               >
-                {t.projects.filters[f]}
+                {filterLabel(t, f)}
                 <span className="chip__count" aria-hidden="true">
                   {n}
                 </span>
@@ -161,8 +200,8 @@ export function ProjectsPage() {
               {t.projects.activeFilters}:
             </span>
             {filter !== 'all' && (
-              <button type="button" className="chip chip--removable" aria-label={format(t.projects.removeFilter, { name: t.projects.filters[filter] })} onClick={() => setFilter('all')}>
-                {t.projects.filters[filter]}
+              <button type="button" className="chip chip--removable" aria-label={format(t.projects.removeFilter, { name: filterLabel(t, filter) })} onClick={() => setFilter('all')}>
+                {filterLabel(t, filter)}
                 <Icon name="close" size={14} />
               </button>
             )}
@@ -180,19 +219,69 @@ export function ProjectsPage() {
       </div>
 
       <p className="result-count" role="status">
-        <span key={countText} className="result-count__text">
+        <span key={`${countText}-${page}`} className="result-count__text">
           {countText}
+          {totalPages > 1 && ` · ${format(t.projects.pagination.showing, { from, to, total: ordered.length })}`}
         </span>
       </p>
 
       {visible.length > 0 ? (
-        <ul className="card-grid card-grid--results">
-          {visible.map((p, i) => (
-            <li key={p.slug} style={{ '--i': Math.min(i, 5) } as CSSProperties}>
-              <ExpandableProjectCard project={p} category={t.projects.filters[p.categories[0]]} tokens={tokens} />
-            </li>
-          ))}
-        </ul>
+        <>
+        {/* key: ao trocar de grupo ou de página a lista é remontada e as seções entram com transição suave. */}
+        <div className="project-groups" key={`${filter}-${page}`} ref={resultsRef} tabIndex={-1} id="project-results">
+          {PROJECT_GROUPS.map((g) => {
+            const items = pageItems.filter((p) => p.group === g);
+            if (items.length === 0) return null;
+            const headingId = `group-${g}`;
+            return (
+              <section key={g} className="project-group" aria-labelledby={headingId} data-group={g}>
+                <h2 id={headingId} className="project-group__title">
+                  {t.projects.groups[g]}
+                  <span className="project-group__count" aria-hidden="true">
+                    {items.length}
+                  </span>
+                </h2>
+                <ul className="card-grid card-grid--results">
+                  {items.map((p, i) => (
+                    <li key={p.slug} style={{ '--i': Math.min(i, 5) } as CSSProperties}>
+                      <ExpandableProjectCard project={p} category={t.projects.groups[p.group]} tokens={tokens} />
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            );
+          })}
+        </div>
+        {totalPages > 1 && (
+          <nav className="pagination" aria-label={t.projects.pagination.label}>
+            <ul>
+              <li>
+                <button type="button" className="pagination__btn" onClick={() => goToPage(page - 1)} disabled={page === 1} aria-label={t.projects.pagination.prev}>
+                  <Icon name="arrowRight" size={18} className="pagination__arrow pagination__arrow--prev" />
+                </button>
+              </li>
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+                <li key={n}>
+                  <button
+                    type="button"
+                    className="pagination__btn"
+                    onClick={() => goToPage(n)}
+                    aria-current={n === page ? 'page' : undefined}
+                    aria-label={format(t.projects.pagination.page, { n })}
+                  >
+                    {n}
+                  </button>
+                </li>
+              ))}
+              <li>
+                <button type="button" className="pagination__btn" onClick={() => goToPage(page + 1)} disabled={page === totalPages} aria-label={t.projects.pagination.next}>
+                  <Icon name="arrowRight" size={18} className="pagination__arrow" />
+                </button>
+              </li>
+            </ul>
+          </nav>
+        )}
+        </>
       ) : (
         <div className="empty empty--search">
           <svg className="empty__art" viewBox="0 0 120 96" width="120" height="96" aria-hidden="true" focusable="false">

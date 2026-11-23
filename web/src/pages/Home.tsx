@@ -3,7 +3,7 @@ import { Icon, type IconName } from '../components/icons';
 import { ProjectCard } from '../components/ProjectCard';
 import { Tag } from '../components/Tag';
 import { TechChip } from '../components/TechChip';
-import { PROJECTS } from '../content/projects';
+import { PROJECTS, findProject } from '../content/projects';
 import { TECHNOLOGIES } from '../content/technologies';
 import { useI18n } from '../i18n/context';
 import { Link } from '../router';
@@ -11,10 +11,13 @@ import { buildPath } from '../routes';
 import { Section, TextLink } from './shared';
 
 const HERO_ICONS: readonly IconName[] = ['cap', 'briefcase', 'target'];
+/** Um ícone por área de atuação (mesma ordem de t.home.focus). */
+const FOCUS_ICONS: readonly IconName[] = ['chart', 'layers', 'code', 'route'];
 
 export function HomePage() {
   const { lang, t } = useI18n();
   const featured = PROJECTS.filter((p) => p.featured);
+  const example = findProject('entrelacos');
   const stack = TECHNOLOGIES.filter((x) => x.status === 'project' && hasBrandIcon(x.name));
   return (
     <div className="page">
@@ -58,13 +61,50 @@ export function HomePage() {
 
       <Section title={t.home.focusTitle}>
         <ul className="card-grid card-grid--pairs">
-          {t.home.focus.map((f) => (
-            <li key={f.title} className="info-card">
+          {t.home.focus.map((f, i) => (
+            <li key={f.title} className="info-card info-card--icon">
+              <span className="info-card__icon" aria-hidden="true">
+                <Icon name={FOCUS_ICONS[i] ?? 'target'} size={22} />
+              </span>
               <h3>{f.title}</h3>
               <p>{f.text}</p>
             </li>
           ))}
         </ul>
+      </Section>
+
+      <Section title={t.home.presence.title}>
+        <div className="presence">
+          <div className="presence__text">
+            <p className="lead">{t.home.presence.lead}</p>
+            <ul className="presence__list">
+              {t.home.presence.benefits.map((b) => (
+                <li key={b.title}>
+                  <span className="presence__check" aria-hidden="true">
+                    <Icon name="check" size={16} />
+                  </span>
+                  <span>
+                    <strong>{b.title}.</strong> {b.text}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p>
+              <Link className="button button--ghost" to={buildPath(lang, 'projects')}>
+                {t.home.presence.all} <Icon name="arrowRight" size={18} />
+              </Link>
+            </p>
+          </div>
+          {example?.cover && (
+            <figure className="presence__figure">
+              <img src={example.cover.src} width={example.cover.width} height={example.cover.height} alt={example.cover.alt[lang]} loading="lazy" decoding="async" />
+              <figcaption>
+                {t.home.presence.caption}{' '}
+                <Link to={buildPath(lang, 'project', example.slug)}>{t.home.presence.cta}</Link>
+              </figcaption>
+            </figure>
+          )}
+        </div>
       </Section>
 
       <Section title={t.home.featuredTitle} action={<TextLink to={buildPath(lang, 'projects')}>{t.home.featuredAll}</TextLink>}>
@@ -76,7 +116,7 @@ export function HomePage() {
                 summary={p.summary[lang]}
                 href={buildPath(lang, 'project', p.slug)}
                 tags={p.tags}
-                category={t.projects.filters[p.categories[0]]}
+                category={t.projects.groups[p.group]}
                 cta={t.projects.details}
                 tagsLabel={t.project.technologies}
               />

@@ -1,3 +1,4 @@
+import { FeatureList, ProjectLinks, TeamPhotoLink } from '../components/ProjectParts';
 import { TagList } from '../components/Tag';
 import { findProject } from '../content/projects';
 import { PROJECT_DETAILS } from '../content/projectDetails';
@@ -5,7 +6,7 @@ import { useI18n } from '../i18n/context';
 import { formatDate } from '../lib/period';
 import { Link } from '../router';
 import { buildPath } from '../routes';
-import { ExternalLink, Section, TextLink } from './shared';
+import { Section, TextLink } from './shared';
 
 export function ProjectNotFound() {
   const { lang, t } = useI18n();
@@ -42,7 +43,7 @@ export function ProjectDetailPage({ slug }: { slug: string }) {
         <TextLink to={buildPath(lang, 'projects')}>{p.back}</TextLink>
       </p>
       <header className="page-header">
-        <p className="project-card__category">{project.categories.map((c) => t.projects.filters[c]).join(' · ')}</p>
+        <p className="project-card__category">{[t.projects.groups[project.group], ...project.categories.map((c) => t.projects.filters[c])].join(' · ')}</p>
         <h1>{project.title}</h1>
         <p className="lead">{project.summary[lang]}</p>
         <dl className="facts">
@@ -52,53 +53,31 @@ export function ProjectDetailPage({ slug }: { slug: string }) {
               <dd>{p.kinds[project.kind]}</dd>
             </div>
           )}
+          {project.status && (
+            <div>
+              <dt>{p.statusLabel}</dt>
+              <dd>{p.statuses[project.status]}</dd>
+            </div>
+          )}
           {project.created && (
             <div>
               <dt>{p.created}</dt>
               <dd>{formatDate(lang, project.created)}</dd>
             </div>
           )}
-          {d?.team && (
+          {d?.team && !project.image && (
             <div>
               <dt>{p.team}</dt>
               <dd>{d.team}</dd>
             </div>
           )}
         </dl>
-        <ul className="link-row" aria-label={p.links}>
-          {project.demo && (
-            <li>
-              <ExternalLink href={project.demo} variant="button">
-                {p.demo}
-              </ExternalLink>
-            </li>
-          )}
-          {project.site && (
-            <li>
-              <ExternalLink href={project.site} variant="button">
-                {p.site}
-              </ExternalLink>
-            </li>
-          )}
-          <li>
-            <ExternalLink href={project.repo} variant="ghost">
-              {p.repo}
-            </ExternalLink>
-          </li>
-        </ul>
+        <ProjectLinks project={project} />
       </header>
 
-      {project.image && (
-        <figure className="project-photo">
-          <img
-            src={project.image.src}
-            width={project.image.width}
-            height={project.image.height}
-            alt={project.image.alt[lang]}
-            loading="lazy"
-            decoding="async"
-          />
-          <figcaption>{project.image.caption[lang]}</figcaption>
+      {project.cover && (
+        <figure className="project-cover">
+          <img src={project.cover.src} width={project.cover.width} height={project.cover.height} alt={project.cover.alt[lang]} decoding="async" />
         </figure>
       )}
 
@@ -124,11 +103,7 @@ export function ProjectDetailPage({ slug }: { slug: string }) {
       )}
       {features.length > 0 && (
         <Section title={p.features}>
-          <ul className="check-list">
-            {features.map((f) => (
-              <li key={f}>{f}</li>
-            ))}
-          </ul>
+          <FeatureList slug={slug} items={features} />
         </Section>
       )}
       {participation.length > 0 && (
@@ -141,6 +116,11 @@ export function ProjectDetailPage({ slug }: { slug: string }) {
       {project.tags.length > 0 && (
         <Section title={p.technologies}>
           <TagList items={project.tags} label={p.technologies} />
+        </Section>
+      )}
+      {project.image && (
+        <Section title={p.team}>
+          <TeamPhotoLink project={project} detail={d} />
         </Section>
       )}
     </div>

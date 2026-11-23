@@ -1,0 +1,9 @@
+AJUSTES VISUAIS 7 — base: portfolio-ajustes-visuais (visual 6)
+- Projetos: 3 por página, paginação numerada com setas, página atual destacada, página escrita na URL (?page=2), busca/filtro volta à página 1.
+- Cartão de projeto: ano (quando confirmado) e selo "Em desenvolvimento".
+- Home: "O que eu construo" com ícones; nova seção "Por que ter presença digital?" (texto e benefícios + exemplo real do projeto EntreLaços).
+- Novos projetos: Tica Artesanato e PM Bem-Casados (em desenvolvimento, a partir dos READMEs dos repositórios).
+- Contato: WhatsApp (11 95808-1846) na página Contato e no rodapé. E-mail mantido: maxgodoy.dev@gmail.com.
+- Trajetória: "Contamac Consultoria Contábil" (antes "Contamar") e título oculto de nível 2 (corrige salto h1 -> h3).
+- Testes: tests/projects.test.mjs (paginação, ano, selo, Home); tests/contact.test.mjs com stubs de requestAnimationFrame/IntersectionObserver.
+Pendências: anos dos demais projetos, capas de Tica e PM, confirmação do e-mail extra. Detalhes em docs/historico/ETAPA-8-VISUAL-7.md.

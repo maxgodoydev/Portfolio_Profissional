@@ -173,3 +173,18 @@ html.modal-open { overflow: hidden; }
 .tech-chip .tip { white-space: normal; width: max-content; max-width: min(15rem, 70vw); text-align: center; }
 html, body { overflow-x: clip; }
 .pd-body:focus-visible { outline: 3px solid var(--link); outline-offset: -3px; }
+
+/* ---------- Paginação da lista de projetos ---------- */
+.project-groups:focus { outline: none; }
+.pagination { margin-top: 2rem; }
+.pagination ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem; list-style: none; margin: 0; padding: 0; }
+.pagination__btn { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 0.7rem; border: 1px solid var(--ink); border-radius: 0.6rem; background: var(--surface); color: var(--ink); font: inherit; font-weight: 700; cursor: pointer; }
+.pagination__btn:hover:not(:disabled):not([aria-current='page']) { background: var(--soft); }
+.pagination__btn[aria-current='page'] { background: var(--action); border-color: var(--action); color: var(--on-action); }
+.pagination__btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.pagination__arrow--prev { transform: scaleX(-1); }
+@media (prefers-reduced-motion: no-preference) {
+  .pagination__btn { transition: background-color 0.2s ease, transform 0.15s ease; }
+  .pagination__btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .pagination__btn:active:not(:disabled) { transform: translateY(0); }
+}

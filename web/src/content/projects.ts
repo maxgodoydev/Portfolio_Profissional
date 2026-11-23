@@ -26,7 +26,7 @@ export interface Project {
   image?: { src: string; width: number; height: number; alt: Localized<string>; caption: Localized<string> };
   /** Capa do cartão na lista de Projetos: captura de tela/banner do próprio projeto (web/public/projects/covers, 960×436). Sem capa, o cartão mostra um quadro neutro. */
   cover?: { src: string; width: number; height: number; alt: Localized<string> };
-  /** Criação (AAAA-MM quando o mês é conhecido; somente AAAA quando apenas o ano foi confirmado). */
+  /** Criação (AAAA-MM), quando confirmada. */
   created?: string;
   title: string;
   summary: Localized<string>;
@@ -35,7 +35,6 @@ export interface Project {
 export const PROJECTS: readonly Project[] = [
   {
     slug: 'barbershop-do-gui',
-    created: '2025-02',
     group: 'business',
     categories: ['development', 'automation', 'bi'],
     kind: 'client',
@@ -62,22 +61,11 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     slug: 'banking-analytics',
-    created: '2026',
     group: 'practice',
     categories: ['data'],
     featured: true,
     tags: ['Python', 'SQL', 'SQLite', 'Pandas', 'Matplotlib', 'Pytest'],
     repo: 'https://github.com/maxgodoydev/Banking-analytics',
-    cover: {
-      src: '/projects/covers/banking-analytics.webp',
-      width: 960,
-      height: 436,
-      alt: {
-        pt: 'Capa do projeto Banking Analytics com painéis de análise financeira, gráficos, banco de dados e tecnologias Python, SQL e SQLite.',
-        en: 'Banking Analytics project cover with financial analysis dashboards, charts, a database, and Python, SQL and SQLite technologies.',
-        es: 'Portada del proyecto Banking Analytics con paneles de análisis financiero, gráficos, base de datos y tecnologías Python, SQL y SQLite.',
-      },
-    },
     title: 'Banking Analytics',
     summary: {
       pt: 'Análise de transações bancárias sintéticas com Python, SQL e SQLite: cinco perguntas de negócio respondidas com CTEs, funções de janela e testes automatizados.',
@@ -87,7 +75,6 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     slug: 'power-bi-portfolio',
-    created: '2026',
     group: 'academic',
     categories: ['bi', 'academic'],
     kind: 'academic',
@@ -113,7 +100,6 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     slug: 'studio-patty-leao',
-    created: '2026-03',
     group: 'business',
     categories: ['development', 'automation'],
     tags: ['Node.js', 'Express', 'EJS', 'MongoDB Atlas'],
@@ -138,7 +124,6 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     slug: 'entrelacos',
-    created: '2026',
     group: 'business',
     categories: ['development'],
     tags: ['HTML', 'CSS', 'JavaScript', 'JSON'],
@@ -163,7 +148,6 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     slug: 'python-studies',
-    created: '2026',
     group: 'practice',
     categories: ['data'],
     kind: 'study',
@@ -188,7 +172,6 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     slug: 'intelibolsas',
-    created: '2025-09',
     group: 'academic',
     categories: ['development', 'academic'],
     kind: 'academic',
@@ -213,7 +196,6 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     slug: 'tica-artesanato',
-    created: '2026',
     group: 'academic',
     categories: ['development', 'academic'],
     kind: 'academic',
@@ -229,7 +211,6 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     slug: 'pm-bem-casados',
-    created: '2026',
     group: 'academic',
     categories: ['development', 'academic'],
     kind: 'academic',

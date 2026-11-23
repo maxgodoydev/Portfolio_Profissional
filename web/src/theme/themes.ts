@@ -2,7 +2,16 @@
 // são derivados das 5 cores da paleta e o contraste é garantido por código.
 import { contrast, ensureContrast, mix } from './color';
 
-export type ThemeId = 'ice-tangerine' | 'cherry-cream' | 'sage-ink' | 'lavender-graphite' | 'monochrome-stone';
+export type ThemeId =
+  | 'ice-tangerine'
+  | 'cherry-cream'
+  | 'sage-ink'
+  | 'lavender-graphite'
+  | 'monochrome-stone'
+  | 'ocean-navy'
+  | 'rose-plum'
+  | 'forest-gold'
+  | 'mint-coral';
 export type ThemeMode = 'auto' | 'light' | 'dark';
 export type ResolvedMode = 'light' | 'dark';
 
@@ -19,6 +28,10 @@ export const THEMES: Palette[] = [
   { id: 'sage-ink', name: 'Sage & Ink', colors: ['#F4F6F1', '#DFE8DE', '#A6BDA9', '#547C68', '#263A32'] },
   { id: 'lavender-graphite', name: 'Lavender & Graphite', colors: ['#F7F5FA', '#E7E0F0', '#C2B2D8', '#806B9F', '#302B3B'] },
   { id: 'monochrome-stone', name: 'Monochrome Stone', colors: ['#F5F4F1', '#DFDDD7', '#B7B3AA', '#77746E', '#292A2D'] },
+  { id: 'ocean-navy', name: 'Ocean & Navy', colors: ['#F2F6FB', '#DCE6F4', '#9DB8DE', '#2F5D9E', '#1A2A44'] },
+  { id: 'rose-plum', name: 'Rose & Plum', colors: ['#FBF4F7', '#F1DCE6', '#DDA0BC', '#A3306B', '#3A1F2E'] },
+  { id: 'forest-gold', name: 'Forest & Gold', colors: ['#F6F4EA', '#E8E2C8', '#CDBE80', '#8A6D1F', '#2E2A1A'] },
+  { id: 'mint-coral', name: 'Mint & Coral', colors: ['#F3F9F7', '#D5ECE6', '#7FC4B3', '#D9573B', '#1F3A36'] },
 ];
 
 export const DEFAULT_THEME: ThemeId = 'ice-tangerine';

@@ -1,6 +1,6 @@
 import { useId, useRef, useState, type FormEvent } from 'react';
 import { ApiError, postContact } from '../services/api';
-import { LINKS } from '../content/profile';
+import { LINKS, formatWhatsapp } from '../content/profile';
 import { useI18n } from '../i18n/context';
 import { ExternalLink, PageHeader, Section } from './shared';
 
@@ -144,6 +144,13 @@ export function ContactPage() {
             {LINKS.linkedin && (
               <li>
                 <ExternalLink href={LINKS.linkedin}>{t.common.linkedin}</ExternalLink>
+              </li>
+            )}
+            {LINKS.whatsapp && (
+              <li>
+                <ExternalLink href={`https://wa.me/${LINKS.whatsapp}`}>
+                  {t.common.whatsapp}: {formatWhatsapp(LINKS.whatsapp)}
+                </ExternalLink>
               </li>
             )}
             {LINKS.email && (
