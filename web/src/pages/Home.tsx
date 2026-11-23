@@ -1,7 +1,8 @@
-import { BrandIcon, hasBrandIcon } from '../components/BrandIcon';
+import { hasBrandIcon } from '../components/BrandIcon';
 import { Icon, type IconName } from '../components/icons';
 import { ProjectCard } from '../components/ProjectCard';
 import { Tag } from '../components/Tag';
+import { TechChip } from '../components/TechChip';
 import { PROJECTS } from '../content/projects';
 import { TECHNOLOGIES } from '../content/technologies';
 import { useI18n } from '../i18n/context';
@@ -88,10 +89,7 @@ export function HomePage() {
         <p>{t.home.techText}</p>
         <ul className="tech-strip">
           {stack.map((x) => (
-            <li key={x.name}>
-              <BrandIcon name={x.name} size={20} />
-              <span>{x.name}</span>
-            </li>
+            <TechChip key={x.name} name={x.name} hint={t.technologies.categories[x.category]} />
           ))}
         </ul>
       </Section>
