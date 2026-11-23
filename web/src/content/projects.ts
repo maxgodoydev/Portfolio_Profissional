@@ -18,6 +18,8 @@ export interface Project {
   site?: string;
   /** Foto opcional exibida na página do projeto (arquivo em web/public/projects). */
   image?: { src: string; width: number; height: number; alt: Localized<string>; caption: Localized<string> };
+  /** Capa do cartão na lista de Projetos: captura de tela/banner do próprio projeto (web/public/projects/covers, 960×436). Sem capa, o cartão mostra um quadro neutro. */
+  cover?: { src: string; width: number; height: number; alt: Localized<string> };
   /** Criação (AAAA-MM), quando confirmada. */
   created?: string;
   title: string;
@@ -33,6 +35,16 @@ export const PROJECTS: readonly Project[] = [
     tags: ['Java 21', 'Spring Boot', 'Spring Security', 'PostgreSQL', 'Supabase', 'Maven'],
     repo: 'https://github.com/maxgodoydev/BarberShop-Do-Gui',
     demo: 'https://barbershop-do-gui.onrender.com/servicos.html',
+    cover: {
+      src: '/projects/covers/barbershop-do-gui.webp',
+      width: 960,
+      height: 436,
+      alt: {
+        pt: 'Captura da página inicial do site da BarberShop do Gui, com a fachada da barbearia.',
+        en: 'Screenshot of the BarberShop do Gui home page, showing the shop front.',
+        es: 'Captura de la página de inicio del sitio de BarberShop do Gui, con la fachada de la barbería.',
+      },
+    },
     title: 'BarberShop do Gui',
     summary: {
       pt: 'Sistema para uma barbearia real da Zona Sul de São Paulo: agendamentos, perfis de proprietário, recepção e profissional, funções administrativas e indicadores de BI.',
@@ -60,6 +72,16 @@ export const PROJECTS: readonly Project[] = [
     featured: true,
     tags: ['Power BI', 'DAX', 'Power Query', 'SQL'],
     repo: 'https://github.com/maxgodoydev/Business-Intelligence-portfolio',
+    cover: {
+      src: '/projects/covers/power-bi-portfolio.webp',
+      width: 960,
+      height: 436,
+      alt: {
+        pt: 'Banner do Portfólio de Business Intelligence e Análise de Dados, com gráficos e os logos de Power BI, SQL, Python e Excel.',
+        en: 'Banner of the Business Intelligence and Data Analysis portfolio, with charts and the Power BI, SQL, Python and Excel logos.',
+        es: 'Banner del Portafolio de Business Intelligence y Análisis de Datos, con gráficos y los logos de Power BI, SQL, Python y Excel.',
+      },
+    },
     title: 'Portfólio de Power BI',
     summary: {
       pt: 'Projetos acadêmicos e estudos de Business Intelligence: dashboards, indicadores operacionais e apoio à tomada de decisão.',
@@ -73,6 +95,16 @@ export const PROJECTS: readonly Project[] = [
     tags: ['Node.js', 'Express', 'EJS', 'MongoDB Atlas'],
     repo: 'https://github.com/maxgodoydev/Studio_Patty_Leao',
     demo: 'https://studio-patty-leao.onrender.com',
+    cover: {
+      src: '/projects/covers/studio-patty-leao.webp',
+      width: 960,
+      height: 436,
+      alt: {
+        pt: 'Captura da página inicial do site do Studio Patty Leão, com o menu e a chamada para agendar.',
+        en: 'Screenshot of the Studio Patty Leão home page, with the menu and the booking call to action.',
+        es: 'Captura de la página de inicio del sitio de Studio Patty Leão, con el menú y la llamada para agendar.',
+      },
+    },
     title: 'Studio Patty Leão',
     summary: {
       pt: 'ERP simplificado para salão de beleza: agendamentos, estoque, controle financeiro manual, vitrine de agendamento e indicadores.',
@@ -86,6 +118,16 @@ export const PROJECTS: readonly Project[] = [
     tags: ['HTML', 'CSS', 'JavaScript', 'JSON'],
     repo: 'https://github.com/maxgodoydev/Entrelacos',
     demo: 'https://entrelacos-vitrine.vercel.app',
+    cover: {
+      src: '/projects/covers/entrelacos.webp',
+      width: 960,
+      height: 436,
+      alt: {
+        pt: 'Captura da vitrine EntreLaços, com três kits de presente e seus preços.',
+        en: 'Screenshot of the EntreLaços storefront, with three gift kits and their prices.',
+        es: 'Captura de la vitrina EntreLaços, con tres kits de regalo y sus precios.',
+      },
+    },
     title: 'EntreLaços',
     summary: {
       pt: 'Catálogo digital responsivo com filtros dinâmicos e integração com WhatsApp.',
@@ -99,6 +141,16 @@ export const PROJECTS: readonly Project[] = [
     kind: 'study',
     tags: ['Python', 'NumPy', 'Pandas', 'SQL'],
     repo: 'https://github.com/maxgodoydev/python-lab',
+    cover: {
+      src: '/projects/covers/python-studies.webp',
+      width: 960,
+      height: 436,
+      alt: {
+        pt: 'Banner do repositório Python Lab: Caderno de estudos em Python.',
+        en: 'Banner of the Python Lab repository: a Python study notebook.',
+        es: 'Banner del repositorio Python Lab: cuaderno de estudios en Python.',
+      },
+    },
     title: 'Estudos em Python',
     summary: {
       pt: 'Estudos de lógica de programação, análise de dados e estatística com Python, NumPy, Pandas e SQL.',
@@ -112,6 +164,16 @@ export const PROJECTS: readonly Project[] = [
     kind: 'academic',
     tags: ['PHP', 'MySQL'],
     repo: 'https://github.com/maxgodoydev/InteliBolsas',
+    cover: {
+      src: '/projects/covers/intelibolsas.webp',
+      width: 960,
+      height: 436,
+      alt: {
+        pt: 'Captura da página inicial do InteliBolsas, com a busca de bolsas e cursos e o mascote.',
+        en: 'Screenshot of the InteliBolsas home page, with the scholarship and course search and the mascot.',
+        es: 'Captura de la página de inicio de InteliBolsas, con la búsqueda de becas y cursos y la mascota.',
+      },
+    },
     title: 'InteliBolsas',
     summary: {
       pt: 'Aplicação web (CRUD) para divulgação de bolsas de estudo e cursos, com áreas para aluno, instituição e administração.',
@@ -137,6 +199,16 @@ export const PROJECTS: readonly Project[] = [
         es: 'Selfie de cinco integrantes de Segunda Vitrine sonriendo en un laboratorio de informática.',
       },
       caption: { pt: 'Integrantes da Segunda Vitrine.', en: 'Members of Segunda Vitrine.', es: 'Integrantes de Segunda Vitrine.' },
+    },
+    cover: {
+      src: '/projects/covers/segunda-vitrine.webp',
+      width: 960,
+      height: 436,
+      alt: {
+        pt: 'Logo da Segunda Vitrine na página Sobre a iniciativa do site.',
+        en: 'Segunda Vitrine logo on the About page of its website.',
+        es: 'Logo de Segunda Vitrine en la página Sobre la iniciativa de su sitio.',
+      },
     },
     title: 'Segunda Vitrine',
     summary: {
