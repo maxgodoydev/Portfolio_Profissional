@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
-import { Icon } from '../components/icons';
+import { Icon, type IconName } from '../components/icons';
 import { ExpandableProjectCard } from '../components/ExpandableProjectCard';
 import { format } from '../i18n';
 import { useI18n } from '../i18n/context';
-import { PROJECTS, PROJECT_GROUPS, type ProjectGroup } from '../content/projects';
+import { PROJECTS, PROJECT_GROUPS, type ProjectCategory, type ProjectGroup } from '../content/projects';
 import { matchesAll, tokenize } from '../lib/search';
 import { buildPath } from '../routes';
 import { navigate, useLocation } from '../router';
@@ -14,6 +14,16 @@ export const PAGE_SIZE = 3;
 
 type Filter = 'all' | ProjectGroup;
 const FILTERS: readonly Filter[] = ['all', ...PROJECT_GROUPS];
+
+/** Ícone de cada tipo de projeto (indicação visual dos filtros). */
+const GROUP_ICONS: Record<Filter, IconName> = { all: 'layers', business: 'briefcase', academic: 'cap', practice: 'code' };
+
+/** Áreas de atuação (segundo filtro). "academic" já é um tipo de projeto, por isso não entra aqui. */
+type Area = 'all' | Exclude<ProjectCategory, 'academic'>;
+const AREAS: readonly Area[] = ['all', 'development', 'data', 'bi', 'automation'];
+function parseArea(value: string | null): Area {
+  return AREAS.find((a) => a === value) ?? 'all';
+}
 
 /** Rótulo de um filtro ("Todos" ou o nome do grupo). */
 const filterLabel = (t: { projects: { filters: { all: string }; groups: Record<ProjectGroup, string> } }, f: Filter) => (f === 'all' ? t.projects.filters.all : t.projects.groups[f]);
@@ -44,27 +54,32 @@ export function ProjectsPage() {
   // A busca e o filtro ficam na URL (?q=sql&cat=bi): voltar do detalhe de um projeto mantém o que a pessoa escolheu.
   const urlQuery = location.query.get('q') ?? '';
   const urlFilter = parseFilter(location.query.get('cat'));
+  const urlArea = parseArea(location.query.get('area'));
   const urlPage = parsePage(location.query.get('page'));
   const [query, setQuery] = useState(urlQuery);
   const [filter, setFilter] = useState<Filter>(urlFilter);
+  const [area, setArea] = useState<Area>(urlArea);
   // A página pertence a uma busca/filtro (sig). Se a busca ou o filtro mudam, a página volta à 1 sem efeito extra.
-  const [pageState, setPageState] = useState({ page: urlPage, sig: `${urlQuery.trim()}|${urlFilter}` });
-  const sig = `${query.trim()}|${filter}`;
+  const [pageState, setPageState] = useState({ page: urlPage, sig: `${urlQuery.trim()}|${urlFilter}|${urlArea}` });
+  const sig = `${query.trim()}|${filter}|${area}`;
+  // Busca ou filtro mudou: a página volta à 1 e a página antiga é esquecida (voltar ao mesmo filtro não a "ressuscita").
+  if (pageState.sig !== sig) setPageState({ page: 1, sig });
   const requestedPage = pageState.sig === sig ? pageState.page : 1;
-  const written = useRef(`${urlQuery}|${urlFilter}|${urlPage}`);
+  const written = useRef(`${urlQuery}|${urlFilter}|${urlArea}|${urlPage}`);
   const resultsRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Botão voltar/avançar: adota a URL quando ela mudou por fora.
   useEffect(() => {
-    const key = `${urlQuery}|${urlFilter}|${urlPage}`;
+    const key = `${urlQuery}|${urlFilter}|${urlArea}|${urlPage}`;
     if (key !== written.current) {
       written.current = key;
       setQuery(urlQuery);
       setFilter(urlFilter);
-      setPageState({ page: urlPage, sig: `${urlQuery.trim()}|${urlFilter}` });
+      setArea(urlArea);
+      setPageState({ page: urlPage, sig: `${urlQuery.trim()}|${urlFilter}|${urlArea}` });
     }
-  }, [urlQuery, urlFilter, urlPage]);
+  }, [urlQuery, urlFilter, urlArea, urlPage]);
 
   const tokens = useMemo(() => tokenize(query), [query]);
 
@@ -77,8 +92,8 @@ export function ProjectsPage() {
   const matchingSearch = useMemo(() => searchable.filter((s) => matchesAll(tokens, s.text)), [searchable, tokens]);
 
   const visible = useMemo(
-    () => matchingSearch.filter((s) => filter === 'all' || s.p.group === filter).map((s) => s.p),
-    [matchingSearch, filter],
+    () => matchingSearch.filter((s) => (filter === 'all' || s.p.group === filter) && (area === 'all' || s.p.categories.includes(area))).map((s) => s.p),
+    [matchingSearch, filter, area],
   );
 
   // Ordem de exibição: grupos na ordem do site; a paginação corta essa lista em páginas de PAGE_SIZE.
@@ -91,19 +106,20 @@ export function ProjectsPage() {
 
   // Escreve na URL com atraso (evita uma entrada de histórico por tecla digitada).
   useEffect(() => {
-    const key = `${query.trim()}|${filter}|${page}`;
+    const key = `${query.trim()}|${filter}|${area}|${page}`;
     if (key === written.current) return;
     const id = window.setTimeout(() => {
       written.current = key;
       const params = new URLSearchParams();
       if (query.trim()) params.set('q', query.trim());
       if (filter !== 'all') params.set('cat', filter);
+      if (area !== 'all') params.set('area', area);
       if (page > 1) params.set('page', String(page));
       const qs = params.toString();
       navigate(buildPath(lang, 'projects') + (qs ? `?${qs}` : ''), { replace: true, keepScroll: true });
     }, 300);
     return () => window.clearTimeout(id);
-  }, [query, filter, page, lang]);
+  }, [query, filter, area, page, lang]);
 
   const goToPage = (n: number) => {
     const next = Math.min(Math.max(1, n), totalPages);
@@ -117,10 +133,14 @@ export function ProjectsPage() {
     });
   };
 
-  const countFor = (f: Filter) => (f === 'all' ? matchingSearch.length : matchingSearch.filter((s) => s.p.group === f).length);
+  // Contagens cruzadas: cada opção conta o que sobraria com a busca e com o OUTRO filtro já aplicados.
+  const inArea = (s: { p: (typeof PROJECTS)[number] }) => area === 'all' || s.p.categories.includes(area);
+  const inGroup = (s: { p: (typeof PROJECTS)[number] }) => filter === 'all' || s.p.group === filter;
+  const countFor = (f: Filter) => matchingSearch.filter((s) => inArea(s) && (f === 'all' || s.p.group === f)).length;
+  const countForArea = (a: Area) => matchingSearch.filter((s) => inGroup(s) && (a === 'all' || s.p.categories.includes(a))).length;
 
   const hasQuery = tokens.length > 0;
-  const filtered = hasQuery || filter !== 'all';
+  const filtered = hasQuery || filter !== 'all' || area !== 'all';
   const countText = !filtered
     ? visible.length === 1
       ? t.projects.countOne
@@ -130,11 +150,13 @@ export function ProjectsPage() {
   const reset = () => {
     setQuery('');
     setFilter('all');
+    setArea('all');
     inputRef.current?.focus();
   };
   const trySearch = (term: string) => {
     setQuery(term);
     setFilter('all');
+    setArea('all');
     inputRef.current?.focus();
   };
 
@@ -142,56 +164,80 @@ export function ProjectsPage() {
     <div className="page">
       <PageHeader title={t.projects.title} lead={t.projects.intro} />
 
-      <div className="toolbar">
-        <div className="field">
-          <label htmlFor="project-search">{t.projects.searchLabel}</label>
-          <div className="search">
-            <Icon name="search" size={18} className="search__icon" />
-            <input
-              ref={inputRef}
-              id="project-search"
-              type="search"
-              value={query}
-              placeholder={t.projects.searchPlaceholder}
-              onChange={(e) => setQuery(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Escape' && query !== '') {
-                  e.preventDefault();
-                  setQuery('');
-                }
-              }}
-              autoComplete="off"
-              enterKeyHint="search"
-            />
-            {query !== '' && (
-              <button type="button" className="search__clear" aria-label={t.projects.clearSearch} onClick={() => { setQuery(''); inputRef.current?.focus(); }}>
-                <Icon name="close" size={16} />
-              </button>
-            )}
+      <div className="filter-panel">
+        <div className="filter-panel__top">
+          <div className="field">
+            <label htmlFor="project-search">{t.projects.searchLabel}</label>
+            <div className="search">
+              <Icon name="search" size={18} className="search__icon" />
+              <input
+                ref={inputRef}
+                id="project-search"
+                type="search"
+                value={query}
+                placeholder={t.projects.searchPlaceholder}
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Escape' && query !== '') {
+                    e.preventDefault();
+                    setQuery('');
+                  }
+                }}
+                autoComplete="off"
+                enterKeyHint="search"
+              />
+              {query !== '' && (
+                <button type="button" className="search__clear" aria-label={t.projects.clearSearch} onClick={() => { setQuery(''); inputRef.current?.focus(); }}>
+                  <Icon name="close" size={16} />
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
-        <div role="group" aria-label={t.projects.filtersLabel} className="chips">
-          {FILTERS.map((f) => {
-            const n = countFor(f);
-            const pressed = filter === f;
-            return (
-              <button
-                key={f}
-                type="button"
-                className="chip"
-                aria-pressed={pressed}
-                disabled={n === 0 && !pressed}
-                onClick={() => setFilter(f)}
-              >
-                {filterLabel(t, f)}
-                <span className="chip__count" aria-hidden="true">
-                  {n}
-                </span>
-                <span className="visually-hidden"> ({n})</span>
-              </button>
-            );
-          })}
+        <div className="filter-block">
+          <p className="filter-block__label" id="filter-group-label">
+            <Icon name="folder" size={14} /> {t.projects.groupLabel}
+          </p>
+          <div role="group" aria-labelledby="filter-group-label" className="seg">
+            {FILTERS.map((f) => {
+              const n = countFor(f);
+              const pressed = filter === f;
+              return (
+                <button key={f} type="button" className="seg__btn" aria-pressed={pressed} disabled={n === 0 && !pressed} onClick={() => setFilter(f)}>
+                  <Icon name={GROUP_ICONS[f]} size={18} className="seg__icon" />
+                  <span className="seg__text">{filterLabel(t, f)}</span>
+                  <span className="seg__count" aria-hidden="true">
+                    {n}
+                  </span>
+                  <span className="visually-hidden"> ({n})</span>
+                  {pressed && <Icon name="check" size={16} className="seg__check" />}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="filter-block">
+          <p className="filter-block__label" id="filter-area-label">
+            <Icon name="tag" size={14} /> {t.projects.areaLabel}
+          </p>
+          <div role="group" aria-labelledby="filter-area-label" className="area-chips">
+            {AREAS.map((a) => {
+              const n = countForArea(a);
+              const pressed = area === a;
+              return (
+                <button key={a} type="button" className="area-chip" aria-pressed={pressed} disabled={n === 0 && !pressed} onClick={() => setArea(a)}>
+                  {pressed && <Icon name="check" size={14} />}
+                  {a === 'all' ? t.projects.areaAll : t.projects.filters[a]}
+                  <span className="area-chip__count" aria-hidden="true">
+                    {n}
+                  </span>
+                  <span className="visually-hidden"> ({n})</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {filtered && (
@@ -202,6 +248,12 @@ export function ProjectsPage() {
             {filter !== 'all' && (
               <button type="button" className="chip chip--removable" aria-label={format(t.projects.removeFilter, { name: filterLabel(t, filter) })} onClick={() => setFilter('all')}>
                 {filterLabel(t, filter)}
+                <Icon name="close" size={14} />
+              </button>
+            )}
+            {area !== 'all' && (
+              <button type="button" className="chip chip--removable" aria-label={format(t.projects.removeFilter, { name: t.projects.filters[area] })} onClick={() => setArea('all')}>
+                {t.projects.filters[area]}
                 <Icon name="close" size={14} />
               </button>
             )}
@@ -228,7 +280,7 @@ export function ProjectsPage() {
       {visible.length > 0 ? (
         <>
         {/* key: ao trocar de grupo ou de página a lista é remontada e as seções entram com transição suave. */}
-        <div className="project-groups" key={`${filter}-${page}`} ref={resultsRef} tabIndex={-1} id="project-results">
+        <div className="project-groups" key={`${filter}-${area}-${page}`} ref={resultsRef} tabIndex={-1} id="project-results">
           {PROJECT_GROUPS.map((g) => {
             const items = pageItems.filter((p) => p.group === g);
             if (items.length === 0) return null;
@@ -254,10 +306,12 @@ export function ProjectsPage() {
         </div>
         {totalPages > 1 && (
           <nav className="pagination" aria-label={t.projects.pagination.label}>
+            <p className="pagination__status">{format(t.projects.pagination.pageOf, { n: page, total: totalPages })}</p>
             <ul>
               <li>
-                <button type="button" className="pagination__btn" onClick={() => goToPage(page - 1)} disabled={page === 1} aria-label={t.projects.pagination.prev}>
+                <button type="button" className="pagination__btn pagination__btn--text" onClick={() => goToPage(page - 1)} disabled={page === 1} aria-label={t.projects.pagination.prev}>
                   <Icon name="arrowRight" size={18} className="pagination__arrow pagination__arrow--prev" />
+                  <span className="pagination__label" aria-hidden="true">{t.projects.pagination.prevText}</span>
                 </button>
               </li>
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
@@ -274,7 +328,8 @@ export function ProjectsPage() {
                 </li>
               ))}
               <li>
-                <button type="button" className="pagination__btn" onClick={() => goToPage(page + 1)} disabled={page === totalPages} aria-label={t.projects.pagination.next}>
+                <button type="button" className="pagination__btn pagination__btn--text" onClick={() => goToPage(page + 1)} disabled={page === totalPages} aria-label={t.projects.pagination.next}>
+                  <span className="pagination__label" aria-hidden="true">{t.projects.pagination.nextText}</span>
                   <Icon name="arrowRight" size={18} className="pagination__arrow" />
                 </button>
               </li>

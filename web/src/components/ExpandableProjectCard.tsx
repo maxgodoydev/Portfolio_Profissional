@@ -12,6 +12,8 @@ import { Tag, TagList } from './Tag';
 
 /** Tecnologias visíveis no cartão compacto (o restante vira "+N"; a lista completa está no pop-up). */
 const PREVIEW_TAGS = 3;
+/** Áreas visíveis no cartão (as demais viram "+N" e continuam no pop-up e nos filtros). */
+const MAX_AREAS = 2;
 
 export interface ExpandableProjectCardProps {
   project: Project;
@@ -20,11 +22,11 @@ export interface ExpandableProjectCardProps {
   tokens?: readonly string[];
 }
 
-/** Cabeçalho de seção do pop-up: ícone + título. */
-function SectionTitle({ icon, children }: { icon: IconName; children: string }) {
+/** Título de bloco do pop-up: ícone + título (o id liga o bloco ao título para leitores de tela). */
+function BlockTitle({ id, icon, children }: { id: string; icon: IconName; children: string }) {
   return (
-    <h3 className="pd-section__title">
-      <span className="pd-section__icon" aria-hidden="true">
+    <h3 id={id} className="pd-block__title">
+      <span className="pd-block__icon" aria-hidden="true">
         <Icon name={icon} size={16} />
       </span>
       {children}
@@ -42,10 +44,12 @@ export function ExpandableProjectCard({ project, category, tokens = [] }: Expand
   const [open, setOpen] = useState(false);
   const titleId = useId();
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const linksRef = useRef<HTMLElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
   const d = PROJECT_DETAILS[project.slug]?.[lang];
   const p = t.project;
+  const m = t.projects.modal;
   const summary = project.summary[lang];
 
   // Abre o <dialog> como modal assim que ele existe no DOM; trava a rolagem da página atrás.
@@ -71,6 +75,8 @@ export function ExpandableProjectCard({ project, category, tokens = [] }: Expand
   const ordered = tokens.length === 0 ? project.tags : [...project.tags].sort((a, b) => Number(matchesAll(tokens, [b])) - Number(matchesAll(tokens, [a])));
   const preview = ordered.slice(0, PREVIEW_TAGS);
   const hidden = project.tags.length - preview.length;
+  // Áreas do projeto (o tipo "acadêmico" já aparece no título da seção); sem áreas, usa o nome do tipo.
+  const areas = project.categories.filter((c): c is Exclude<typeof c, 'academic'> => c !== 'academic');
   const hasDeploy = !!(project.demo || project.site);
   // Seções só existem com conteúdo real (texto vazio ou só espaços não conta).
   const audience = d?.audience?.trim();
@@ -79,6 +85,15 @@ export function ExpandableProjectCard({ project, category, tokens = [] }: Expand
   const solution = d?.solution?.trim();
   const features = (d?.features ?? []).filter((f) => f.trim() !== '');
   const participation = (d?.participation ?? []).filter((f) => f.trim() !== '');
+  // Resultados: só os comprovados nos dados; uma demonstração publicada também conta.
+  const results = [...(d?.results ?? []).filter((r) => r.trim() !== ''), ...(project.demo ? [m.demoPublished] : [])];
+
+  // Rola o pop-up (única área com rolagem) até o bloco de links; sem animação se houver preferência por menos movimento.
+  const goToLinks = () => {
+    const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    linksRef.current?.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+    linksRef.current?.focus({ preventScroll: true });
+  };
 
   return (
     <article className="project-card project-card--expandable project-card--compact" data-open={open ? 'true' : 'false'}>
@@ -89,15 +104,28 @@ export function ExpandableProjectCard({ project, category, tokens = [] }: Expand
           <Icon name="chart" size={30} />
         )}
       </div>
-      <p className="project-card__category">
-        <Icon name="tag" size={13} /> {category}
-        {project.status && <Tag tone="accent">{p.statuses[project.status]}</Tag>}
-        {project.created && (
-          <span className="project-card__year">
-            <Icon name="calendar" size={13} /> {project.created.slice(0, 4)}
-          </span>
+      {project.status && (
+        <span className="project-card__status">
+          <Icon name="wrench" size={13} /> {p.statuses[project.status]}
+        </span>
+      )}
+      <ul className="project-card__areas" aria-label={t.projects.areaLabel}>
+        {areas.length > 0 ? (
+          <>
+            {areas.slice(0, MAX_AREAS).map((a) => (
+              <li key={a}>{t.projects.filters[a]}</li>
+            ))}
+            {areas.length > MAX_AREAS && (
+              <li>
+                <span aria-hidden="true">{format(t.projects.moreTags, { n: areas.length - MAX_AREAS })}</span>
+                <span className="visually-hidden">{areas.slice(MAX_AREAS).map((a) => t.projects.filters[a]).join(', ')}</span>
+              </li>
+            )}
+          </>
+        ) : (
+          <li>{category}</li>
         )}
-      </p>
+      </ul>
       <h2 className="project-card__title">
         <button ref={toggleRef} type="button" className="project-card__toggle" aria-haspopup="dialog" aria-expanded={open} onClick={() => setOpen(true)}>
           <Highlight text={project.title} tokens={tokens} />
@@ -128,23 +156,35 @@ export function ExpandableProjectCard({ project, category, tokens = [] }: Expand
         </ul>
       )}
 
-      <p className="project-card__cta" aria-hidden="true">
-        {t.projects.viewDetails} <Icon name="expand" size={16} className="project-card__chevron" />
-      </p>
+      <div className="project-card__foot" aria-hidden="true">
+        {project.created ? (
+          <span className="project-card__year">
+            <Icon name="calendar" size={14} /> {project.created.slice(0, 4)}
+          </span>
+        ) : (
+          <span />
+        )}
+        <span className="project-card__cta">
+          {t.projects.viewDetails} <Icon name="expand" size={16} className="project-card__chevron" />
+        </span>
+      </div>
 
       {open && (
         <dialog ref={dialogRef} className="project-dialog" aria-labelledby={titleId} onClose={() => setOpen(false)} onClick={onBackdrop}>
           <div className="project-dialog__box">
-            <div className="pd-top">
-              {project.cover && (
-                <figure className="pd-cover">
-                  <img src={project.cover.src} width={project.cover.width} height={project.cover.height} alt={project.cover.alt[lang]} decoding="async" />
-                </figure>
-              )}
+            {/* Botão fechar fixo no topo: acompanha a rolagem única do pop-up */}
+            <div className="pd-bar">
               <button type="button" className="icon-button pd-close" onClick={close} aria-label={t.projects.close}>
                 <Icon name="close" size={20} />
               </button>
             </div>
+            {project.cover && (
+              <div className="pd-top">
+                <figure className="pd-cover">
+                  <img src={project.cover.src} width={project.cover.width} height={project.cover.height} alt={project.cover.alt[lang]} decoding="async" />
+                </figure>
+              </div>
+            )}
 
             <header className="pd-head">
               <p className="pd-head__category">
@@ -153,7 +193,8 @@ export function ExpandableProjectCard({ project, category, tokens = [] }: Expand
               <h2 id={titleId} className="pd-head__title">
                 {project.title}
               </h2>
-              {(project.kind || project.created || project.status || d?.team) && (
+              <p className="pd-head__lead">{summary}</p>
+              {(project.kind || project.created || project.status) && (
                 <ul className="pd-meta">
                   {project.kind && (
                     <li>
@@ -170,72 +211,107 @@ export function ExpandableProjectCard({ project, category, tokens = [] }: Expand
                       <Icon name="calendar" size={14} /> {formatDate(lang, project.created)}
                     </li>
                   )}
-                  {d?.team && !project.image && (
-                    <li>
-                      <Icon name="users" size={14} /> {d.team}
-                    </li>
-                  )}
                 </ul>
               )}
-              {/* Acesso rápido: links pequenos com símbolo */}
-              <ProjectLinks project={project} withPage />
-              {!hasDeploy && <p className="pd-note">{t.projects.noDeploy}</p>}
+              <button type="button" className="pd-jump" onClick={goToLinks}>
+                <Icon name="globe" size={15} /> {m.goToLinks}
+              </button>
             </header>
 
-            <div className="pd-body" tabIndex={0} role="region" aria-labelledby={titleId}>
-              {problem && (
-                <section className="pd-section">
-                  <SectionTitle icon="info">{p.problem}</SectionTitle>
-                  <p>{problem}</p>
+            {/* História antes da stack: contexto/problema → público → solução → contribuição → funcionalidades → tecnologias → resultados → links */}
+            <div className="pd-body">
+              {(context || problem) && (
+                <section className="pd-block pd-block--wide" aria-labelledby={`${titleId}-context`}>
+                  <BlockTitle id={`${titleId}-context`} icon="info">
+                    {m.context}
+                  </BlockTitle>
+                  {context && <p>{context}</p>}
+                  {problem && (
+                    <div className="pd-callout">
+                      <strong>{m.problem}</strong>
+                      <p>{problem}</p>
+                    </div>
+                  )}
                 </section>
               )}
 
               {audience && (
-                <section className="pd-section">
-                  <SectionTitle icon="users">{p.audience}</SectionTitle>
+                <section className="pd-block" aria-labelledby={`${titleId}-audience`}>
+                  <BlockTitle id={`${titleId}-audience`} icon="users">
+                    {m.audience}
+                  </BlockTitle>
                   <p>{audience}</p>
                 </section>
               )}
 
-              {context && (
-                <section className="pd-section">
-                  <SectionTitle icon="info">{p.context}</SectionTitle>
-                  <p>{context}</p>
+              {solution && (
+                <section className="pd-block" aria-labelledby={`${titleId}-solution`}>
+                  <BlockTitle id={`${titleId}-solution`} icon="wrench">
+                    {m.solution}
+                  </BlockTitle>
+                  <p>{solution}</p>
                 </section>
               )}
 
-              {(solution || features.length > 0) && (
-                <section className="pd-section">
-                  <SectionTitle icon="wrench">{p.how}</SectionTitle>
-                  {solution && <p>{solution}</p>}
-                  {features.length > 0 && <FeatureList slug={project.slug} items={features} className="pd-features" />}
+              {(participation.length > 0 || d?.team || project.image) && (
+                <section className="pd-block" aria-labelledby={`${titleId}-contribution`}>
+                  <BlockTitle id={`${titleId}-contribution`} icon="user">
+                    {m.contribution}
+                  </BlockTitle>
+                  {participation.length > 0 && (
+                    <ul className="check-list pd-features">
+                      {participation.map((f) => (
+                        <li key={f}>{f}</li>
+                      ))}
+                    </ul>
+                  )}
+                  {d?.team && (
+                    <p className="pd-team">
+                      <Icon name="users" size={14} /> <strong>{m.team}:</strong> {d.team}
+                    </p>
+                  )}
+                  {project.image && <TeamPhotoLink project={project} detail={d} />}
                 </section>
               )}
 
-              {participation.length > 0 && (
-                <section className="pd-section">
-                  <SectionTitle icon="user">{p.participation}</SectionTitle>
+              {features.length > 0 && (
+                <section className="pd-block" aria-labelledby={`${titleId}-features`}>
+                  <BlockTitle id={`${titleId}-features`} icon="check">
+                    {m.features}
+                  </BlockTitle>
+                  <FeatureList slug={project.slug} items={features} className="pd-features" />
+                </section>
+              )}
+
+              {project.tags.length > 0 && (
+                <section className="pd-block pd-block--wide" aria-labelledby={`${titleId}-tech`}>
+                  <BlockTitle id={`${titleId}-tech`} icon="layers">
+                    {m.technologies}
+                  </BlockTitle>
+                  <TagList items={project.tags} label={m.technologies} tokens={tokens} />
+                </section>
+              )}
+
+              {results.length > 0 && (
+                <section className="pd-block pd-block--wide" aria-labelledby={`${titleId}-results`}>
+                  <BlockTitle id={`${titleId}-results`} icon="chart">
+                    {m.results}
+                  </BlockTitle>
                   <ul className="check-list pd-features">
-                    {participation.map((f) => (
-                      <li key={f}>{f}</li>
+                    {results.map((r) => (
+                      <li key={r}>{r}</li>
                     ))}
                   </ul>
                 </section>
               )}
 
-              {project.tags.length > 0 && (
-                <section className="pd-section">
-                  <SectionTitle icon="layers">{p.technologies}</SectionTitle>
-                  <TagList items={project.tags} label={p.technologies} tokens={tokens} />
-                </section>
-              )}
-
-              {project.image && (
-                <section className="pd-section">
-                  <SectionTitle icon="users">{p.team}</SectionTitle>
-                  <TeamPhotoLink project={project} detail={d} />
-                </section>
-              )}
+              <section ref={linksRef} className="pd-block pd-block--wide pd-block--links" aria-labelledby={`${titleId}-links`} tabIndex={-1}>
+                <BlockTitle id={`${titleId}-links`} icon="globe">
+                  {m.links}
+                </BlockTitle>
+                <ProjectLinks project={project} withPage />
+                {!hasDeploy && <p className="pd-note">{t.projects.noDeploy}</p>}
+              </section>
             </div>
           </div>
         </dialog>

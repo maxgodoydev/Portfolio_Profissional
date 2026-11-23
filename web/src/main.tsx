@@ -9,6 +9,7 @@ import './styles/search.css';
 import './styles/cards.css';
 import './styles/showcase.css';
 import './styles/neon.css';
+import './styles/projects-ui.css';
 import './styles/admin.css';
 import { App } from './App';
 import { I18nProvider } from './i18n/context';

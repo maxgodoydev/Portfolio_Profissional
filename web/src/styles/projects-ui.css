@@ -1,0 +1,74 @@
+/* Projetos: grade fixa de 3 colunas, cartão com áreas/ano/status, painel de filtros e paginação.
+ * Só tokens do tema. Movimento só sob .motion-ok (desligado com prefers-reduced-motion). */
+
+/* ---------- Grade: colunas iguais, sem trilhas vazias à direita ---------- */
+.card-grid--results { grid-template-columns: minmax(0, 1fr); gap: 1.1rem; }
+@media (min-width: 40em) { .card-grid--results { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 64em) { .card-grid--results { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* ---------- Cartão ---------- */
+.project-card__status { position: absolute; top: 0.65rem; left: 0.65rem; z-index: 2; display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.2rem 0.6rem; background: var(--action); color: var(--on-action); border-radius: 999px; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 0.75rem; font-weight: 700; box-shadow: 0 2px 8px rgb(0 0 0 / 0.3); }
+.project-card__areas { display: flex; flex-wrap: wrap; gap: 0.35rem; list-style: none; margin: 0 0 0.45rem; padding: 0; }
+.project-card__areas li { padding: 0.05rem 0.55rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.02em; }
+.project-card__foot { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-top: 0.2rem; padding-top: 0.7rem; border-top: 1px dashed var(--line); }
+.project-card__year { display: inline-flex; align-items: center; gap: 0.3rem; color: var(--muted); font-size: 0.8125rem; font-weight: 600; }
+.project-card--compact .project-card__cta { display: inline-flex; align-items: center; gap: 0.4rem; margin: 0; padding: 0.3rem 0.8rem; border: 1.5px solid var(--link); border-radius: 999px; color: var(--link); font-size: 0.875rem; font-weight: 700; }
+@media (hover: hover) {
+  .project-card--compact:hover .project-card__cta { background: var(--action); border-color: var(--action); color: var(--on-action); }
+}
+.motion-ok .project-card--compact .project-card__cta { transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+
+/* ---------- Painel de filtros ---------- */
+.filter-panel { display: grid; gap: 1.1rem; margin-bottom: 1.25rem; padding: 1.15rem 1.25rem; background: var(--card); border: 1px solid var(--line); border-radius: 1rem; }
+.filter-panel .field { max-width: 30rem; }
+.filter-block { display: grid; gap: 0.55rem; }
+.filter-block__label { display: flex; align-items: center; gap: 0.4rem; margin: 0; color: var(--muted); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; }
+
+/* Tipo de projeto: abas grandes, com ícone, contagem e marca de seleção */
+.seg { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.seg__btn { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 2.75rem; padding: 0.35rem 0.95rem; background: var(--surface); color: var(--ink); border: 1.5px solid var(--ink); border-radius: 0.8rem; font: inherit; font-size: 0.9375rem; font-weight: 700; cursor: pointer; }
+.seg__count { min-width: 1.5rem; padding: 0 0.4rem; border: 1px solid currentColor; border-radius: 999px; font-size: 0.8125rem; line-height: 1.3rem; text-align: center; font-variant-numeric: tabular-nums; }
+.seg__btn[aria-pressed='true'] { background: var(--action); border-color: var(--action); color: var(--on-action); box-shadow: var(--neon-glow); }
+.seg__btn:disabled { opacity: 0.5; border-style: dashed; cursor: not-allowed; }
+@media (hover: hover) { .seg__btn:not([aria-pressed='true']):hover:not(:disabled) { background: var(--soft); } }
+.seg__btn:active:not(:disabled) { transform: scale(0.98); }
+
+/* Área: chips menores e mais discretos (segundo nível da hierarquia) */
+.area-chips { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.area-chip { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.25rem; padding: 0.2rem 0.8rem; background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 999px; font: inherit; font-size: 0.875rem; font-weight: 600; cursor: pointer; }
+.area-chip__count { color: var(--muted); font-size: 0.8125rem; font-variant-numeric: tabular-nums; }
+.area-chip[aria-pressed='true'] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.area-chip[aria-pressed='true'] .area-chip__count { color: inherit; opacity: 0.85; }
+.area-chip:disabled { opacity: 0.5; border-style: dashed; cursor: not-allowed; }
+@media (hover: hover) { .area-chip:not([aria-pressed='true']):hover:not(:disabled) { border-color: var(--ink); background: var(--soft); } }
+.area-chip:active:not(:disabled) { transform: scale(0.97); }
+.seg__btn:focus-visible, .area-chip:focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }
+.motion-ok .seg__btn, .motion-ok .area-chip { transition: transform 0.12s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
+.motion-ok .seg__check { animation: seg-check 0.2s ease-out; }
+@keyframes seg-check { from { transform: scale(0.4); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* ---------- Paginação ---------- */
+.pagination { display: grid; justify-items: center; gap: 0.6rem; margin-top: 2rem; padding-top: 1.25rem; border-top: 1px dashed var(--line); }
+.pagination__status { margin: 0; color: var(--muted); font-size: 0.875rem; font-weight: 600; }
+.pagination__btn { border-width: 1.5px; border-radius: 0.8rem; }
+.pagination__btn--text { gap: 0.4rem; padding: 0 0.8rem; }
+.pagination__label { display: none; }
+@media (min-width: 40em) { .pagination__label { display: inline; } .pagination__btn--text { padding: 0 1rem; } }
+.pagination__btn[aria-current='page'] { box-shadow: var(--neon-glow); }
+.pagination__btn:focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }
+
+/* ---------- Celular: painel mais baixo (abas em 2 colunas, chips menores) ---------- */
+@media (max-width: 39.99em) {
+  .filter-panel { gap: 0.8rem; padding: 0.9rem; }
+  .seg { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
+  .seg__btn { gap: 0.4rem; padding: 0.3rem 0.55rem; font-size: 0.8125rem; line-height: 1.2; text-align: left; }
+  .seg__text { flex: 1; min-width: 0; }
+  .seg__check { display: none; }
+  .area-chips { gap: 0.35rem; }
+  .area-chip { min-height: 2.25rem; padding: 0.15rem 0.65rem; font-size: 0.8125rem; }
+}
+
+/* Estado selecionado: além da cor de ação (que em alguns temas tem pouco contraste contra os vizinhos),
+ * um anel em --ink (≥ 7:1 sobre o fundo em todos os temas) garante o 3:1 de WCAG 1.4.11 sem depender da cor. */
+.seg__btn[aria-pressed='true'], .pagination__btn[aria-current='page'] { outline: 2px solid var(--ink); outline-offset: 2px; }
+.seg__btn[aria-pressed='true']:focus-visible, .pagination__btn[aria-current='page']:focus-visible { outline: 3px solid var(--link); outline-offset: 3px; }
