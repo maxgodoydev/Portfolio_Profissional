@@ -15,6 +15,13 @@ const dom = new JSDOM('<!doctype html><html lang="pt-BR" data-theme="ice-tangeri
 });
 const w = dom.window;
 w.scrollTo = () => {};
+// jsdom não traz estas APIs de navegador; o app as usa (animações de entrada, rolagem).
+for (const k of ['requestAnimationFrame', 'cancelAnimationFrame']) globalThis[k] = w[k] ?? (k === 'requestAnimationFrame' ? (cb) => setTimeout(() => cb(Date.now()), 16) : (id) => clearTimeout(id));
+class NoopObserver { observe() {} unobserve() {} disconnect() {} takeRecords() { return []; } }
+globalThis.IntersectionObserver ??= w.IntersectionObserver ?? NoopObserver;
+globalThis.ResizeObserver ??= w.ResizeObserver ?? NoopObserver;
+w.IntersectionObserver ??= globalThis.IntersectionObserver;
+w.ResizeObserver ??= globalThis.ResizeObserver;
 w.matchMedia = () => ({ matches: false, addEventListener() {}, removeEventListener() {} });
 w.HTMLElement.prototype.scrollIntoView = () => {};
 Object.assign(globalThis, {
@@ -111,7 +118,7 @@ before(async () => {
 test('a página de contato mostra e-mail, LinkedIn e GitHub reais', async () => {
   await fresh();
   const hrefs = [...w.document.querySelectorAll('.channel-list a')].map((a) => a.getAttribute('href'));
-  assert.deepEqual(hrefs.sort(), ['https://github.com/maxgodoydev', 'https://www.linkedin.com/in/max-godoy/', 'mailto:maxgodoy.dev@gmail.com'].sort());
+  assert.deepEqual(hrefs.sort(), ['https://github.com/maxgodoydev', 'https://www.linkedin.com/in/max-godoy/', 'mailto:maxgodoy.dev@gmail.com', 'https://wa.me/5511958081846'].sort());
 });
 
 test('abrir a página registra pageview anônimo no contrato', async () => {

@@ -13,7 +13,7 @@ try {
   process.exit(2);
 }
 const BASE = process.argv[2] || 'http://localhost:4173';
-const ROUTES = ['/pt/', '/pt/about', '/pt/projects', '/pt/projects?q=python&cat=data', '/pt/projects?q=zzzz', '/pt/projects/barbershop-do-gui', '/pt/projects/segunda-vitrine', '/pt/projects/intelibolsas', '/pt/technologies', '/pt/journey', '/pt/contact', '/pt/resume', '/pt/privacy', '/en/', '/es/'];
+const ROUTES = ['/pt/', '/pt/about', '/pt/projects', '/pt/projects?page=2', '/pt/projects?q=python&cat=data', '/pt/projects?q=zzzz', '/pt/projects/barbershop-do-gui', '/pt/projects/segunda-vitrine', '/pt/projects/intelibolsas', '/pt/projects/tica-artesanato', '/pt/projects/pm-bem-casados', '/pt/technologies', '/pt/journey', '/pt/contact', '/pt/resume', '/pt/privacy', '/en/', '/es/'];
 const browser = await chromium.launch();
 let failures = 0;
 for (const width of [360, 1280]) {

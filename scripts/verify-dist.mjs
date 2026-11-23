@@ -118,7 +118,7 @@ check(js.includes('https://www.linkedin.com/in/max-godoy/'), 'LinkedIn ausente d
     const v = Object.fromEntries([...m[3].matchAll(/--([\w-]+):(#[0-9a-fA-F]{6})/g)].map((x) => [x[1], x[2]]));
     for (const [f, b] of PAIRS) check(ratio(v[f], v[b]) >= 4.5, `contraste ${m[1]}/${m[2]}: ${f} sobre ${b} = ${ratio(v[f], v[b]).toFixed(2)} (mín. 4.5)`);
   }
-  check(themes === 10, `esperado 10 combinações tema×modo, achei ${themes}`);
+  check(themes === 18, `esperado 18 combinações tema×modo (9 paletas × claro/escuro), achei ${themes}`);
 }
 
 console.log(`verify: ${checks - problems.length}/${checks} verificações ok, ${pageCount} páginas HTML`);
