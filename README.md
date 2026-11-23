@@ -78,7 +78,7 @@ Atualmente, curso **Desenvolvimento de Software Multiplataforma na FATEC Zona Su
 
 <a id="tecnologias"></a>
 
-## ⚙️ Tecnologias neste projeto
+## ⚙️ Tecnologias
 
 <p align="center">
   <a href="https://www.typescriptlang.org/">
@@ -117,8 +117,14 @@ Atualmente, curso **Desenvolvimento de Software Multiplataforma na FATEC Zona Su
 ## 🌐 Acesso
 
 <p align="center">
-  <a href="max-godoy-portfolio.vercel.app">
-    <img src="https://img.shields.io/badge/Acessar_Portf%C3%B3lio-Visualizar_online-2B2E2A?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Acessar portfólio">
+  <a href="https://max-godoy-portfolio.vercel.app/">
+    <img src="https://img.shields.io/badge/Acessar_Portf%C3%B3lio-Visualizar_online-2B2E2A?style=for-the-badge&logo=vercel&logoColor=white" alt="Acessar portfólio">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://max-godoy-portfolio.vercel.app/">
+    <b>max-godoy-portfolio.vercel.app</b>
   </a>
 </p>
 
