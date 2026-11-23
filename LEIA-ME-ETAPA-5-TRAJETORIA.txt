@@ -1,0 +1,21 @@
+ETAPA 5: TRAJETÓRIA REESTRUTURADA
+
+Página /journey (Trajetória)
+- Duas seções independentes, ambas com linha do tempo vertical em ordem cronológica inversa:
+  💼 Trajetória profissional  e  🎓 Formação acadêmica (+ ✦ Cursos e certificações).
+- "✦ Minha rota em foco" substitui o antigo "Resumo da trajetória": 4 atalhos que ancoram cada seção.
+- Experiência atual (Segunda Vitrine) em cartão de destaque; anteriores compactas, com "Ver detalhes" / "Expandir tudo".
+- Transição de carreira: marco próprio (⌁) entre a Segunda Vitrine e a Contmor, jul/2024 a nov/2026.
+- Primeiras experiências: bloco expansível (5 funções, nada removido).
+- Formação: FATEC em destaque + 7 áreas em grupos de etiquetas; UNINOVE discreta como formação anterior.
+- Certificações por categoria, com cartões compactos; eventos e formação complementar anterior em blocos expansíveis.
+
+Página /about (Sobre)
+- Novo bloco "Como eu trabalho": síntese de perfil em etapas + 8 competências + "Curiosidade tecnológica".
+
+Arquivos
+  novos:     web/src/content/career.ts, content/traits.ts, components/CareerParts.tsx, components/WorkStyle.tsx, styles/career.css
+  alterados: pages/Journey.tsx, pages/About.tsx, main.tsx, i18n/{pt,en,es}.ts, styles/showcase.css
+  removidos: components/JourneyTrack.tsx (carrossel), content/journey.ts
+
+Para editar conteúdo: tudo está em web/src/content/career.ts e traits.ts (pt/en/es lado a lado).

@@ -1,3 +1,4 @@
+import { WorkStyle } from '../components/WorkStyle';
 import { useI18n } from '../i18n/context';
 import { buildPath } from '../routes';
 import { PageHeader, Section, TextLink } from './shared';
@@ -24,6 +25,8 @@ export function AboutPage() {
           ))}
         </ul>
       </Section>
+
+      <WorkStyle />
 
       <Section title={a.educationTitle}>
         <div className="info-card info-card--wide">

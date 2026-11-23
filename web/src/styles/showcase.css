@@ -65,93 +65,13 @@
 .motion-ok .project-group:nth-child(2) { animation-delay: 0.08s; }
 .motion-ok .project-group:nth-child(3) { animation-delay: 0.16s; }
 
-/* ---------- Trajetória: cartões pequenos que deslizam para o lado ---------- */
-.jt { margin-top: 1.5rem; }
-.jt__bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 0.5rem; }
-.jt__position { margin: 0; font-size: 0.875rem; font-variant-numeric: tabular-nums; color: var(--muted); }
-.jt__buttons { display: flex; gap: 0.4rem; }
-.jt__buttons .icon-button:disabled { opacity: 0.4; cursor: default; }
-.jt__flip { transform: scaleX(-1); }
-
-.jt__track {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.9rem;
-  margin: 0;
-  padding: 0.75rem 0 1rem;
-  list-style: none;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 88%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 88%, transparent 100%);
-}
-.jt__track::-webkit-scrollbar { display: none; }
-.jt__track:focus-visible { outline: 3px solid var(--link); outline-offset: 2px; border-radius: 0.5rem; }
-/* O início não apaga a borda esquerda; o fim não apaga a direita. */
-.jt[data-start='true'] .jt__track { -webkit-mask-image: linear-gradient(to right, #000 0, #000 88%, transparent 100%); mask-image: linear-gradient(to right, #000 0, #000 88%, transparent 100%); }
-.jt[data-end='true'] .jt__track { -webkit-mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 100%); mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 100%); }
-.jt[data-start='true'][data-end='true'] .jt__track { -webkit-mask-image: none; mask-image: none; }
-
-.jt-card {
-  flex: 0 0 min(16.5rem, 78%);
-  scroll-snap-align: start;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  padding: 0.9rem 1rem 1rem;
-  border: 1px solid var(--line);
-  border-radius: 1rem;
-  color: var(--ink);
-  background: var(--card);
-}
-.jt-card[data-tone='0'] { background: var(--soft); }
-.jt-card[data-tone='1'] { background: var(--card); }
-.jt-card[data-tone='2'] { background: var(--action); color: var(--on-action); border-color: transparent; }
-.jt-card[data-tone='3'] { background: var(--surface); }
-.jt-card[data-pos='past'] { filter: saturate(0.55); transform: scale(0.965); }
-.jt-card[data-pos='far'] { filter: saturate(0.8); }
-.jt-card[data-pos='active'] { box-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.5); }
-.motion-ok .jt-card { transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.35s ease, box-shadow 0.35s ease; }
-
-.jt-card__meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.2rem 0.6rem; margin: 0; font-size: 0.75rem; font-weight: 700; }
-.jt-card__kind { display: inline-flex; align-items: center; gap: 0.3rem; text-transform: uppercase; letter-spacing: 0.06em; }
-.jt-card__period { font-variant-numeric: tabular-nums; }
-.jt-card__title { margin: 0.1rem 0 0; font-size: 1.0625rem; line-height: 1.25; }
-.jt-card__org { margin: 0; font-size: 0.875rem; font-weight: 600; }
-.jt-card__badge { align-self: flex-start; margin: 0; padding: 0.05rem 0.55rem; font-size: 0.75rem; font-weight: 700; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 999px; }
-.jt-card__text { font-size: 0.875rem; line-height: 1.45; }
-.jt-card__text p { margin: 0; }
-.jt-card__techs { display: flex; flex-wrap: wrap; gap: 0.3rem; margin: auto 0 0; padding: 0.5rem 0 0; list-style: none; }
-.jt-tech { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.1rem 0.5rem 0.1rem 0.35rem; font-size: 0.75rem; font-weight: 600; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 999px; }
-
-.jt__rail { height: 3px; margin-top: 0.25rem; background: var(--line); border-radius: 3px; overflow: hidden; }
-.jt__rail-fill { display: block; height: 100%; background: var(--action); border-radius: 3px; }
-.motion-ok .jt__rail-fill { transition: width 0.35s ease; }
-
-/* ---------- Trajetória: resumo final ---------- */
-.js-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); }
-.js-card { padding: 1.1rem 1.1rem 1.2rem; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 1rem; }
-.js-card[data-tone='0'] { background: var(--soft); }
-.js-card[data-tone='2'] { background: var(--surface); }
-.js-card__title { display: flex; align-items: center; gap: 0.5rem; margin: 0 0 0.5rem; font-size: 1.125rem; }
-.js-card__lead { margin: 0 0 0.5rem; font-size: 0.9375rem; font-weight: 600; }
-.js-card__sub { margin: 0 0 0.6rem; font-family: system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
-.js-blocks { display: grid; gap: 0.4rem; margin: 0; padding: 0; list-style: none; }
-.js-block { display: flex; align-items: flex-start; gap: 0.5rem; padding: 0.45rem 0.6rem; font-size: 0.875rem; line-height: 1.35; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 0.6rem; }
-.js-block .icon { flex: none; margin-top: 0.1rem; }
-
 @media (max-width: 40em) {
   .pd-cover img { max-height: 28dvh; }
   .icon-link { font-size: 0.8125rem; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .jt-card, .jt__rail-fill { transition: none; }
 }
 
-/* Textos longos nos cartões da trajetória ficam curtos (o detalhe completo está nos projetos). */
-.jt-card__text { display: -webkit-box; -webkit-line-clamp: 4; line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
 
 /* ---------- O que eu construo: ícones nos cartões ---------- */
 .info-card--icon { display: grid; gap: 0.5rem; align-content: start; }
