@@ -1,84 +1,148 @@
-# Portfólio de Max Godoy
+# 💼 Portfólio Profissional
 
-> **Evolução visual — parte 1 (Etapa 8):** logos de marca (Simple Icons/Font Awesome), hero com painel, fundo ambiente, microinterações e entrada ao rolar. Detalhes e backlog em `docs/historico/ETAPA-8-VISUAL-1.md`.
->
-> **Evolução visual — parte 2 (Etapa 8):** busca e filtros de Projetos (sem acento, vários termos, destaque, contagem por categoria, chips removíveis, estado vazio e filtros na URL). Detalhes, validação e backlog atualizado em `docs/historico/ETAPA-8-VISUAL-2.md`. Atribuição: logos de Simple Icons (CC0) e Font Awesome Free Brands (CC BY 4.0, Java e LinkedIn); marcas pertencem aos titulares.
+<a id="topo"></a>
 
-> **Evolução visual — parte 3 (Etapa 8):** menu mobile animado (botão que vira X, painel com entrada/saída, fundo escurecido, item atual destacado) e tooltips de categoria nas tecnologias da Home. Detalhes e backlog em `docs/historico/ETAPA-8-VISUAL-3.md`.
+<img src="Assets/Banners/main.svg" alt="Portfólio profissional de Max Godoy" width="100%">
 
-> **Evolução visual — parte 4 (Etapa 8):** cartões de projeto expansíveis na página Projetos (disclosure acessível, prévia de tecnologias, painel com foto, fatos, funcionalidades e links). Detalhes e backlog em `docs/historico/ETAPA-8-VISUAL-4.md`.
+<p align="center">
+  <a href="#proposito">🧩 Propósito</a> &nbsp;·&nbsp;
+  <a href="#projetos">🚀 Projetos</a> &nbsp;·&nbsp;
+  <a href="#trajetoria">📚 Trajetória</a> &nbsp;·&nbsp;
+  <a href="#tecnologias">⚙️ Tecnologias</a> &nbsp;·&nbsp;
+  <a href="#acesso">🌐 Acesso</a> &nbsp;·&nbsp;
+  <a href="#contato">📬 Contato</a>
+</p>
 
-> **Evolução visual — parte 4B (Etapa 8):** capas dos cartões de projeto (prints reais, 960×436 WebP) e aviso "Sem versão online" nos projetos sem deploy. Detalhes e pendências em `docs/historico/ETAPA-8-VISUAL-4B-CAPAS.md`.
+---
 
-Portfólio profissional de Max Godoy, estudante de Desenvolvimento de Software Multiplataforma na FATEC Zona Sul, com foco em Dados & Analytics, Business Intelligence, desenvolvimento de software e automação de processos.
+<p align="center">
+  <img src="https://img.shields.io/badge/TypeScript-em_uso-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Go-em_uso-00ADD8?style=flat-square&logo=go&logoColor=white" alt="Go">
+  <img src="https://img.shields.io/badge/JavaScript-em_uso-F7DF1E?style=flat-square&logo=javascript&logoColor=black" alt="JavaScript">
+  <img src="https://img.shields.io/badge/HTML-em_uso-E34F26?style=flat-square&logo=html5&logoColor=white" alt="HTML">
+  <img src="https://img.shields.io/badge/CSS-em_uso-1572B6?style=flat-square&logo=css3&logoColor=white" alt="CSS">
+  <img src="https://img.shields.io/badge/Python-em_uso-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
+</p>
 
-**Site:** https://max-godoy-portfolio.vercel.app/pt/ · **Idiomas:** português, inglês e espanhol
+<p align="center">
+  <img src="https://img.shields.io/badge/status-em_desenvolvimento-6B7280?style=flat-square&labelColor=2B2E2A" alt="Status: em desenvolvimento">
+</p>
 
-## O que é
+---
 
-Um site feito para qualquer visitante: recrutadores, empresas, estudantes ou quem só encontrou o link. Linguagem simples, navegação direta, 5 temas (claro, escuro ou automático), acessível por teclado e responsivo.
+<a id="proposito"></a>
 
-Páginas: Início, Sobre, Projetos (com busca, filtros e página de cada projeto), Tecnologias, Trajetória, Contato, Currículo e Privacidade. Há também um painel administrativo privado (`/admin`) com métricas anônimas de acesso e monitoramento.
+## 🧩 Propósito
 
-## Tecnologias
+A tecnologia por trás de um projeto não deve ser uma barreira para conhecer seu resultado.
 
-| Parte | Escolha |
+Desenvolvi este portfólio para apresentar meus projetos, experiências e competências de forma visual, intuitiva e acessível, tornando meu trabalho mais fácil de explorar e compreender.
+
+### 👥 Público-alvo
+
+Profissionais de recrutamento e seleção, gestores, empresas, desenvolvedores e pessoas interessadas em conhecer meus projetos, independentemente de sua familiaridade com programação.
+
+### 🎯 Objetivos
+
+- Facilitar a navegação e a visualização dos projetos.
+- Apresentar minha trajetória e competências de forma clara.
+- Tornar informações técnicas mais acessíveis.
+- Proporcionar uma experiência agradável, intuitiva e responsiva.
+
+<img src="Assets/divider.svg" alt="" width="100%">
+
+<a id="projetos"></a>
+
+## 🚀 Projetos
+
+Projetos acadêmicos, pessoais e colaborativos que representam minha evolução e a aplicação prática dos conhecimentos adquiridos.
+
+| Área | Projetos |
 |---|---|
-| Frontend | React 19 + TypeScript, build próprio com esbuild (páginas geradas no build), roteador próprio, i18n pt/en/es |
-| Backend | Go 1.22 só com a biblioteca padrão, rodando como função serverless da Vercel |
-| Dados | Turso (libSQL, via HTTP) ou memória em desenvolvimento |
-| E-mail | Resend (formulário de contato) |
-| Hospedagem | Vercel, com deploy automático a partir da branch `main` |
+| 💻 | Desenvolvimento de Software |
+| 📊 | Dados e Business Intelligence |
+| ⚙️ | Automação e Soluções Digitais |
+| 🎓 | Projetos Acadêmicos e Colaborativos |
 
-## Estrutura
+<img src="Assets/divider.svg" alt="" width="100%">
 
-```
-api/index.go         função serverless Go (toda a API)
-cmd/server/          a mesma API para rodar localmente
-backend/             config, server (rotas, admin, contato) e store (Turso/memória)
-web/src/             pages, components, content, i18n, theme, admin, services, styles
-web/public/          imagens, ícones e currículos em PDF
-scripts/             build, verificação do build, auditoria de acessibilidade, e2e do admin
-tests/               testes do frontend (node --test)
-docs/                API.md, DEPLOY.md e historico/ (etapas anteriores)
-legacy-v1/           site antigo, preservado e ignorado no deploy (.vercelignore)
-```
+<a id="trajetoria"></a>
 
-> A pasta do backend chama-se `backend/` (e não `internal/`) porque a Vercel não permite que `api/` importe pacotes `internal/`.
+## 📚 Trajetória
 
-## Como rodar
+Experiência profissional em Legalização Empresarial, com atuação em processos, análise e validação de dados, controles e documentação.
 
-Requisitos: Node 22, Go 1.22+.
+Atualmente, curso **Desenvolvimento de Software Multiplataforma na FATEC Zona Sul**, direcionando minha experiência para Tecnologia, Dados, BI e Automação.
 
-```powershell
-npm install
-npm test            # typecheck, testes, build, verificação do build e testes Go
-npm run dev         # site em http://localhost:3000 (com recarga automática)
-go run ./cmd/server # API em http://localhost:8080/api/health (outro terminal)
-npm run preview     # build de produção em http://localhost:4173
-```
+<img src="Assets/divider.svg" alt="" width="100%">
 
-Sem variáveis de ambiente o site e a API funcionam (dados em memória, contato e admin desativados). Para ativar o resto, veja [`docs/DEPLOY.md`](docs/DEPLOY.md) e `.env.example`. O Go **não lê o `.env` sozinho**: defina as variáveis no terminal (`$env:NOME="valor"`).
+<a id="tecnologias"></a>
 
-## Verificações disponíveis
+## ⚙️ Tecnologias neste projeto
 
-| Comando | O que faz |
-|---|---|
-| `npm test` | Tudo em sequência: tipos, testes web, build, `verify-dist` (estrutura, SEO, segurança e contraste AA dos 5 temas), testes Go |
-| `npm run a11y` | Auditoria de acessibilidade em 11 rotas, 360 e 1280 px (precisa de Playwright e do `npm run preview` rodando) |
-| `npm run e2e:admin` | Teste ponta a ponta do painel contra a API real (precisa de Playwright) |
-| `go test ./... -cover` | Testes do backend (inclui o cliente Turso contra um servidor falso) |
+<p align="center">
+  <a href="https://www.typescriptlang.org/">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="45" alt="TypeScript">
+  </a>
+  &nbsp;
+  <a href="https://go.dev/">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" width="45" alt="Go">
+  </a>
+  &nbsp;
+  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="45" alt="JavaScript">
+  </a>
+  &nbsp;
+  <a href="https://developer.mozilla.org/en-US/docs/Web/HTML">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="45" alt="HTML5">
+  </a>
+  &nbsp;
+  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="45" alt="CSS3">
+  </a>
+  &nbsp;
+  <a href="https://www.python.org/">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="45" alt="Python">
+  </a>
+</p>
 
-## Currículos
+<p align="center">
+  TypeScript · Go · JavaScript · HTML · CSS · Python
+</p>
 
-O build lê `web/public/resume/curriculo-max-godoy-{pt,en,es}.pdf`. Idiomas sem PDF mostram "Em breve".
+<img src="Assets/divider.svg" alt="" width="100%">
 
-## Documentação
+<a id="acesso"></a>
 
-- [`docs/API.md`](docs/API.md): rotas, formatos, erros e limites
-- [`docs/DEPLOY.md`](docs/DEPLOY.md): publicar e configurar variáveis na Vercel, passo a passo
-- [`docs/historico/`](docs/historico/): relatórios e auditorias das etapas anteriores
+## 🌐 Acesso
 
-## Privacidade
+<p align="center">
+  <a href="SEU_LINK_DO_DEPLOY">
+    <img src="https://img.shields.io/badge/Acessar_Portf%C3%B3lio-Visualizar_online-2B2E2A?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Acessar portfólio">
+  </a>
+</p>
 
-As métricas são anônimas: sem cookies de rastreamento, sem IP, sem user agent armazenados; respeitam Do Not Track e Global Privacy Control. Detalhes na página de Privacidade do site.
+<img src="Assets/divider.svg" alt="" width="100%">
+
+<a id="contato"></a>
+
+## 📬 Contato
+
+<p align="center">
+  <a href="https://github.com/maxgodoydev">
+    <img src="https://img.shields.io/badge/GitHub-MaxGodoyDev-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub">
+  </a>
+  <a href="SEU_LINK_LINKEDIN">
+    <img src="https://img.shields.io/badge/LinkedIn-Perfil_profissional-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn">
+  </a>
+</p>
+
+---
+
+<p align="center">
+  Desenvolvido por <b>Max Godoy</b> · Em constante evolução. 🌱
+</p>
+
+<p align="center">
+  <a href="#topo">↑ Voltar ao topo</a>
+</p>
