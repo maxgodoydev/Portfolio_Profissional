@@ -36,7 +36,7 @@ export function ResumePage() {
           const entry = manifest[l];
           return (
             <li key={l} className="info-card">
-              <h3>{t.resume.languages[l]}</h3>
+              <h2>{t.resume.languages[l]}</h2>
               {loading ? (
                 <p>{t.common.loading}</p>
               ) : entry ? (

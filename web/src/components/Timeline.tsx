@@ -19,7 +19,8 @@ export interface TimelineItem {
 }
 
 /** Linha do tempo vertical, semântica (<ol>). Cores só de variáveis do tema. */
-export function Timeline({ items, label }: { items: readonly TimelineItem[]; label?: string }) {
+export function Timeline({ items, label, headingLevel = 3 }: { items: readonly TimelineItem[]; label?: string; headingLevel?: 2 | 3 }) {
+  const Heading = headingLevel === 2 ? 'h2' : 'h3';
   return (
     <ol className="timeline" aria-label={label}>
       {items.map((item) => (
@@ -30,7 +31,7 @@ export function Timeline({ items, label }: { items: readonly TimelineItem[]; lab
             {item.kindLabel && <span aria-hidden="true"> · </span>}
             {item.period}
           </p>
-          <h3 className="timeline__title">
+          <Heading className="timeline__title">
             {item.title}
             {item.badge && (
               <>
@@ -38,7 +39,7 @@ export function Timeline({ items, label }: { items: readonly TimelineItem[]; lab
                 <Tag tone={item.current ? 'accent' : 'outline'}>{item.badge}</Tag>
               </>
             )}
-          </h3>
+          </Heading>
           {item.subtitle && <p className="timeline__subtitle">{item.subtitle}</p>}
           {item.description && <div className="timeline__text">{item.description}</div>}
         </li>

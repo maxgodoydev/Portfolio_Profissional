@@ -4,6 +4,7 @@ import './styles/themes.generated.css'; // gerado pelo build a partir de theme/t
 import './styles/global.css';
 import './styles/components.css';
 import './styles/pages.css';
+import './styles/visual.css';
 import './styles/admin.css';
 import { App } from './App';
 import { I18nProvider } from './i18n/context';

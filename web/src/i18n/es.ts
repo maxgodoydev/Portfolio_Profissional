@@ -55,10 +55,10 @@ export const es: Dictionary = {
     ctaResume: 'Currículum',
     focusTitle: 'Áreas de actuación',
     focus: [
-      { title: 'Datos y Analytics', text: 'Consultas SQL, análisis e indicadores con Python y Excel.' },
-      { title: 'Business Intelligence', text: 'Modelado y dashboards en Power BI, con DAX y Power Query.' },
-      { title: 'Desarrollo de software', text: 'Aplicaciones web y APIs, de la base de datos a la interfaz.' },
-      { title: 'Automatización de procesos', text: 'Reglas de negocio y rutinas repetitivas convertidas en sistema.' },
+      { title: 'Datos y Analytics', text: 'Convertir datos en respuestas. Consultas SQL, análisis e indicadores con Python y Excel.' },
+      { title: 'Business Intelligence', text: 'Paneles que ayudan a tomar decisiones. Modelado y dashboards en Power BI, con DAX y Power Query.' },
+      { title: 'Desarrollo de software', text: 'Sitios y sistemas que las personas usan a diario. Aplicaciones web y APIs, de la base de datos a la interfaz.' },
+      { title: 'Automatización de procesos', text: 'Menos trabajo repetitivo. Reglas de negocio y rutinas repetitivas convertidas en sistema.' },
     ],
     snapshotTitle: 'Resumen rápido',
     snapshot: [
@@ -159,6 +159,7 @@ export const es: Dictionary = {
       studied: 'Estudiada',
       building: 'En desarrollo en este portafolio',
     },
+    noLogoNote: 'Icono punteado: aún sin logo oficial disponible; no se inventó ningún logo.',
     usedIn: 'Usada en',
     studiedNote: 'Estudiada, sin uso en un proyecto publicado.',
     categories: {

@@ -16,6 +16,8 @@ export interface Project {
   repo: string;
   demo?: string;
   site?: string;
+  /** Foto opcional exibida na página do projeto (arquivo em web/public/projects). */
+  image?: { src: string; width: number; height: number; alt: Localized<string>; caption: Localized<string> };
   /** Criação (AAAA-MM), quando confirmada. */
   created?: string;
   title: string;
@@ -57,7 +59,7 @@ export const PROJECTS: readonly Project[] = [
     kind: 'academic',
     featured: true,
     tags: ['Power BI', 'DAX', 'Power Query', 'SQL'],
-    repo: 'https://github.com/maxgodoydev/Portfolio_Power_BI',
+    repo: 'https://github.com/maxgodoydev/Business-Intelligence-portfolio',
     title: 'Portfólio de Power BI',
     summary: {
       pt: 'Projetos acadêmicos e estudos de Business Intelligence: dashboards, indicadores operacionais e apoio à tomada de decisão.',
@@ -96,12 +98,25 @@ export const PROJECTS: readonly Project[] = [
     categories: ['data'],
     kind: 'study',
     tags: ['Python', 'NumPy', 'Pandas', 'SQL'],
-    repo: 'https://github.com/maxgodoydev/Python',
+    repo: 'https://github.com/maxgodoydev/python-lab',
     title: 'Estudos em Python',
     summary: {
       pt: 'Estudos de lógica de programação, análise de dados e estatística com Python, NumPy, Pandas e SQL.',
       en: 'Studies in programming logic, data analysis and statistics with Python, NumPy, Pandas and SQL.',
       es: 'Estudios de lógica de programación, análisis de datos y estadística con Python, NumPy, Pandas y SQL.',
+    },
+  },
+  {
+    slug: 'intelibolsas',
+    categories: ['development', 'academic'],
+    kind: 'academic',
+    tags: ['PHP', 'MySQL'],
+    repo: 'https://github.com/maxgodoydev/InteliBolsas',
+    title: 'InteliBolsas',
+    summary: {
+      pt: 'Aplicação web (CRUD) para divulgação de bolsas de estudo e cursos, com áreas para aluno, instituição e administração.',
+      en: 'Web application (CRUD) to publish scholarships and courses, with areas for students, institutions and administration.',
+      es: 'Aplicación web (CRUD) para difundir becas de estudio y cursos, con áreas para alumno, institución y administración.',
     },
   },
   {
@@ -112,11 +127,22 @@ export const PROJECTS: readonly Project[] = [
     repo: 'https://github.com/Luck16Ash/Segunda-Vitrine',
     site: 'https://segunda-vitrine.vercel.app',
     created: '2026-11',
+    image: {
+      src: '/projects/segunda-vitrine-equipe.jpg',
+      width: 1200,
+      height: 886,
+      alt: {
+        pt: 'Selfie de cinco integrantes da Segunda Vitrine, sorrindo, em um laboratório de informática.',
+        en: 'Selfie of five Segunda Vitrine members smiling in a computer lab.',
+        es: 'Selfie de cinco integrantes de Segunda Vitrine sonriendo en un laboratorio de informática.',
+      },
+      caption: { pt: 'Integrantes da Segunda Vitrine.', en: 'Members of Segunda Vitrine.', es: 'Integrantes de Segunda Vitrine.' },
+    },
     title: 'Segunda Vitrine',
     summary: {
-      pt: 'Iniciativa independente de estudantes para apresentar projetos de tecnologia e dados, destacando contexto, solução e contribuição individual.',
-      en: 'Independent student initiative to showcase technology and data projects, highlighting context, solution and individual contribution.',
-      es: 'Iniciativa independiente de estudiantes para presentar proyectos de tecnología y datos, destacando contexto, solución y contribución individual.',
+      pt: 'Iniciativa independente de estudantes de DSM que conecta talentos estudantis a empresas e negócios reais por meio de soluções tecnológicas, dando visibilidade à contribuição de cada estudante.',
+      en: 'Independent initiative by DSM students that connects student talent with companies and real businesses through technology solutions, giving visibility to each student\'s contribution.',
+      es: 'Iniciativa independiente de estudiantes de DSM que conecta el talento estudiantil con empresas y negocios reales mediante soluciones tecnológicas, dando visibilidad al aporte de cada estudiante.',
     },
   },
 ];

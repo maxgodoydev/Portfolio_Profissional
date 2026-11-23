@@ -81,6 +81,20 @@ export function ProjectDetailPage({ slug }: { slug: string }) {
         </ul>
       </header>
 
+      {project.image && (
+        <figure className="project-photo">
+          <img
+            src={project.image.src}
+            width={project.image.width}
+            height={project.image.height}
+            alt={project.image.alt[lang]}
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>{project.image.caption[lang]}</figcaption>
+        </figure>
+      )}
+
       {d?.context && (
         <Section title={p.context}>
           <p>{d.context}</p>

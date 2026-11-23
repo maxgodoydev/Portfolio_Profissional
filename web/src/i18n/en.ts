@@ -55,10 +55,10 @@ export const en: Dictionary = {
     ctaResume: 'Résumé',
     focusTitle: 'Areas of focus',
     focus: [
-      { title: 'Data & Analytics', text: 'SQL queries, analysis and indicators with Python and Excel.' },
-      { title: 'Business Intelligence', text: 'Modeling and dashboards in Power BI, with DAX and Power Query.' },
-      { title: 'Software development', text: 'Web applications and APIs, from the database to the interface.' },
-      { title: 'Process automation', text: 'Business rules and repetitive routines turned into software.' },
+      { title: 'Data & Analytics', text: 'Turning data into answers. SQL queries, analysis and indicators with Python and Excel.' },
+      { title: 'Business Intelligence', text: 'Dashboards that help people make decisions. Modeling and dashboards in Power BI, with DAX and Power Query.' },
+      { title: 'Software development', text: 'Websites and systems people use every day. Web applications and APIs, from the database to the interface.' },
+      { title: 'Process automation', text: 'Less repetitive work. Business rules and repetitive routines turned into software.' },
     ],
     snapshotTitle: 'At a glance',
     snapshot: [
@@ -159,6 +159,7 @@ export const en: Dictionary = {
       studied: 'Studied',
       building: 'Being developed in this portfolio',
     },
+    noLogoNote: 'Dashed icon: no official logo available yet; no logo has been made up.',
     usedIn: 'Used in',
     studiedNote: 'Studied, not used in a published project.',
     categories: {

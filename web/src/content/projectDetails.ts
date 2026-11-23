@@ -138,18 +138,53 @@ export const PROJECT_DETAILS: Record<string, Localized<ProjectDetail> | undefine
       features: ['Lógica de programación', 'Análisis de datos', 'Estadística'],
     },
   },
-  'segunda-vitrine': {
+  intelibolsas: {
     pt: {
-      context: 'Iniciativa independente criada por estudantes em novembro de 2026. Não é um projeto oficial da FATEC.',
-      solution: 'Um site que apresenta projetos de tecnologia e dados, destacando em cada um o contexto, a solução e a contribuição individual.',
+      context: 'Projeto acadêmico do 2º semestre, executado localmente.',
+      solution: 'Aplicação web (CRUD) em PHP com banco de dados MySQL para divulgar bolsas de estudo e cursos.',
+      features: ['Área do aluno', 'Área da instituição', 'Área de administração', 'Divulgação de bolsas de estudo e cursos'],
     },
     en: {
-      context: 'An independent initiative created by students in November 2026. It is not an official FATEC project.',
-      solution: 'A website that presents technology and data projects, highlighting the context, the solution and the individual contribution in each one.',
+      context: 'An academic project from the 2nd semester, run locally.',
+      solution: 'A web application (CRUD) in PHP with a MySQL database to publish scholarships and courses.',
+      features: ['Student area', 'Institution area', 'Administration area', 'Publication of scholarships and courses'],
     },
     es: {
-      context: 'Iniciativa independiente creada por estudiantes en noviembre de 2026. No es un proyecto oficial de la FATEC.',
-      solution: 'Un sitio que presenta proyectos de tecnología y datos, destacando en cada uno el contexto, la solución y la contribución individual.',
+      context: 'Proyecto académico del 2.º semestre, ejecutado localmente.',
+      solution: 'Aplicación web (CRUD) en PHP con base de datos MySQL para difundir becas de estudio y cursos.',
+      features: ['Área del alumno', 'Área de la institución', 'Área de administración', 'Difusión de becas de estudio y cursos'],
+    },
+  },
+  'segunda-vitrine': {
+    pt: {
+      context: 'Iniciativa independente criada em novembro de 2026 por estudantes de Desenvolvimento de Software Multiplataforma da FATEC Zona Sul. Não tem vínculo institucional nem representa a FATEC. O nome vem da ideia de ser a "segunda vitrine" de um negócio: a primeira é a loja física, a segunda é a presença digital.',
+      solution: 'O propósito é conectar talentos estudantis ao mercado por meio de soluções tecnológicas para empresas e negócios reais. Hoje a iniciativa tem um site que apresenta os projetos, com o contexto, a solução e a contribuição de cada estudante, e uma página no LinkedIn. Segue em desenvolvimento.',
+      features: ['Sites e sistemas', 'Aplicativos', 'Soluções de dados', 'Automação de processos'],
+      participation: [
+        'Idealização da iniciativa e criação do nome, após definir objetivo, problema, público-alvo e partes envolvidas.',
+        'Coordenação dos projetos: planejamento, levantamento de necessidades, distribuição de tarefas, prazos e entregas.',
+        'Organização da comunicação com Trello, Jira e Discord e apoio à documentação e apresentação dos projetos.',
+      ],
+    },
+    en: {
+      context: 'An independent initiative created in November 2026 by Multiplatform Software Development students at FATEC Zona Sul. It has no institutional link with FATEC and does not represent it. The name comes from the idea of being a business\'s "second storefront": the first is the physical shop, the second is the digital presence.',
+      solution: 'The purpose is to connect student talent with the job market through technology solutions for companies and real businesses. Today the initiative has a website that presents the projects, with the context, the solution and each student\'s contribution, and a LinkedIn page. It is still in development.',
+      features: ['Websites and systems', 'Applications', 'Data solutions', 'Process automation'],
+      participation: [
+        'Conceived the initiative and created the name, after defining the goal, the problem, the target audience and the parties involved.',
+        'Project coordination: planning, requirements gathering, task distribution, deadlines and deliveries.',
+        'Organizing communication with Trello, Jira and Discord and supporting project documentation and presentation.',
+      ],
+    },
+    es: {
+      context: 'Iniciativa independiente creada en noviembre de 2026 por estudiantes de Desarrollo de Software Multiplataforma de la FATEC Zona Sul. No tiene vínculo institucional ni representa a la FATEC. El nombre viene de la idea de ser la "segunda vitrina" de un negocio: la primera es la tienda física, la segunda es la presencia digital.',
+      solution: 'El propósito es conectar el talento estudiantil con el mercado mediante soluciones tecnológicas para empresas y negocios reales. Hoy la iniciativa tiene un sitio que presenta los proyectos, con el contexto, la solución y el aporte de cada estudiante, y una página en LinkedIn. Sigue en desarrollo.',
+      features: ['Sitios y sistemas', 'Aplicaciones', 'Soluciones de datos', 'Automatización de procesos'],
+      participation: [
+        'Ideación de la iniciativa y creación del nombre, tras definir objetivo, problema, público objetivo y partes involucradas.',
+        'Coordinación de los proyectos: planificación, levantamiento de necesidades, distribución de tareas, plazos y entregas.',
+        'Organización de la comunicación con Trello, Jira y Discord y apoyo a la documentación y presentación de los proyectos.',
+      ],
     },
   },
 };

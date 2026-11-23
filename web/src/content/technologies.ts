@@ -25,7 +25,7 @@ export const TECHNOLOGIES: readonly Tech[] = [
   { name: 'Python', category: 'languages', status: 'project', projects: ['banking-analytics', 'python-studies'] },
   { name: 'JavaScript', category: 'languages', status: 'project', projects: ['entrelacos', 'studio-patty-leao'] },
   { name: 'Java', category: 'languages', status: 'project', projects: ['barbershop-do-gui'] },
-  { name: 'PHP', category: 'languages', status: 'studied' },
+  { name: 'PHP', category: 'languages', status: 'project', projects: ['intelibolsas'] },
   { name: 'C', category: 'languages', status: 'studied' },
   { name: 'C++', category: 'languages', status: 'studied' },
   // Desenvolvimento web
@@ -36,7 +36,7 @@ export const TECHNOLOGIES: readonly Tech[] = [
   { name: 'Spring Boot', category: 'web', status: 'project', projects: ['barbershop-do-gui'] },
   { name: 'React', category: 'web', status: 'studied' },
   // Bancos de dados
-  { name: 'MySQL', category: 'databases', status: 'studied' },
+  { name: 'MySQL', category: 'databases', status: 'project', projects: ['intelibolsas'] },
   { name: 'MongoDB', category: 'databases', status: 'project', projects: ['studio-patty-leao'] },
   { name: 'PostgreSQL', category: 'databases', status: 'project', projects: ['barbershop-do-gui'] },
   { name: 'SQLite', category: 'databases', status: 'project', projects: ['banking-analytics'] },

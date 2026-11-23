@@ -1,3 +1,5 @@
+import { BrandIcon, hasBrandIcon } from '../components/BrandIcon';
+import { Icon } from '../components/icons';
 import { Tag } from '../components/Tag';
 import { findProject } from '../content/projects';
 import { TECHNOLOGIES, TECH_CATEGORIES, type Tech, type TechStatus } from '../content/technologies';
@@ -8,14 +10,18 @@ import { PageHeader, Section } from './shared';
 
 const TONE: Record<TechStatus, 'default' | 'accent' | 'outline'> = { project: 'default', studied: 'outline', building: 'accent' };
 
-function TechItem({ tech }: { tech: Tech }) {
+function TechItem({ tech, showStatus = true }: { tech: Tech; showStatus?: boolean }) {
   const { lang, t } = useI18n();
   const projects = (tech.projects ?? []).map((slug) => findProject(slug)).filter((p) => p !== undefined);
   return (
-    <li className="tech-item">
+    <li className="tech-item" data-status={tech.status}>
       <div className="tech-item__head">
+        {/* Logo oficial quando existe; sem logo disponível, glifo neutro tracejado (nunca um logo inventado). */}
+        <span className={hasBrandIcon(tech.name) ? 'tech-item__mark' : 'tech-item__mark tech-item__mark--generic'}>
+          {hasBrandIcon(tech.name) ? <BrandIcon name={tech.name} size={22} /> : <Icon name={tech.category === 'data' ? 'chart' : 'code'} size={20} />}
+        </span>
         <span className="tech-item__name">{tech.name}</span>
-        <Tag tone={TONE[tech.status]}>{t.technologies.status[tech.status]}</Tag>
+        {showStatus && <Tag tone={TONE[tech.status]}>{t.technologies.status[tech.status]}</Tag>}
       </div>
       {projects.length > 0 && (
         <p className="tech-item__projects">
@@ -48,6 +54,7 @@ export function TechnologiesPage() {
             </li>
           ))}
         </ul>
+        <p className="legend__note">{t.technologies.noLogoNote}</p>
       </section>
 
       {TECH_CATEGORIES.map((cat) => {
@@ -67,7 +74,7 @@ export function TechnologiesPage() {
       <Section title={t.technologies.status.building}>
         <ul className="tech-grid">
           {building.map((x) => (
-            <TechItem key={x.name} tech={x} />
+            <TechItem key={x.name} tech={x} showStatus={false} />
           ))}
         </ul>
       </Section>

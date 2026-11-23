@@ -5,7 +5,7 @@ import { Link } from '../router';
 
 export function PageHeader({ title, lead }: { title: string; lead?: string }) {
   return (
-    <header className="page-header">
+    <header className="page-header" data-reveal>
       <h1>{title}</h1>
       {lead && <p className="lead">{lead}</p>}
     </header>
@@ -15,7 +15,7 @@ export function PageHeader({ title, lead }: { title: string; lead?: string }) {
 export function Section({ title, children, action }: { title: string; children: ReactNode; action?: ReactNode }) {
   const id = useId();
   return (
-    <section className="section" aria-labelledby={id}>
+    <section className="section" aria-labelledby={id} data-reveal>
       <div className="section__head">
         <h2 id={id}>{title}</h2>
         {action}

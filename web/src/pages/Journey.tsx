@@ -31,7 +31,7 @@ export function JourneyPage() {
           </li>
         ))}
       </ul>
-      <Timeline items={items} />
+      <Timeline items={items} headingLevel={2} />
     </div>
   );
 }

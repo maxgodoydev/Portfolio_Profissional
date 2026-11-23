@@ -73,12 +73,12 @@ export const JOURNEY: readonly JourneyEntry[] = [
     title: { pt: 'Formação em Power BI (47 horas)', en: 'Power BI training (47 hours)', es: 'Formación en Power BI (47 horas)' },
   },
   {
-    id: 'segunda-vitrine', kind: 'project', start: '2026-11',
-    title: { pt: 'Criação da Segunda Vitrine', en: 'Creation of Segunda Vitrine', es: 'Creación de Segunda Vitrine' },
+    id: 'segunda-vitrine', kind: 'project', start: '2026-11', ongoing: true, org: 'Segunda Vitrine',
+    title: { pt: 'Cofundador e Coordenador de Projetos', en: 'Co-founder and Project Coordinator', es: 'Cofundador y Coordinador de Proyectos' },
     text: {
-      pt: 'Iniciativa independente de estudantes para apresentar projetos de tecnologia e dados.',
-      en: 'Independent student initiative to showcase technology and data projects.',
-      es: 'Iniciativa independiente de estudiantes para presentar proyectos de tecnología y datos.',
+      pt: 'Iniciativa independente de estudantes que conecta talentos estudantis a empresas e negócios reais por meio de soluções tecnológicas. Idealização, criação do nome e coordenação dos projetos.',
+      en: 'Independent student initiative that connects student talent with companies and real businesses through technology solutions. Concept, name creation and project coordination.',
+      es: 'Iniciativa independiente de estudiantes que conecta el talento estudiantil con empresas y negocios reales mediante soluciones tecnológicas. Ideación, creación del nombre y coordinación de los proyectos.',
     },
   },
   {

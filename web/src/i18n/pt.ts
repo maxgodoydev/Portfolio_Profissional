@@ -54,10 +54,10 @@ export const pt = {
     ctaResume: 'Currículo',
     focusTitle: 'Áreas de atuação',
     focus: [
-      { title: 'Dados & Analytics', text: 'Consultas SQL, análise e indicadores com Python e Excel.' },
-      { title: 'Business Intelligence', text: 'Modelagem e dashboards em Power BI, com DAX e Power Query.' },
-      { title: 'Desenvolvimento de software', text: 'Aplicações web e APIs, do banco de dados à interface.' },
-      { title: 'Automação de processos', text: 'Regras de negócio e rotinas repetitivas transformadas em sistema.' },
+      { title: 'Dados & Analytics', text: 'Transformar dados em respostas. Consultas SQL, análise e indicadores com Python e Excel.' },
+      { title: 'Business Intelligence', text: 'Painéis que ajudam a tomar decisões. Modelagem e dashboards em Power BI, com DAX e Power Query.' },
+      { title: 'Desenvolvimento de software', text: 'Sites e sistemas que as pessoas usam no dia a dia. Aplicações web e APIs, do banco de dados à interface.' },
+      { title: 'Automação de processos', text: 'Menos trabalho repetitivo. Regras de negócio e rotinas repetitivas transformadas em sistema.' },
     ],
     snapshotTitle: 'Resumo rápido',
     snapshot: [
@@ -158,6 +158,7 @@ export const pt = {
       studied: 'Estudada',
       building: 'Em desenvolvimento neste portfólio',
     },
+    noLogoNote: 'Ícone tracejado: ainda sem logo oficial disponível; nenhum logo foi inventado.',
     usedIn: 'Usada em',
     studiedNote: 'Estudada, sem uso em projeto publicado.',
     categories: {

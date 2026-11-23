@@ -42,11 +42,11 @@
 
 /* Cartões informativos */
 .info-card { position: relative; padding: 1.5rem; background: var(--card); border: 1px solid var(--line); border-radius: 1rem; }
-.info-card h3 { margin-bottom: 0.4em; }
+.info-card h2, .info-card h3 { margin-bottom: 0.4em; }
 .info-card p:last-child { margin-bottom: 0; }
 .info-card--wide { max-width: 40rem; }
 .info-card__meta { color: var(--muted); }
-.info-card__link { color: inherit; text-decoration: none; }
+.info-card__link { color: inherit; text-decoration: none; display: inline-block; padding-block: 0.3rem; }
 .info-card__link::after { content: ''; position: absolute; inset: 0; border-radius: inherit; }
 .info-card:has(.info-card__link:hover) { border-color: var(--action); }
 
@@ -78,6 +78,7 @@
 .tech-item { padding: 0.9rem 1rem; background: var(--card); border: 1px solid var(--line); border-radius: 0.75rem; }
 .tech-item__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.4rem 0.75rem; }
 .tech-item__name { font-weight: 700; }
+.tech-item__projects a { display: inline-block; padding-block: 0.2rem; }
 .tech-item__projects { margin: 0.5rem 0 0; font-size: 0.9375rem; color: var(--muted); }
 
 /* Trajetória: variações por tipo (cor só de tokens; o tipo também aparece em texto) */
@@ -99,3 +100,7 @@
 
 /* Movimento discreto, desligado com prefers-reduced-motion (global.css já zera durações) */
 .info-card, .tech-item, .chip { transition: border-color 0.2s ease, background-color 0.2s ease; }
+
+.project-photo { margin: 2rem 0 0; max-width: 40rem; }
+.project-photo img { display: block; width: 100%; height: auto; border-radius: 0.75rem; border: 1px solid var(--ink); }
+.project-photo figcaption { margin-top: 0.5rem; font-size: 0.9rem; color: var(--muted, inherit); }
