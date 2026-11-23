@@ -5,7 +5,13 @@
 // e rolagem horizontal. Sai com código 1 se houver falhas.
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
-const { chromium } = require('playwright');
+let chromium;
+try {
+  ({ chromium } = require('playwright'));
+} catch {
+  console.error('Dependência ausente: instale Playwright com `npm install -D playwright` e depois execute `npx playwright install chromium`.');
+  process.exit(2);
+}
 const BASE = process.argv[2] || 'http://localhost:4173';
 const ROUTES = ['/pt/', '/pt/about', '/pt/projects', '/pt/projects?q=python&cat=data', '/pt/projects?q=zzzz', '/pt/projects/barbershop-do-gui', '/pt/projects/segunda-vitrine', '/pt/projects/intelibolsas', '/pt/technologies', '/pt/journey', '/pt/contact', '/pt/resume', '/pt/privacy', '/en/', '/es/'];
 const browser = await chromium.launch();
