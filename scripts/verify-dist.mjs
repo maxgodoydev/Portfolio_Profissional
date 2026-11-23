@@ -105,6 +105,22 @@ const contactHtml = await read(path.join(DIST, 'pt', 'contact', 'index.html'));
 check(contactHtml.includes('maxgodoy.dev@gmail.com') || js.includes('maxgodoy.dev@gmail.com'), 'e-mail de contato ausente do build');
 check(js.includes('https://www.linkedin.com/in/max-godoy/'), 'LinkedIn ausente do build');
 
+
+// Contraste WCAG AA (4.5:1) dos pares texto/fundo em todos os temas e modos.
+{
+  const themesCss = await read(path.join(ROOT, 'web', 'src', 'styles', 'themes.generated.css'));
+  const lum = (h) => { const c = [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255).map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4)); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };
+  const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m); return (x + 0.05) / (y + 0.05); };
+  const PAIRS = [['ink', 'bg'], ['ink', 'card'], ['ink', 'surface'], ['muted', 'bg'], ['muted', 'card'], ['muted', 'surface'], ['link', 'bg'], ['link', 'card'], ['link', 'surface'], ['on-action', 'action']];
+  let themes = 0;
+  for (const m of themesCss.matchAll(/\[data-theme="([^"]+)"\]\[data-mode="(\w+)"\]\{([^}]*)\}/g)) {
+    themes++;
+    const v = Object.fromEntries([...m[3].matchAll(/--([\w-]+):(#[0-9a-fA-F]{6})/g)].map((x) => [x[1], x[2]]));
+    for (const [f, b] of PAIRS) check(ratio(v[f], v[b]) >= 4.5, `contraste ${m[1]}/${m[2]}: ${f} sobre ${b} = ${ratio(v[f], v[b]).toFixed(2)} (mín. 4.5)`);
+  }
+  check(themes === 10, `esperado 10 combinações tema×modo, achei ${themes}`);
+}
+
 console.log(`verify: ${checks - problems.length}/${checks} verificações ok, ${pageCount} páginas HTML`);
 if (problems.length) {
   console.error('\nFalhas:\n- ' + problems.join('\n- '));

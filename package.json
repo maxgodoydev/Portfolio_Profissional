@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Portfólio de Max Godoy — React + TypeScript (frontend) e Go (API).",
   "engines": {
-    "node": ">=20"
+    "node": "22.x"
   },
   "scripts": {
     "dev": "node scripts/build.mjs --dev",
@@ -17,6 +17,7 @@
     "test:web": "node --test \"tests/*.test.mjs\"",
     "verify": "node scripts/verify-dist.mjs",
     "e2e:admin": "node scripts/e2e-admin.mjs",
+    "a11y": "node scripts/a11y-check.mjs",
     "test": "npm run typecheck && npm run test:web && npm run build && npm run verify && npm run test:api"
   },
   "dependencies": {
