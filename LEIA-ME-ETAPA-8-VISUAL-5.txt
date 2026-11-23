@@ -1,0 +1,39 @@
+ETAPA 8 — VISUAL 5 | PACOTE UNIFICADO
+
+Este ZIP contém o projeto completo da etapa Visual 5, baseado no arquivo etapa8-visual5.zip enviado, com as correções desta revisão já integradas. Não é apenas um patch.
+
+INCLUÍDO
+- Correção das condições de exibição das seções context/problem/audience/solution e das listas em ProjectDetail.tsx.
+- Ajuste de Render para #000000 como referência do catálogo Simple Icons (não declarado como cor oficial da Render).
+- NumPy mantido em #4DABCF, com observação sobre a segunda cor oficial #4D77CF.
+- Logos SVG de Power BI, Power Query e Excel integrados à página de tecnologias.
+- SVGs preservados em assets/brand-logos/.
+- Atribuição de CC BY 4.0 para os arquivos Power BI e Power Query.
+- Origem/licença do SVG Excel identificada como pendente de confirmação.
+- Gerador de SVGs e script de acessibilidade atualizados.
+- Documentação da etapa consolidada em docs/historico/ETAPA-8-VISUAL-5.md.
+
+VALIDAÇÕES REALIZADAS NESTA MONTAGEM
+- Os três SVGs embutidos foram decodificados e validados como XML.
+- Não foram encontrados elementos script, handlers de evento ou referências HTTP externas nos SVGs embutidos.
+- node --check passou para scripts/a11y-check.mjs e scripts/gen-ms-icons.mjs.
+
+PENDÊNCIAS TÉCNICAS HONESTAS
+- Não foi possível executar npm ci / npm test neste ambiente porque o acesso ao npm registry falhou por DNS (EAI_AGAIN). Portanto, build, typecheck e suíte completa não estão certificados.
+- Playwright não foi adicionado ao package.json/package-lock.json porque não foi possível acessar o npm registry. Para executar a auditoria a11y no seu computador, rode na raiz:
+    npm ci
+    npm install -D playwright
+    npx playwright install chromium
+    npm test
+    npm run build
+    npm run preview
+  Em outro terminal:
+    npm run a11y
+  O comando npm install -D playwright atualizará package.json e package-lock.json; inclua os dois arquivos no commit.
+- A licença/origem do SVG Excel precisa ser confirmada antes de publicar, se você não tiver essa informação.
+- Acessibilidade com leitor de tela e teste em aparelho físico continuam exigindo validação manual.
+
+GIT
+- O ZIP não contém a pasta .git. Extraia sobre uma cópia local do seu repositório, preservando a pasta .git existente.
+- Não faça push antes de conferir npm test, build e a11y.
+- Não apague arquivos locais que não estejam no ZIP.
