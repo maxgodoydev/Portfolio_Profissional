@@ -66,7 +66,8 @@
 .field__error { margin: 0; font-weight: 600; }
 .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .chip { padding: 0.35rem 0.9rem; background: transparent; color: var(--ink); border: 1px solid var(--ink); border-radius: 999px; font: inherit; font-size: 0.9375rem; font-weight: 600; cursor: pointer; }
-.chip:hover { background: var(--soft); }
+@media (hover: hover) { .chip:not([aria-pressed='true']):hover:not(:disabled) { background: var(--soft); color: var(--ink); } }
+.chip:not([aria-pressed='true']):active:not(:disabled) { background: var(--soft); color: var(--ink); }
 .chip[aria-pressed='true'] { background: var(--action); color: var(--on-action); border-color: var(--action); }
 .result-count { margin: 0 0 1rem; color: var(--muted); font-size: 0.9375rem; }
 .empty { padding: 2rem; background: var(--card); border: 1px dashed var(--line); border-radius: 1rem; }
