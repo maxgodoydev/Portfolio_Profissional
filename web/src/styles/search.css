@@ -1,0 +1,67 @@
+/* Evolução visual — parte 2: busca e filtros de Projetos.
+ * Cores só de tokens do tema; movimento só em transform/opacity; tudo desligado em prefers-reduced-motion
+ * (as animações só existem sob .motion-ok, classe que lib/reveal.ts liga apenas quando o movimento é permitido). */
+
+/* ---------- Campo de busca ---------- */
+.search { position: relative; display: flex; align-items: center; }
+.search__icon { position: absolute; left: 0.8rem; color: var(--muted); pointer-events: none; }
+.search input { padding-inline: 2.5rem; }
+.search input::-webkit-search-cancel-button,
+.search input::-webkit-search-decoration { -webkit-appearance: none; appearance: none; }
+.search__clear {
+  position: absolute;
+  right: 0.3rem;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  background: transparent;
+  color: var(--ink);
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.search__clear:active { background: var(--soft); }
+@media (hover: hover) { .search__clear:hover { background: var(--soft); } }
+
+/* ---------- Chips: contagem, desativado, removível ---------- */
+.chip { display: inline-flex; align-items: center; gap: 0.45rem; min-height: 2.25rem; }
+.chip__count { min-width: 1.4rem; padding: 0 0.35rem; border: 1px solid currentColor; border-radius: 999px; font-size: 0.8125rem; line-height: 1.25rem; text-align: center; font-variant-numeric: tabular-nums; }
+.chip:disabled { opacity: 0.5; border-style: dashed; cursor: not-allowed; }
+.chip:active:not(:disabled) { transform: scale(0.97); }
+.chip--removable { background: var(--soft); color: var(--ink); }
+.chip--removable .icon { flex: none; }
+@media (hover: hover) { .chip.chip--removable:not([aria-pressed='true']):hover:not(:disabled) { background: transparent; } }
+
+.active-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+.active-filters__label { color: var(--muted); font-size: 0.9375rem; }
+.active-filters__clear { min-height: 2rem; padding: 0.25rem 0.5rem; background: transparent; color: var(--link); border: 0; font: inherit; font-size: 0.9375rem; font-weight: 600; text-decoration: underline; text-underline-offset: 0.2em; cursor: pointer; }
+.active-filters__clear:active { text-decoration-thickness: 2px; }
+
+/* ---------- Destaque do termo buscado ---------- */
+.hl { padding: 0 0.1em; background: color-mix(in srgb, var(--action) 30%, transparent); color: inherit; border-radius: 0.2em; }
+/* Dentro de tags (fundo --soft) o destaque usa o tom do cartão, para manter o contraste do texto. */
+.tag .hl { background: color-mix(in srgb, var(--card) 75%, transparent); box-shadow: 0 0 0 1px var(--ink); }
+
+/* ---------- Contagem de resultados ---------- */
+.result-count__text { display: inline-block; }
+
+/* ---------- Estado vazio ---------- */
+.empty--search { display: grid; justify-items: center; gap: 0.75rem; text-align: center; }
+.empty--search p { margin: 0; max-width: 34rem; }
+.empty__title { margin: 0; font-size: 1.25rem; }
+.empty__try { color: var(--muted); font-size: 0.9375rem; }
+.empty__suggest { justify-content: center; margin: 0; padding: 0; list-style: none; }
+.empty__line { fill: var(--soft); }
+.empty__lens { fill: var(--surface); stroke: var(--ink); stroke-width: 4; }
+.empty__handle { stroke: var(--ink); stroke-width: 6; stroke-linecap: round; fill: none; }
+.empty__dash { stroke: var(--ink); stroke-width: 4; stroke-linecap: round; fill: none; }
+
+/* ---------- Movimento (só com .motion-ok) ---------- */
+@keyframes result-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes count-pop { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+.motion-ok .card-grid--results > li { animation: result-in 0.38s cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: calc(var(--i, 0) * 45ms); }
+.motion-ok .result-count__text { animation: count-pop 0.25s ease-out; }
+.motion-ok .empty--search { animation: result-in 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.motion-ok .chip { transition: transform 0.12s ease, border-color 0.2s ease, background-color 0.2s ease; }
