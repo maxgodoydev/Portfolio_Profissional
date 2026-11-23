@@ -1,0 +1,80 @@
+/* Evolução visual — parte 4: cartões de projeto expansíveis (página Projetos).
+ * Só tokens do tema. Expansão por grid-template-rows (0fr → 1fr); animações só sob .motion-ok
+ * (desligado com prefers-reduced-motion). Conteúdo recolhido fica inert + visibility:hidden. */
+
+/* ---------- Botão do título: o ::after cobre o cartão (alvo de toque grande) ---------- */
+.project-card__toggle {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+.project-card__toggle::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+.project-card__toggle:focus-visible { outline: none; }
+.project-card:has(.project-card__toggle:focus-visible) { outline: 3px solid var(--link); outline-offset: 3px; }
+.project-card--expandable { scroll-margin-top: 5.5rem; }
+.project-card--expandable[data-open='true'] { border-color: var(--ink); }
+
+/* Chevron e rótulo do convite acompanham o estado */
+.project-card__chevron { transition: transform 0.25s ease; }
+.project-card--expandable[data-open='true'] .project-card__chevron { transform: rotate(180deg); }
+@media (hover: hover) {
+  .project-card--expandable:not([data-open='true']):hover .project-card__chevron { transform: translateY(2px); }
+}
+.project-card--expandable:hover .project-card__cta .icon { transform: none; }
+.project-card--expandable[data-open='true']:hover .project-card__chevron { transform: rotate(180deg); }
+.project-card--expandable .project-card__summary { flex: none; }
+
+/* ---------- Recolhimento (grid 0fr → 1fr) ---------- */
+.collapse { display: grid; grid-template-rows: 0fr; visibility: hidden; }
+.collapse[data-open='true'] { grid-template-rows: 1fr; visibility: visible; }
+.collapse__inner { min-height: 0; overflow: hidden; }
+.collapse--preview .tag-list { margin-bottom: 1rem; }
+.motion-ok .collapse { transition: grid-template-rows 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), visibility 0s linear 0.3s; }
+.motion-ok .collapse[data-open='true'] { transition-delay: 0s; }
+.motion-ok .collapse--panel .project-card__panel { opacity: 0; transform: translateY(-4px); transition: opacity 0.2s ease, transform 0.25s ease; }
+.motion-ok .collapse--panel[data-open='true'] .project-card__panel { opacity: 1; transform: none; transition-delay: 0.08s; }
+
+/* ---------- Painel expandido ---------- */
+.project-card__panel { display: grid; gap: 1.1rem; padding: 1rem 0 1.25rem; border-top: 1px dashed var(--line); margin-top: 0.25rem; }
+.project-card__panel > * { position: relative; z-index: 1; } /* acima do ::after do botão: links clicáveis, texto selecionável */
+.project-card__photo { margin: 0; }
+.project-card__photo img { display: block; width: 100%; height: auto; border-radius: 0.75rem; border: 1px solid var(--line); }
+.facts--compact { margin: 0; gap: 0.6rem 1.5rem; }
+.project-card__block { display: grid; gap: 0.5rem; }
+.project-card__subtitle { margin: 0; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.4; font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.project-card__panel .tag-list { margin: 0; }
+.project-card__panel .check-list { gap: 0.4rem; font-size: 0.9375rem; }
+.project-card__links { margin: 0; align-items: center; }
+.project-card__links .button { min-height: 2.75rem; }
+.project-card__links .ext-link, .project-card__links .button--ghost { min-height: 2.75rem; }
+
+/* ---------- Grade: vizinhos de um cartão aberto não esticam (sem vazio embaixo) ---------- */
+.card-grid--results:has(.project-card[data-open='true']) > li:not(:has(.project-card[data-open='true'])) { align-self: start; }
+.card-grid--results > li:has(.project-card[data-open='true']) { align-self: start; }
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card__chevron { transition: none; }
+}
+
+/* ---------- Capa do cartão (parte 4b) ---------- */
+.project-card--expandable { overflow: hidden; padding-top: 0; }
+.project-card__cover { position: relative; margin: 0 -1.5rem 1.1rem; aspect-ratio: 960 / 436; background: var(--soft); border-bottom: 1px solid var(--line); overflow: hidden; }
+.project-card__cover img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.project-card__cover[data-empty='true'] { display: grid; place-items: center; color: var(--ink); background-image: repeating-linear-gradient(135deg, transparent 0 14px, color-mix(in srgb, var(--ink) 8%, transparent) 14px 15px); }
+.project-card__cover[data-empty='true'] .icon { opacity: 0.55; }
+@media (hover: hover) {
+  .motion-ok .project-card__cover img { transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1); }
+  .motion-ok .project-card--expandable:hover .project-card__cover img { transform: scale(1.04); }
+}
+.project-card__note { margin: 0; font-size: 0.9375rem; color: var(--ink); }
