@@ -12,7 +12,7 @@ import (
 
 var (
 	validLangs  = map[string]bool{"pt": true, "en": true, "es": true}
-	validThemes = map[string]bool{"ice-tangerine": true, "cherry-cream": true, "sage-ink": true, "lavender-graphite": true, "monochrome-stone": true}
+	validThemes = map[string]bool{"ice-tangerine": true, "cherry-cream": true, "sage-ink": true, "lavender-graphite": true, "monochrome-stone": true, "ocean-navy": true, "rose-plum": true, "forest-gold": true, "mint-coral": true}
 	slugRe      = regexp.MustCompile(`^[a-z0-9-]{1,60}$`)
 	pathRe      = regexp.MustCompile(`^/[A-Za-z0-9/_\-.~]{0,199}$`)
 	hostRe      = regexp.MustCompile(`^[a-z0-9.\-]{1,100}$`)
