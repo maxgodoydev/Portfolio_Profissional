@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { BrandIcon } from './BrandIcon';
+import { Highlight } from './Highlight';
 
 interface TagProps {
   children: ReactNode;
@@ -14,18 +15,20 @@ export function Tag({ children, tone = 'default', icon }: TagProps) {
   return (
     <span className={`tag tag--${tone}`}>
       {icon && <BrandIcon name={icon} size={14} />}
-      {children}
+      <span className="tag__text">{children}</span>
     </span>
   );
 }
 
-export function TagList({ items, label }: { items: readonly string[]; label?: string }) {
+export function TagList({ items, label, tokens = [] }: { items: readonly string[]; label?: string; /** Termos da busca a destacar (já normalizados). */ tokens?: readonly string[] }) {
   if (items.length === 0) return null;
   return (
     <ul className="tag-list" aria-label={label}>
       {items.map((item) => (
         <li key={item}>
-          <Tag icon={item}>{item}</Tag>
+          <Tag icon={item}>
+            <Highlight text={item} tokens={tokens} />
+          </Tag>
         </li>
       ))}
     </ul>

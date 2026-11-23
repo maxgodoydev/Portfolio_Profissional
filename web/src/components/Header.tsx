@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { useI18n } from '../i18n/context';
 import { Link, useLocation } from '../router';
 import { buildPath, type StaticRouteId } from '../routes';
@@ -47,6 +47,12 @@ export function Header() {
     };
   }, [menuOpen]);
 
+  // Com o menu aberto no celular, a página atrás não rola (classe lida só abaixo de 900px no CSS).
+  useEffect(() => {
+    document.documentElement.classList.toggle('nav-open', menuOpen);
+    return () => document.documentElement.classList.remove('nav-open');
+  }, [menuOpen]);
+
   const navId = 'menu-principal';
 
   return (
@@ -56,14 +62,17 @@ export function Header() {
           Max Godoy
         </Link>
 
+        <div className="site-nav-scrim" data-open={menuOpen ? 'true' : 'false'} aria-hidden="true" onClick={() => setMenuOpen(false)} />
+
         <nav id={navId} ref={navRef} className="site-nav" aria-label={t.nav.primary} data-open={menuOpen ? 'true' : 'false'}>
           <ul className="site-nav__list">
-            {MENU_ROUTES.map((id) => {
+            {MENU_ROUTES.map((id, i) => {
               const active = route === id || (id === 'projects' && route === 'project');
               return (
-                <li key={id}>
+                <li key={id} style={{ '--i': i } as CSSProperties}>
                   <Link to={buildPath(lang, id)} className="site-nav__link" aria-current={active ? 'page' : undefined}>
-                    {t.nav[id]}
+                    <span>{t.nav[id]}</span>
+                    <Icon name={active ? 'check' : 'arrowRight'} size={18} className="site-nav__mark" />
                   </Link>
                 </li>
               );
@@ -83,7 +92,11 @@ export function Header() {
             aria-label={menuOpen ? t.common.closeMenu : t.common.openMenu}
             onClick={() => setMenuOpen((v) => !v)}
           >
-            <Icon name={menuOpen ? 'close' : 'menu'} />
+            <span className="menu-bars" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </span>
           </button>
         </div>
       </div>
