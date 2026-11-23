@@ -7,7 +7,7 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const { chromium } = require('playwright');
 const BASE = process.argv[2] || 'http://localhost:4173';
-const ROUTES = ['/pt/', '/pt/about', '/pt/projects', '/pt/projects/barbershop-do-gui', '/pt/projects/segunda-vitrine', '/pt/projects/intelibolsas', '/pt/technologies', '/pt/journey', '/pt/contact', '/pt/resume', '/pt/privacy', '/en/', '/es/'];
+const ROUTES = ['/pt/', '/pt/about', '/pt/projects', '/pt/projects?q=python&cat=data', '/pt/projects?q=zzzz', '/pt/projects/barbershop-do-gui', '/pt/projects/segunda-vitrine', '/pt/projects/intelibolsas', '/pt/technologies', '/pt/journey', '/pt/contact', '/pt/resume', '/pt/privacy', '/en/', '/es/'];
 const browser = await chromium.launch();
 let failures = 0;
 for (const width of [360, 1280]) {
