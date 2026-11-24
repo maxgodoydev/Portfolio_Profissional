@@ -200,3 +200,9 @@ a:not([class]):hover { text-decoration-color: currentColor; }
 /* Status "usada em projetos" é o padrão e já aparece em "Usada em ..."; o cartão mostra só o ponto (o texto continua para leitores de tela) */
 .tech-item[data-status='project'] .tag__text { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
 .tech-item[data-status='project'] .tag { position: relative; }
+
+/* Seletor de idioma: bandeira circular acima do código (PT/EN/ES). */
+.lang-switch__item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.15rem; min-width: 2.75rem; }
+.lang-switch__flag { flex: none; width: 1.05rem; height: 1.05rem; border-radius: 50%; box-shadow: 0 0 0 1px rgb(0 0 0 / 0.22); }
+.lang-switch__code { line-height: 1; }
+@media (max-width: 40em) { .lang-switch__item { min-width: 2.4rem; padding-inline: 0.25rem; } }

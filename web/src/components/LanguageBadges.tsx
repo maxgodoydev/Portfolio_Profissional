@@ -3,9 +3,9 @@ import { useI18n } from '../i18n/context';
 
 /** Bandeiras circulares em SVG inline: o emoji de bandeira não é desenhado no Windows (aparece só "BR"/"US"). Decorativas. */
 const FLAG_VIEWBOX: Record<FlagCountry, string> = { br: '3 0 14 14', us: '0 0 14 14', es: '3 0 14 14' };
-function Flag({ country }: { country: FlagCountry }) {
+export function Flag({ country, className = 'lang-chip__flag' }: { country: FlagCountry; className?: string }) {
   return (
-    <svg className="lang-chip__flag" viewBox={FLAG_VIEWBOX[country]} width="16" height="16" aria-hidden="true" focusable="false">
+    <svg className={className} viewBox={FLAG_VIEWBOX[country]} width="16" height="16" aria-hidden="true" focusable="false">
       {country === 'br' && (
         <>
           <rect width="20" height="14" fill="#009C3B" />
