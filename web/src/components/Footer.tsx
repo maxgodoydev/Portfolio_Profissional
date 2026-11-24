@@ -5,7 +5,6 @@ import { buildPath } from '../routes';
 import { LINKS } from '../content/profile';
 import { BrandIcon } from './BrandIcon';
 import { MENU_ROUTES } from './Header';
-import { Icon } from './icons';
 
 export function Footer() {
   const { lang, t } = useI18n();
@@ -34,7 +33,7 @@ export function Footer() {
           {LINKS.whatsapp && (
             <li>
               <a href={`https://wa.me/${LINKS.whatsapp}`} target="_blank" rel="noopener noreferrer">
-                {t.common.whatsapp}
+                <BrandIcon name="WhatsApp" size={18} /> {t.common.whatsapp}
                 <span className="visually-hidden"> {t.common.newTab}</span>
               </a>
             </li>
@@ -42,7 +41,7 @@ export function Footer() {
           {LINKS.email && (
             <li>
               <a href={`mailto:${LINKS.email}`}>
-                <Icon name="mail" size={18} /> {t.common.email}
+                <BrandIcon name="Gmail" size={18} /> {t.common.email}
               </a>
             </li>
           )}

@@ -151,20 +151,44 @@
 
 /* ---------- Sobre: como eu trabalho ---------- */
 .approach { margin: 0 0 1.5rem; padding: 1.25rem 1.25rem 1.4rem; background: var(--surface); border-radius: 1.25rem; }
-.approach__steps { display: flex; flex-wrap: wrap; gap: 0.6rem 0.4rem; margin: 0 0 1.1rem; padding: 0; list-style: none; counter-reset: step; }
-.approach__step { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.3rem 0.85rem 0.3rem 0.35rem; font-size: 0.9rem; font-weight: 600; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 999px; }
-.approach__glyph { display: inline-grid; place-items: center; width: 1.75rem; height: 1.75rem; font-size: 1rem; background: var(--soft); border-radius: 50%; }
 .approach__quote { margin: 0; padding: 0.2rem 0 0.2rem 1rem; border-left: 4px solid var(--action); }
 .approach__quote p { margin: 0; max-width: 46rem; font-family: ui-serif, 'Iowan Old Style', Georgia, serif; font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.25rem); line-height: 1.55; }
-.trait-grid { display: grid; gap: 0.8rem; margin: 0; padding: 0; list-style: none; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); }
-.trait { padding: 1rem 1.05rem 1.1rem; background: var(--card); border: 1px solid var(--line); border-radius: 1rem; }
-.trait__glyph { display: inline-grid; place-items: center; width: 2.25rem; height: 2.25rem; margin-bottom: 0.6rem; font-size: 1.15rem; background: var(--soft); border-radius: 0.65rem; }
-.trait__title { margin: 0 0 0.3rem; font-size: 1.0625rem; }
-.trait__text { margin: 0; font-size: 0.9rem; line-height: 1.5; }
-.motion-ok .trait { transition: transform 0.2s ease, border-color 0.2s ease; }
-.motion-ok .trait:hover { transform: translateY(-3px); border-color: var(--action); }
 .curiosity { display: flex; align-items: flex-start; gap: 0.9rem; max-width: 46rem; margin-top: 1.5rem; padding: 1rem 1.2rem; background: var(--card); border: 1px dashed var(--action); border-radius: 1rem; }
 .curiosity__glyph { display: inline-grid; place-items: center; flex: none; width: 2.25rem; height: 2.25rem; font-size: 1.15rem; background: var(--soft); border-radius: 0.65rem; }
 .curiosity__title { margin: 0 0 0.25rem; font-size: 1.0625rem; }
 .curiosity p { margin: 0; font-size: 0.9375rem; }
 .cert__foot .ext-link { display: inline-flex; align-items: center; gap: 0.3rem; min-height: 1.75rem; }
+
+/* Etapas conectadas por uma linha */
+.approach__steps { position: relative; display: grid; gap: 0.5rem; margin: 0 0 1.2rem; padding: 0; list-style: none; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); }
+.approach__step { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0.45rem; padding: 0 0.25rem; font-size: 0.875rem; font-weight: 600; line-height: 1.25; text-align: center; color: var(--ink); }
+.approach__step::before { content: ''; position: absolute; top: 1.2rem; left: calc(-50% + 1.4rem); right: calc(50% + 1.4rem); height: 2px; background: repeating-linear-gradient(to right, var(--action) 0 6px, transparent 6px 11px); }
+.approach__step:first-child::before { display: none; }
+.approach__glyph { position: relative; display: inline-grid; place-items: center; width: 2.4rem; height: 2.4rem; font-size: 1.15rem; background: var(--card); border: 2px solid var(--action); border-radius: 50%; }
+
+/* Quatro temas, três competências cada */
+.pillars { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 52em) { .pillars { grid-template-columns: repeat(2, 1fr); } }
+.pillar { position: relative; overflow: hidden; padding: 1.15rem 1.2rem 0.6rem; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 1.25rem; }
+.pillar::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--action); }
+.pillar[data-pillar='motion']::before { background: var(--link); }
+.pillar[data-pillar='growth']::before { background: var(--ink); }
+.pillar__head { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.4rem; }
+.pillar__icon { display: inline-grid; place-items: center; flex: none; width: 2.75rem; height: 2.75rem; color: var(--ink); background: var(--soft); border-radius: 0.85rem; }
+.pillar__title { margin: 0; font-size: 1.25rem; }
+.pillar__subtitle { margin: 0.1rem 0 0; font-size: 0.875rem; color: var(--muted); }
+.skills { margin: 0; padding: 0; list-style: none; }
+.skill { display: grid; grid-template-columns: auto 1fr; gap: 0.75rem; padding: 0.85rem 0; border-top: 1px solid var(--line); }
+.skill__glyph { display: inline-grid; place-items: center; width: 2rem; height: 2rem; margin-top: 0.1rem; font-size: 1.05rem; color: var(--ink); background: var(--soft); border-radius: 0.6rem; }
+.skill__title { margin: 0; font-size: 1.0625rem; }
+.skill__text { margin: 0.15rem 0 0; font-size: 0.9375rem; line-height: 1.45; }
+.skill__proof { margin: 0.4rem 0 0; font-size: 0.8125rem; line-height: 1.4; color: var(--muted); }
+.skill__proof-label { display: inline-block; margin-right: 0.3rem; padding: 0 0.5rem; font-weight: 700; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; }
+.motion-ok .skill__glyph { transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease; }
+.motion-ok .skill:hover .skill__glyph { color: var(--on-action); background: var(--action); transform: scale(1.08); }
+@media (max-width: 40em) {
+  .approach__steps { grid-template-columns: repeat(2, 1fr); gap: 0.9rem 0.5rem; }
+  .approach__step::before { display: none; }
+  .approach__step:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .pillar { padding: 1rem 0.95rem 0.4rem; }
+}

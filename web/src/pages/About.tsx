@@ -1,3 +1,4 @@
+import { LanguageBadges } from '../components/LanguageBadges';
 import { WorkStyle } from '../components/WorkStyle';
 import { useI18n } from '../i18n/context';
 import { buildPath } from '../routes';
@@ -34,6 +35,10 @@ export function AboutPage() {
           <p>{a.educationPlace}</p>
           <p className="info-card__meta">{a.educationPeriod}</p>
         </div>
+      </Section>
+
+      <Section title={t.common.spokenLanguages}>
+        <LanguageBadges />
       </Section>
 
       <Section title={a.interestsTitle}>

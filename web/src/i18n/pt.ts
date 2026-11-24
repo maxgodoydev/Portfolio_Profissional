@@ -33,6 +33,7 @@ export const pt = {
     email: 'E-mail',
     whatsapp: 'WhatsApp',
     language: 'Idioma',
+    spokenLanguages: 'Idiomas',
     theme: 'Tema',
     palette: 'Paleta de cores',
     mode: 'Modo',
@@ -222,8 +223,9 @@ export const pt = {
       studied: 'Estudada',
       building: 'Em desenvolvimento neste portfólio',
     },
+    creditsTitle: 'Créditos e licenças dos ícones',
     noLogoNote: 'Ícone tracejado: ainda sem logo oficial disponível; nenhum logo foi inventado.',
-    brandAttribution: 'Ícones de Power BI e Power Query: Microsoft, licença CC BY 4.0, repositório microsoft/PowerBI-Icons. O ícone de Excel foi fornecido para esta revisão; sua origem e licença precisam ser confirmadas.',
+    brandAttribution: 'Ícones de Power BI e Power Query: Microsoft, licença CC BY 4.0, repositório microsoft/PowerBI-Icons. Ícone do Matplotlib: logo oficial do projeto (repositório matplotlib/matplotlib). O ícone de Excel foi fornecido para esta revisão; sua origem e licença precisam ser confirmadas.',
     usedIn: 'Usada em',
     studiedNote: 'Estudada, sem uso em projeto publicado.',
     categories: {
@@ -308,7 +310,8 @@ export const pt = {
   },
   contact: {
     title: 'Contato',
-    intro: 'Escreva uma mensagem ou use um dos canais ao lado. Respondo assim que possível.',
+    intro: 'Escreva uma mensagem ou use um dos canais. Respondo assim que possível.',
+    formTitle: 'Escreva uma mensagem',
     channels: 'Outros canais',
     form: {
       name: 'Nome',

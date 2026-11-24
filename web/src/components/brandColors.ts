@@ -29,8 +29,15 @@ export const BRAND_COLORS: Record<string, string> = {
   NumPy: '#4DABCF', // "Maximum Blue" do logo oficial (diretrizes de logo do repositório numpy/numpy.org)
   Pytest: '#0A9EDC',
   JSON: '#000000',
+  'Spring Security': '#6DB33F', // Usa a marca Spring (mesma cor do catálogo Simple Icons).
+  'MongoDB Atlas': '#47A248', // Usa a folha MongoDB (marca-mãe).
+  Angular: '#0F0F11', // Cor do catálogo Simple Icons (marca escura → azulejo claro).
+  Ionic: '#3880FF', // Cor do catálogo Simple Icons.
+  EJS: '#B4CA65', // Cor do catálogo Simple Icons.
   Java: '#ED8B00',
   'Java 21': '#ED8B00',
+  WhatsApp: '#25D366', // Verde de referência (catálogo Simple Icons).
+  Gmail: '#EA4335', // Vermelho de referência (catálogo Simple Icons).
   LinkedIn: '#0A66C2', // Azul de referência; HEX não confirmado em guideline oficial nesta auditoria.
 };
 

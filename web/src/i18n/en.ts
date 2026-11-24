@@ -34,6 +34,7 @@ export const en: Dictionary = {
     email: 'Email',
     whatsapp: 'WhatsApp',
     language: 'Language',
+    spokenLanguages: 'Languages',
     theme: 'Theme',
     palette: 'Color palette',
     mode: 'Mode',
@@ -223,8 +224,9 @@ export const en: Dictionary = {
       studied: 'Studied',
       building: 'Being developed in this portfolio',
     },
+    creditsTitle: 'Icon credits and licenses',
     noLogoNote: 'Dashed icon: no official logo available yet; no logo has been made up.',
-    brandAttribution: 'Power BI and Power Query icons: Microsoft, CC BY 4.0, microsoft/PowerBI-Icons repository. The Excel icon was supplied for this review; its source and license still need confirmation.',
+    brandAttribution: 'Power BI and Power Query icons: Microsoft, CC BY 4.0, microsoft/PowerBI-Icons repository. Matplotlib icon: the official logo of the project (matplotlib/matplotlib repository). The Excel icon was supplied for this review; its source and license still need confirmation.',
     usedIn: 'Used in',
     studiedNote: 'Studied, not used in a published project.',
     categories: {
@@ -309,7 +311,8 @@ export const en: Dictionary = {
   },
   contact: {
     title: 'Contact',
-    intro: 'Write me a message or use one of the channels beside it. I’ll reply as soon as I can.',
+    intro: 'Write me a message or use one of the channels. I’ll reply as soon as I can.',
+    formTitle: 'Write a message',
     channels: 'Other channels',
     form: {
       name: 'Name',

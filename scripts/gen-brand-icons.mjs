@@ -14,8 +14,10 @@ const MAP = {
   PostgreSQL: ['si', 'SiPostgresql'], SQLite: ['si', 'SiSqlite'], Git: ['si', 'SiGit'], GitHub: ['si', 'SiGithub'],
   Vercel: ['si', 'SiVercel'], PHP: ['si', 'SiPhp'], HTML: ['si', 'SiHtml5'], CSS: ['si', 'SiCss'], Express: ['si', 'SiExpress'],
   'Spring Boot': ['si', 'SiSpringboot'], Render: ['si', 'SiRender'], C: ['si', 'SiC'], 'C++': ['si', 'SiCplusplus'],
-  Supabase: ['si', 'SiSupabase'], Maven: ['si', 'SiApachemaven'], Pandas: ['si', 'SiPandas'], NumPy: ['si', 'SiNumpy'],
+  Supabase: ['si', 'SiSupabase'], WhatsApp: ['si', 'SiWhatsapp'], Gmail: ['si', 'SiGmail'], Maven: ['si', 'SiApachemaven'], Pandas: ['si', 'SiPandas'], NumPy: ['si', 'SiNumpy'],
   Pytest: ['si', 'SiPytest'], JSON: ['si', 'SiJson'],
+  'Spring Security': ['si', 'SiSpring'], 'MongoDB Atlas': ['si', 'SiMongodb'],
+  Angular: ['si', 'SiAngular'], Ionic: ['si', 'SiIonic'], EJS: ['si', 'SiEjs'],
   Java: ['fa', 'FaJava'], 'Java 21': ['fa', 'FaJava'], LinkedIn: ['fa', 'FaLinkedin'],
 };
 const out = {};

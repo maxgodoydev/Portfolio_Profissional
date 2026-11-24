@@ -35,6 +35,8 @@
 .icon-link:hover { border-color: var(--ink); }
 .icon-link__symbol { display: grid; place-items: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--soft); color: var(--ink); }
 .icon-link__ext { opacity: 0.7; }
+/* Logo escuro (GitHub) usa um azulejo claro; dentro do círculo do chip ele preenche o círculo, sem quadrado branco solto. */
+.icon-link__symbol .brand-tile { width: 100% !important; height: 100% !important; border-radius: 50%; box-shadow: none; }
 .project-detail .icon-links { margin-top: 1rem; }
 
 /* ---------- Funcionalidades com emoji ---------- */

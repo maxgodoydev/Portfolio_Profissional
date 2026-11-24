@@ -1,0 +1,202 @@
+/* Identidade visual — revisão geral (carregado por último entre os estilos do site público).
+ *
+ * Regra de cor desta camada (vale para as 9 paletas, claro e escuro):
+ *   --action  → SÓ o que se clica ou indica estado: botão principal, filtro ativo, item atual do menu, progresso, status ao vivo.
+ *   --link    → links e foco.
+ *   --soft / --surface / --line → estrutura passiva (marcadores, faixas, bordas).
+ * Um único elemento gráfico recorrente: o "marcador" (barra curta ao lado/abaixo dos títulos), como um traço de eixo de gráfico.
+ * Movimento: só em transform/opacity, só como resposta a uma ação ou como indicador de estado; desligado com prefers-reduced-motion.
+ * Somente tokens do tema; nenhuma cor solta (exceto o azulejo branco das marcas, que já existe). */
+
+:root {
+  /* Espaço */
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2.25rem;
+  --section-gap: clamp(2.5rem, 2rem + 2.5vw, 3.75rem);
+  /* Forma */
+  --r-sm: 0.5rem;
+  --r-md: 0.75rem;
+  --r-lg: 1rem;
+  /* Elevação (2 níveis) */
+  --lift-1: 0 1px 2px color-mix(in srgb, var(--ink) 12%, transparent);
+  --lift-2: 0 14px 26px -18px color-mix(in srgb, var(--ink) 55%, transparent);
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  accent-color: var(--action);
+  scrollbar-color: var(--soft) transparent;
+}
+
+/* O brilho "neon" fica só como realce discreto de foco/seleção: nada de sombra em texto ou em ícones. */
+[data-mode='dark'] { --neon-a: 42%; }
+[data-mode='light'] { --neon-a: 20%; }
+.brand:hover, .brand:focus-visible { text-shadow: none; }
+.site-nav__link:hover .site-nav__icon, .site-nav__link[aria-current='page'] .site-nav__icon { filter: none; }
+@media (min-width: 56.25em) {
+  .site-nav__link:hover, .site-nav__link:focus-visible { text-shadow: none; }
+  .site-nav__link::after { box-shadow: none; }
+}
+
+/* ---------- Tipografia e ritmo ---------- */
+body { font-size: 1rem; line-height: 1.6; }
+h1 { font-size: clamp(1.875rem, 1.45rem + 2vw, 2.625rem); line-height: 1.12; letter-spacing: -0.018em; }
+h2 { font-size: clamp(1.3125rem, 1.15rem + 0.9vw, 1.6875rem); line-height: 1.2; }
+h3 { font-size: 1.125rem; line-height: 1.3; }
+.hero__title { font-size: clamp(2rem, 1.45rem + 2.7vw, 3.125rem); line-height: 1.1; }
+.hero__title-b { color: inherit; }
+.lead { font-size: 1.0625rem; line-height: 1.6; max-width: 60ch; }
+.main { padding-block: clamp(1.5rem, 1rem + 3vw, 3.5rem); }
+.page { padding-block: 0.5rem 2.5rem; }
+.section { margin-top: var(--section-gap); }
+.section__head { margin-bottom: var(--sp-4); }
+.page-header { margin-bottom: var(--sp-6); }
+
+/* Rótulos pequenos: frase normal (sem caixa alta), peso médio, cor apagada */
+.hero__panel-title, .filter-block__label, .snapshot dt, .facts dt, .legend__title,
+.project-card__category, .theme-panel__group legend, .timeline__kind {
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* ---------- Marcador (identidade) ---------- */
+.page-header h1 { position: relative; padding-bottom: 0.5em; margin-bottom: 0.55em; }
+.page-header h1::after { content: ''; position: absolute; left: 0; bottom: 0; width: 3.25rem; height: 4px; border-radius: 2px; background: var(--soft); }
+.section__head h2 { display: flex; align-items: center; gap: 0.6rem; }
+.section__head h2::before { content: ''; flex: none; width: 0.3rem; height: 1.05em; border-radius: 2px; background: var(--soft); }
+
+/* Cor de ação só onde há ação: barras decorativas viram neutras */
+.hero__panel::before, .contact-card::before { background: var(--soft); height: 3px; }
+.site-footer { box-shadow: none; border-top: 1px solid var(--line); }
+.check-list li::before { background: var(--soft); }
+.presence__check { background: var(--soft); color: var(--ink); }
+
+/* ---------- Cabeçalho e navegação ---------- */
+.site-header { background: color-mix(in srgb, var(--bg) 90%, transparent); -webkit-backdrop-filter: saturate(1.3) blur(10px); backdrop-filter: saturate(1.3) blur(10px); }
+.icon-button { width: 2.75rem; height: 2.75rem; }
+.lang-switch__item { height: 2.75rem; }
+.brand { transition: color 0.15s ease; }
+.brand:hover { text-decoration: none; color: var(--link); }
+
+/* Item atual do menu: fundo com um toque da cor de ação, ícone e texto legíveis em qualquer paleta */
+.site-nav__link[aria-current='page'] { background: color-mix(in srgb, var(--action) 16%, var(--bg)); color: var(--ink); font-weight: 700; }
+.site-nav__link[aria-current='page'] .site-nav__icon, .site-nav__link[aria-current='page'] .site-nav__mark { color: var(--ink); opacity: 1; }
+.site-nav__link:hover .site-nav__icon { color: var(--link); }
+.site-nav__link { min-height: 2.75rem; }
+@media (min-width: 56.25em) {
+  .site-nav__link[aria-current='page'] { box-shadow: none; }
+  .site-nav__link { min-height: 0; transition: background-color 0.15s ease; }
+  .site-nav__link:hover:not([aria-current='page']) { background: color-mix(in srgb, var(--soft) 35%, transparent); }
+}
+
+/* Progresso de leitura: fio de ação no rodapé do cabeçalho (só em navegadores com rolagem guiada) */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .site-header::after { content: ''; position: absolute; inset: auto 0 -1px 0; height: 2px; background: var(--action); transform: scaleX(0); transform-origin: left; animation: read-progress linear both; animation-timeline: scroll(root block); pointer-events: none; }
+    @keyframes read-progress { to { transform: scaleX(1); } }
+  }
+}
+
+/* ---------- Botões e links: hierarquia primário > secundário > link ---------- */
+.button { min-height: 2.75rem; justify-content: center; padding: 0.5rem 1.2rem; border-radius: var(--r-md); }
+.button--ghost { border-width: 1.5px; background: var(--card); }
+.button--ghost:hover { background: var(--soft); }
+.text-link, .ext-link { min-height: 2.25rem; }
+a:not([class]) { text-decoration-color: color-mix(in srgb, var(--link) 55%, transparent); }
+a:not([class]):hover { text-decoration-color: currentColor; }
+
+/* ---------- Início ---------- */
+/* Status ao vivo: ponto pulsante em vez de uma pílula laranja que parece botão */
+.hero__status .tag { padding: 0.25rem 0.8rem 0.25rem 0.65rem; gap: 0.5rem; background: var(--card); color: var(--ink); border: 1px solid var(--line); box-shadow: var(--lift-1); }
+.hero__status .tag::before { content: ''; flex: none; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--action); box-shadow: 0 0 0 0 color-mix(in srgb, var(--action) 55%, transparent); }
+@media (prefers-reduced-motion: no-preference) {
+  .hero__status .tag::before { animation: status-ping 2.4s ease-out infinite; }
+  @keyframes status-ping { 70%, 100% { box-shadow: 0 0 0 0.45rem transparent; } }
+}
+.hero__panel { border-radius: var(--r-lg); }
+.hero__fact-icon { border-radius: var(--r-sm); }
+
+/* Cartões informativos não clicáveis não "levantam": só os clicáveis reagem ao ponteiro */
+.info-card--icon:hover { transform: none; }
+.info-card--icon:hover .info-card__icon { background: var(--soft); color: var(--ink); border-color: var(--line); }
+.info-card { border-radius: var(--r-lg); }
+
+/* Atalhos de navegação: ícone, título, descrição e seta (o cartão inteiro é o link) */
+.info-card--nav { display: grid; gap: 0.35rem; align-content: start; padding-right: 3rem; cursor: pointer; }
+.info-card--nav .info-card__icon { display: inline-grid; place-items: center; width: 2.5rem; height: 2.5rem; margin-bottom: 0.25rem; border-radius: var(--r-md); background: var(--soft); color: var(--ink); border: 1px solid var(--line); }
+.info-card--nav h3, .info-card--nav p { margin: 0; }
+.info-card--nav .info-card__go { position: absolute; right: 1rem; bottom: 1rem; display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; border: 1.5px solid var(--line); color: var(--link); background: var(--card); }
+.info-card--nav:focus-within { outline: 3px solid var(--link); outline-offset: 3px; }
+.info-card--nav .info-card__link:focus-visible { outline: none; }
+@media (hover: hover) {
+  .info-card--nav:hover { border-color: var(--action); box-shadow: var(--lift-2); }
+  .info-card--nav:hover .info-card__go { background: var(--action); border-color: var(--action); color: var(--on-action); }
+  .info-card--nav:hover .info-card__icon { background: var(--surface); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .info-card--nav { transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+  .info-card--nav .info-card__go { transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s var(--ease-out); }
+  .info-card--nav:hover .info-card__go { transform: translateX(3px); }
+}
+
+/* "Presença digital" vira um painel: quebra o ritmo de cartões e dá personalidade à seção */
+.section:has(> .presence) { padding: clamp(1.1rem, 3vw, 2rem); background: var(--surface); border: 1px solid var(--line); border-radius: 1.25rem; }
+.section:has(> .presence) .presence__check { background: var(--card); box-shadow: 0 0 0 1px var(--line); }
+.section:has(> .presence) .button--ghost { background: var(--card); }
+
+/* ---------- Projetos ---------- */
+.filter-panel { border-radius: var(--r-lg); box-shadow: var(--lift-1); }
+.filter-block__label { color: var(--ink); }
+.project-card--compact { border-radius: var(--r-lg); }
+.project-card__foot { border-top-style: solid; }
+.pagination { border-top-style: solid; }
+
+/* ---------- Tecnologias ---------- */
+/* Status como ponto + rótulo (cheio = usada, vazado = estudada, ação = em desenvolvimento), igual na legenda e nos cartões */
+.tech-item .tag, .legend .tag { padding: 0; gap: 0.4rem; background: transparent; border: 0; color: var(--muted); font-weight: 600; }
+.tech-item .tag::before, .legend .tag::before { content: ''; flex: none; width: 0.55rem; height: 0.55rem; border-radius: 50%; border: 1.5px solid var(--ink); box-sizing: border-box; }
+.tech-item .tag--default::before, .legend .tag--default::before { background: var(--ink); }
+.tech-item .tag--outline::before, .legend .tag--outline::before { background: transparent; }
+.tech-item .tag--accent::before, .legend .tag--accent::before { background: var(--action); border-color: var(--action); }
+.legend .tag { color: var(--ink); }
+.legend .tag-list { gap: 0.4rem 1.25rem; margin-bottom: 0.6rem; }
+.tech-item__head .tag { margin-left: auto; font-size: 0.8125rem; }
+.tech-item { border-radius: var(--r-md); min-height: 4.25rem; }
+.legend__note { max-width: 62ch; }
+.credits { margin-top: var(--section-gap); padding: 0.75rem 1rem; background: var(--card); border: 1px solid var(--line); border-radius: var(--r-md); max-width: 46rem; }
+.credits summary { display: flex; align-items: center; gap: 0.5rem; min-height: 2.25rem; font-weight: 600; cursor: pointer; }
+.credits summary:focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }
+.credits p { margin: 0.5rem 0 0; color: var(--muted); font-size: 0.9375rem; }
+
+/* ---------- Contato ---------- */
+.contact-card, .contact-channels { border-radius: var(--r-lg); }
+.contact-card .field input, .contact-card .field textarea { min-height: 2.75rem; }
+.channel { border-radius: var(--r-md); }
+
+/* ---------- Rodapé ---------- */
+.site-footer__inner { padding-block: 2.25rem; }
+.site-footer__social a { min-height: 2.75rem; }
+
+/* ---------- Celular ---------- */
+@media (max-width: 39.99em) {
+  .page-header h1::after { width: 2.75rem; }
+  .section__head { gap: 0.25rem 1rem; }
+  .hero { padding-block: 1rem 0.5rem; gap: 1.5rem; }
+  .hero__actions .button { flex: 1 1 auto; }
+  .info-card--nav { padding-right: 3.25rem; }
+  /* Cartões de foco e atalhos: ícone ao lado do texto (metade da altura empilhada) */
+  .info-card--icon, .info-card--nav { grid-template-columns: auto minmax(0, 1fr); column-gap: 0.9rem; row-gap: 0.2rem; padding: 1.1rem; }
+  .info-card--nav { padding-right: 3.5rem; }
+  .info-card--icon .info-card__icon, .info-card--nav .info-card__icon { grid-row: 1 / span 2; margin: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__status .tag::before { animation: none; }
+  .info-card--nav:hover .info-card__go { transform: none; }
+}
+
+/* Status "usada em projetos" é o padrão e já aparece em "Usada em ..."; o cartão mostra só o ponto (o texto continua para leitores de tela) */
+.tech-item[data-status='project'] .tag__text { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+.tech-item[data-status='project'] .tag { position: relative; }

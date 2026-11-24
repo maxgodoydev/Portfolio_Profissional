@@ -1,4 +1,5 @@
 import { hasBrandIcon } from '../components/BrandIcon';
+import { LanguageBadges } from '../components/LanguageBadges';
 import { Icon, type IconName } from '../components/icons';
 import { ProjectCard } from '../components/ProjectCard';
 import { Tag } from '../components/Tag';
@@ -13,6 +14,8 @@ import { Section, TextLink } from './shared';
 const HERO_ICONS: readonly IconName[] = ['cap', 'briefcase', 'target'];
 /** Um ícone por área de atuação (mesma ordem de t.home.focus). */
 const FOCUS_ICONS: readonly IconName[] = ['chart', 'layers', 'code', 'route'];
+/** Ícone de cada atalho de "Continue explorando". */
+const EXPLORE_ICONS = { about: 'user', journey: 'route', contact: 'mail' } as const satisfies Record<'about' | 'journey' | 'contact', IconName>;
 
 export function HomePage() {
   const { lang, t } = useI18n();
@@ -55,6 +58,17 @@ export function HomePage() {
                 <dd>{item.value}</dd>
               </div>
             ))}
+            <div className="hero__fact">
+              <dt>
+                <span className="hero__fact-icon">
+                  <Icon name="globe" size={18} />
+                </span>
+                {t.common.spokenLanguages}
+              </dt>
+              <dd>
+                <LanguageBadges />
+              </dd>
+            </div>
           </dl>
         </aside>
       </section>
@@ -137,13 +151,19 @@ export function HomePage() {
       <Section title={t.home.exploreTitle}>
         <ul className="card-grid">
           {(['about', 'journey', 'contact'] as const).map((id) => (
-            <li key={id} className="info-card">
+            <li key={id} className="info-card info-card--nav">
+              <span className="info-card__icon" aria-hidden="true">
+                <Icon name={EXPLORE_ICONS[id]} size={20} />
+              </span>
               <h3>
                 <Link to={buildPath(lang, id)} className="info-card__link">
                   {t.nav[id]}
                 </Link>
               </h3>
               <p>{t.home.explore[id]}</p>
+              <span className="info-card__go" aria-hidden="true">
+                <Icon name="arrowRight" size={18} />
+              </span>
             </li>
           ))}
         </ul>

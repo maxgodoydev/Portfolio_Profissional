@@ -1,8 +1,9 @@
 import { useId, useRef, useState, type FormEvent } from 'react';
 import { ApiError, postContact } from '../services/api';
-import { LINKS, formatWhatsapp } from '../content/profile';
+import { ChannelLinks } from '../components/ChannelLinks';
+import { Icon } from '../components/icons';
 import { useI18n } from '../i18n/context';
-import { ExternalLink, PageHeader, Section } from './shared';
+import { PageHeader } from './shared';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 interface Errors {
@@ -101,67 +102,57 @@ export function ContactPage() {
     <div className="page contact">
       <PageHeader title={t.contact.title} lead={t.contact.intro} />
       <div className="contact__grid">
-        <form ref={formRef} className="form" onSubmit={onSubmit} noValidate aria-busy={status === 'sending'}>
-          <div className="field">
-            <label htmlFor={`${uid}-name`}>{f.name}</label>
-            <input id={`${uid}-name`} type="text" autoComplete="name" maxLength={100} required value={name} onChange={(e) => setName(e.target.value)} {...field('name')} />
-            {errors.name && <p className="field__error" id={`${uid}-name-err`}>{errors.name}</p>}
-          </div>
-          <div className="field">
-            <label htmlFor={`${uid}-email`}>{f.email}</label>
-            <input id={`${uid}-email`} type="email" autoComplete="email" inputMode="email" autoCapitalize="off" spellCheck={false} maxLength={254} required value={email} onChange={(e) => setEmail(e.target.value)} {...field('email')} />
-            {errors.email && <p className="field__error" id={`${uid}-email-err`}>{errors.email}</p>}
-          </div>
-          <div className="field">
-            <label htmlFor={`${uid}-message`}>{f.message}</label>
-            <textarea id={`${uid}-message`} rows={6} maxLength={4000} required value={message} onChange={(e) => setMessage(e.target.value)} {...field('message')} />
-            {errors.message && <p className="field__error" id={`${uid}-message-err`}>{errors.message}</p>}
-          </div>
-          {/* Honeypot: invisível para pessoas e leitores de tela; robôs costumam preencher. */}
-          <div className="hp" aria-hidden="true">
-            <label htmlFor={`${uid}-website`}>{f.honeypot}</label>
-            <input id={`${uid}-website`} type="text" tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} />
-          </div>
-          <p className="form__privacy">{f.privacy}</p>
-          <button type="submit" className="button" aria-disabled={status === 'sending'} onClick={(e) => { if (status === 'sending') e.preventDefault(); }}>
-            {status === 'sending' ? f.sending : f.send}
-          </button>
-          {/* Duas regiões sempre presentes: leitores de tela só anunciam mudanças em regiões que já existem.
-              Envio e sucesso são educados (status); erros interrompem (alert). */}
-          <p className={`form__status form__status--${status === 'error' ? 'idle' : status}`} role="status" aria-live="polite">
-            {status === 'sending' ? f.sending : status === 'sent' ? feedback : ''}
-          </p>
-          <p className="form__status form__status--error" role="alert">
-            {status === 'error' ? feedback : ''}
-          </p>
-        </form>
+        <section className="contact-card" aria-labelledby={`${uid}-title`}>
+          <header className="contact-card__head">
+            <span className="contact-card__icon" aria-hidden="true">
+              <Icon name="mail" size={20} />
+            </span>
+            <h2 id={`${uid}-title`}>{t.contact.formTitle}</h2>
+          </header>
+          <form ref={formRef} className="form form--compact" onSubmit={onSubmit} noValidate aria-busy={status === 'sending'}>
+            <div className="form__row">
+              <div className="field">
+                <label htmlFor={`${uid}-name`}>{f.name}</label>
+                <input id={`${uid}-name`} type="text" autoComplete="name" maxLength={100} required value={name} onChange={(e) => setName(e.target.value)} {...field('name')} />
+                {errors.name && <p className="field__error" id={`${uid}-name-err`}>{errors.name}</p>}
+              </div>
+              <div className="field">
+                <label htmlFor={`${uid}-email`}>{f.email}</label>
+                <input id={`${uid}-email`} type="email" autoComplete="email" inputMode="email" autoCapitalize="off" spellCheck={false} maxLength={254} required value={email} onChange={(e) => setEmail(e.target.value)} {...field('email')} />
+                {errors.email && <p className="field__error" id={`${uid}-email-err`}>{errors.email}</p>}
+              </div>
+            </div>
+            <div className="field">
+              <label htmlFor={`${uid}-message`}>{f.message}</label>
+              <textarea id={`${uid}-message`} rows={4} maxLength={4000} required value={message} onChange={(e) => setMessage(e.target.value)} {...field('message')} />
+              {errors.message && <p className="field__error" id={`${uid}-message-err`}>{errors.message}</p>}
+            </div>
+            {/* Honeypot: invisível para pessoas e leitores de tela; robôs costumam preencher. */}
+            <div className="hp" aria-hidden="true">
+              <label htmlFor={`${uid}-website`}>{f.honeypot}</label>
+              <input id={`${uid}-website`} type="text" tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} />
+            </div>
+            <div className="form__foot">
+              <p className="form__privacy">{f.privacy}</p>
+              <button type="submit" className="button" aria-disabled={status === 'sending'} onClick={(e) => { if (status === 'sending') e.preventDefault(); }}>
+                {status === 'sending' ? f.sending : f.send}
+              </button>
+            </div>
+            {/* Duas regiões sempre presentes: leitores de tela só anunciam mudanças em regiões que já existem.
+                Envio e sucesso são educados (status); erros interrompem (alert). */}
+            <p className={`form__status form__status--${status === 'error' ? 'idle' : status}`} role="status" aria-live="polite">
+              {status === 'sending' ? f.sending : status === 'sent' ? feedback : ''}
+            </p>
+            <p className="form__status form__status--error" role="alert">
+              {status === 'error' ? feedback : ''}
+            </p>
+          </form>
+        </section>
 
-        <Section title={t.contact.channels}>
-          <ul className="channel-list">
-            <li>
-              <ExternalLink href={LINKS.github}>{t.common.github}</ExternalLink>
-            </li>
-            {LINKS.linkedin && (
-              <li>
-                <ExternalLink href={LINKS.linkedin}>{t.common.linkedin}</ExternalLink>
-              </li>
-            )}
-            {LINKS.whatsapp && (
-              <li>
-                <ExternalLink href={`https://wa.me/${LINKS.whatsapp}`}>
-                  {t.common.whatsapp}: {formatWhatsapp(LINKS.whatsapp)}
-                </ExternalLink>
-              </li>
-            )}
-            {LINKS.email && (
-              <li>
-                <a className="ext-link" href={`mailto:${LINKS.email}`}>
-                  {t.common.email}: {LINKS.email}
-                </a>
-              </li>
-            )}
-          </ul>
-        </Section>
+        <section className="contact-channels" aria-labelledby={`${uid}-channels`}>
+          <h2 id={`${uid}-channels`}>{t.contact.channels}</h2>
+          <ChannelLinks />
+        </section>
       </div>
     </div>
   );

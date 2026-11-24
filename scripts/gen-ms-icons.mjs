@@ -9,19 +9,24 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
 const BASE = 'https://raw.githubusercontent.com/microsoft/PowerBI-Icons/main/SVG/';
-const MAP = { 'Power BI': 'Power-BI.svg', 'Power Query': 'Power-Query-Colored.svg', Excel: 'Excel-Workbook.svg' };
+const MAP = {
+  'Power BI': 'Power-BI.svg', 'Power Query': 'Power-Query-Colored.svg', Excel: 'Excel-Workbook.svg',
+  // Logo oficial do Matplotlib (repositório matplotlib/matplotlib, licença do projeto). URL absoluta = fora do repositório da Microsoft.
+  Matplotlib: 'https://raw.githubusercontent.com/matplotlib/matplotlib/main/lib/matplotlib/mpl-data/images/matplotlib.svg',
+};
 const dir = process.env.MS_ICONS_DIR;
+const isUrl = (f) => /^https?:\/\//.test(f);
 
 const out = {};
 for (const [name, file] of Object.entries(MAP)) {
   let svg;
   if (dir) {
-    const localPath = path.join(dir, file);
+    const localPath = path.join(dir, isUrl(file) ? `${name}.svg` : file);
     const excelFallback = path.join(dir, 'microsoft-excel-logo.svg');
     svg = readFileSync(existsSync(localPath) ? localPath : (name === 'Excel' && existsSync(excelFallback) ? excelFallback : localPath), 'utf8');
   }
   else {
-    const res = await fetch(BASE + file);
+    const res = await fetch(isUrl(file) ? file : BASE + file);
     if (!res.ok) throw new Error(`${file}: HTTP ${res.status}`);
     svg = await res.text();
   }
